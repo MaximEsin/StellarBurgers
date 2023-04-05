@@ -1,0 +1,31 @@
+.header {
+  background-color: #1c1c21;
+  box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04),
+    0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04),
+    0px 0px 1px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar {
+  max-width: 1240px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navItemContainer {
+  display: flex;
+  gap: 8px;
+}
+
+.navItem {
+  display: flex;
+  cursor: pointer;
+}
+
+.logo {
+  margin-right: 200px;
+  cursor: pointer;
+}
