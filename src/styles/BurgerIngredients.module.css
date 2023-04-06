@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.ingredientsSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.ingredientTable {
+  display: flex;
+  gap: 24px;
+  max-width: 620px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ingredientCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.priceContainer {
+  display: flex;
+}
+
+.counter {
+  position: absolute;
+}

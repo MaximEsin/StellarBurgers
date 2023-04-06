@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
+import BurgerIngredients from './components/BurgerIngredients';
+import data from './data/Data';
 
 function App() {
   const config = {
@@ -10,9 +12,11 @@ function App() {
   const [state, setState] = useState({
     data: null,
     loading: false,
+    recievedData: false,
   });
 
   useEffect(() => {
+    let Ingredients;
     const getInitialData = () => {
       setState({ ...state, loading: true });
       fetch(config.baseUrl)
@@ -23,16 +27,21 @@ function App() {
           return Promise.reject(`Ошибка ${res.status}`);
         })
         .then((res) => {
-          setState({ data: res.data, loading: false });
+          setState({ data: res.data, loading: false, recievedData: true });
+        })
+        .catch((err) => {
+          console.log(err);
         });
     };
     getInitialData();
   }, []);
-  console.log(state);
 
   return (
     <div className="App">
       <Header />
+      <main className="main">
+        <BurgerIngredients data={data} />
+      </main>
     </div>
   );
 }
