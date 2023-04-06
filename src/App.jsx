@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import BurgerIngredients from './components/BurgerIngredients';
+import BurgerConstructor from './components/BurgerConstructor';
 import data from './data/Data';
 
 function App() {
@@ -40,7 +41,10 @@ function App() {
     <div className="App">
       <Header />
       <main className="main">
-        <BurgerIngredients data={data} />
+        <div className="container">
+          <BurgerIngredients data={data} />
+          <BurgerConstructor data={data} />
+        </div>
       </main>
     </div>
   );

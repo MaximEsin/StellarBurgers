@@ -1,0 +1,48 @@
+.scroll {
+  max-height: 656px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.constructorItem {
+  width: 536px;
+  background-color: #1c1c21;
+  border-radius: 40px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.constructorItem:first-of-type {
+  border-radius: 88px 88px 40px 40px;
+}
+
+.constructorItem:last-of-type {
+  border-radius: 40px 40px 88px 88px;
+}
+
+.itemImage {
+  width: 80px;
+  height: 40px;
+}
+
+.ingredientName {
+  min-width: 254px;
+}
+
+.itemContainer {
+  display: flex;
+}
+
+.totalContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.buttonWrapper {
+  margin-left: 40px;
+  cursor: pointer;
+}

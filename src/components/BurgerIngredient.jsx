@@ -22,7 +22,9 @@ const BurgerIngredient = (props) => {
           </p>
           <CurrencyIcon type="primary" />
         </div>
-        <p>{props.data.name}</p>
+        <p className={styles.ingredientName + ' text text_type_main-default'}>
+          {props.data.name}
+        </p>
       </div>
     );
   } else {
@@ -35,7 +37,9 @@ const BurgerIngredient = (props) => {
           </p>
           <CurrencyIcon type="primary" />
         </div>
-        <p>{props.data.name}</p>
+        <p className={styles.ingredientName + ' text text_type_main-default'}>
+          {props.data.name}
+        </p>
       </div>
     );
   }
