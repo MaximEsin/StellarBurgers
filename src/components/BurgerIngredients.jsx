@@ -2,8 +2,12 @@ import React from 'react';
 import Table from './Table';
 import styles from '../styles/BurgerIngredients.module.css';
 import BurgerIngredient from './BurgerIngredient';
+import PropTypes from 'prop-types';
 
 const BurgerIngredients = (props) => {
+  BurgerIngredients.propTypes = {
+    data: PropTypes.object,
+  };
   return (
     <section className={styles.container + ' pt-10'}>
       <h1 className="text text_type_main-large pb-5">Соберите бургер</h1>

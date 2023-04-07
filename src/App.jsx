@@ -4,6 +4,7 @@ import Header from './components/Header';
 import BurgerIngredients from './components/BurgerIngredients';
 import BurgerConstructor from './components/BurgerConstructor';
 import data from './data/Data';
+import ModalOverlay from './components/ModalOverlay';
 
 function App() {
   const config = {
@@ -39,6 +40,7 @@ function App() {
 
   return (
     <div className="App">
+      <ModalOverlay modalType="Order" data={data} />
       <Header />
       <main className="main">
         <div className="container">

@@ -5,9 +5,12 @@ import {
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import OrderDetails from './OrderDetails';
+import PropTypes from 'prop-types';
 
 const BurgerConstructor = (props) => {
+  BurgerConstructor.propTypes = {
+    data: PropTypes.object,
+  };
   return (
     <section className="pt-25">
       <ul className={styles.scroll}>
