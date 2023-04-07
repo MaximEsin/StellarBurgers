@@ -2,6 +2,7 @@
 
 .App {
   background-color: #131316;
+  position: relative;
 }
 
 .main {

@@ -1,0 +1,78 @@
+.modal {
+  width: 720px;
+  background-color: #1c1c21;
+  border: 1px solid rgba(76, 76, 255, 0.2);
+  box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04),
+    0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04),
+    0px 0px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+}
+
+.cross {
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+  margin-right: 40px;
+  cursor: pointer;
+}
+
+.modalContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.orderNumber {
+  text-align: center;
+  text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25),
+    0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
+  color: #f2f2f3;
+}
+
+.orderText {
+  text-align: center;
+  color: #f2f2f3;
+}
+
+.orderApproval {
+  width: 120px;
+  height: 120px;
+}
+
+.orderTextDark {
+  color: #8585ad;
+}
+
+.modalOverlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  visibility: hidden;
+}
+
+.modalHeader {
+  display: flex;
+  width: 95%;
+  align-items: center;
+}
+
+.ingredientImage {
+  width: 520px;
+  height: 240px;
+}
+
+.ingredientDataContainer {
+  display: flex;
+  gap: 20px;
+}

@@ -5,11 +5,12 @@ import {
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import OrderDetails from './OrderDetails';
 
 const BurgerConstructor = (props) => {
   return (
     <section className="pt-25">
-      <div className={styles.scroll}>
+      <ul className={styles.scroll}>
         <ConstructorItem data={props.data[0]} />
         <ConstructorItem data={props.data[1]} />
         <ConstructorItem data={props.data[2]} />
@@ -17,7 +18,7 @@ const BurgerConstructor = (props) => {
         <ConstructorItem data={props.data[4]} />
         <ConstructorItem data={props.data[5]} />
         <ConstructorItem data={props.data[6]} />
-      </div>
+      </ul>
       <div className={styles.totalContainer + ' mt-10 mr-4'}>
         <p className="text text_type_digits-medium mr-2">610</p>
         <CurrencyIcon />

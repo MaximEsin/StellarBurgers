@@ -7,7 +7,7 @@ import styles from '../styles/BurgerConstructor.module.css';
 
 const ConstructorItem = (props) => {
   return (
-    <div className={styles.constructorItem + ' ml-8 pl-6 pr-8 mb-4'}>
+    <li className={styles.constructorItem + ' ml-8 pl-6 pr-8 mb-4'}>
       <div className={styles.itemContainer}>
         <img src={props.data.image} className={styles.itemImage} />
         <p
@@ -27,7 +27,7 @@ const ConstructorItem = (props) => {
           <DeleteIcon type="primary" />
         </div>
       </div>
-    </div>
+    </li>
   );
 };
 

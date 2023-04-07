@@ -29,3 +29,31 @@
   margin-right: 200px;
   cursor: pointer;
 }
+
+@media all and (max-width: 1120px) {
+  .navbar {
+    max-width: 800px;
+  }
+
+  .logo {
+    margin-right: 100px;
+  }
+}
+
+@media all and (max-width: 820px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo {
+    margin: 0;
+  }
+}
+
+@media all and (max-width: 420px) {
+  .navItemContainer {
+    flex-direction: column;
+  }
+}

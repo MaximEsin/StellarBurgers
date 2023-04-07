@@ -8,7 +8,7 @@ import styles from '../styles/BurgerIngredients.module.css';
 const BurgerIngredient = (props) => {
   if (props.counter) {
     return (
-      <div className={styles.ingredientCard}>
+      <li className={styles.ingredientCard}>
         <Counter
           count={1}
           size="default"
@@ -25,11 +25,11 @@ const BurgerIngredient = (props) => {
         <p className={styles.ingredientName + ' text text_type_main-default'}>
           {props.data.name}
         </p>
-      </div>
+      </li>
     );
   } else {
     return (
-      <div className={styles.ingredientCard}>
+      <li className={styles.ingredientCard}>
         <img src={props.data.image} className="pl-4 pr-4 pb-1" />
         <div className={styles.priceContainer + ' pb-1'}>
           <p className="text text_type_digits-default pr-1">
@@ -40,7 +40,7 @@ const BurgerIngredient = (props) => {
         <p className={styles.ingredientName + ' text text_type_main-default'}>
           {props.data.name}
         </p>
-      </div>
+      </li>
     );
   }
 };
