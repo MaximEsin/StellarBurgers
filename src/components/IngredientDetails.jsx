@@ -4,10 +4,6 @@ import styles from '../styles/Modal.module.css';
 import PropTypes from 'prop-types';
 
 const IngredientDetails = (props) => {
-  IngredientDetails.propTypes = {
-    modalType: PropTypes.string,
-    data: PropTypes.object,
-  };
   const Ingredient = props.data.modalType.data[0];
   return (
     <section className={styles.modal}>

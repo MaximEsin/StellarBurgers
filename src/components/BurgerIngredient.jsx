@@ -8,7 +8,12 @@ import styles from '../styles/BurgerIngredients.module.css';
 const BurgerIngredient = (props) => {
   if (props.counter) {
     return (
-      <li className={styles.ingredientCard}>
+      <li
+        className={styles.ingredientCard}
+        onClick={() => {
+          props.setActive(true);
+        }}
+      >
         <Counter
           count={1}
           size="default"
@@ -29,7 +34,12 @@ const BurgerIngredient = (props) => {
     );
   } else {
     return (
-      <li className={styles.ingredientCard}>
+      <li
+        className={styles.ingredientCard}
+        onClick={() => {
+          props.setActive(true);
+        }}
+      >
         <img src={props.data.image} className="pl-4 pr-4 pb-1" />
         <div className={styles.priceContainer + ' pb-1'}>
           <p className="text text_type_digits-default pr-1">

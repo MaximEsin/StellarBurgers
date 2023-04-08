@@ -4,12 +4,8 @@ import IngredientDetails from './IngredientDetails';
 import PropTypes from 'prop-types';
 
 const Modal = (props) => {
-  Modal.propTypes = {
-    modalType: PropTypes.string,
-    data: PropTypes.object,
-  };
   if (props.modalType.modalType === 'Order') {
-    return <OrderDetails />;
+    return <OrderDetails data={props} />;
   } else {
     return <IngredientDetails data={props} />;
   }

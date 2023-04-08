@@ -4,12 +4,22 @@ import Modal from './Modal';
 import PropTypes from 'prop-types';
 
 const ModalOverlay = (props) => {
-  ModalOverlay.propTypes = {
-    modalType: PropTypes.string,
-    data: PropTypes.object,
-  };
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      props.setActive(false);
+    }
+  });
   return (
-    <div className={styles.modalOverlay}>
+    <div
+      className={
+        props.active ? styles.modalOverlay_active : styles.modalOverlay
+      }
+      onClick={(event) => {
+        if (event.target === event.currentTarget) {
+          props.setActive(false);
+        }
+      }}
+    >
       <Modal modalType={props} />
     </div>
   );

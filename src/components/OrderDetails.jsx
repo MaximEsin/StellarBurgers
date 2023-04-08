@@ -3,10 +3,17 @@ import done from '../images/done.png';
 import cross from '../images/icon.png';
 import styles from '../styles/Modal.module.css';
 
-const OrderDetails = () => {
+const OrderDetails = (props) => {
   return (
     <section className={styles.modal}>
-      <img src={cross} alt="Закрыть окно" className={styles.cross + ' mt-15'} />
+      <img
+        src={cross}
+        alt="Закрыть окно"
+        className={styles.cross + ' mt-15'}
+        onClick={() => {
+          props.data.modalType.setActive(false);
+        }}
+      />
       <div className={styles.modalContainer + ' mt-2'}>
         <p className={styles.orderNumber + ' text text_type_digits-large'}>
           034536

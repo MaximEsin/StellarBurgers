@@ -8,9 +8,6 @@ import {
 import PropTypes from 'prop-types';
 
 const BurgerConstructor = (props) => {
-  BurgerConstructor.propTypes = {
-    data: PropTypes.object,
-  };
   return (
     <section className="pt-25">
       <ul className={styles.scroll}>
@@ -26,7 +23,12 @@ const BurgerConstructor = (props) => {
         <p className="text text_type_digits-medium mr-2">610</p>
         <CurrencyIcon />
         <div className={styles.buttonWrapper}>
-          <Button htmlType="button" type="primary" size="large">
+          <Button
+            htmlType="button"
+            type="primary"
+            size="large"
+            onClick={() => props.setActive(true)}
+          >
             Оформить заказ
           </Button>
         </div>
