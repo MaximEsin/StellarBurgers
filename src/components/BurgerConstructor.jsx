@@ -27,7 +27,10 @@ const BurgerConstructor = (props) => {
             htmlType="button"
             type="primary"
             size="large"
-            onClick={() => props.setActive(true)}
+            onClick={() => {
+              props.setActive(true);
+              props.setModalType('Order');
+            }}
           >
             Оформить заказ
           </Button>

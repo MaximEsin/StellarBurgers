@@ -12,6 +12,7 @@ const BurgerIngredient = (props) => {
         className={styles.ingredientCard}
         onClick={() => {
           props.setActive(true);
+          props.setModalType('Ingredient');
         }}
       >
         <Counter
@@ -38,6 +39,7 @@ const BurgerIngredient = (props) => {
         className={styles.ingredientCard}
         onClick={() => {
           props.setActive(true);
+          props.setModalType('Ingredient');
         }}
       >
         <img src={props.data.image} className="pl-4 pr-4 pb-1" />

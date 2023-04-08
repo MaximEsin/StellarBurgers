@@ -12,6 +12,7 @@ function App() {
   };
 
   const [modalActive, setModalActive] = useState(false);
+  const [modalType, setModalType] = useState('');
 
   const [state, setState] = useState({
     data: null,
@@ -43,7 +44,7 @@ function App() {
   return (
     <div className="App">
       <ModalOverlay
-        modalType="Order"
+        modalType={modalType}
         data={data}
         active={modalActive}
         setActive={setModalActive}
@@ -51,8 +52,16 @@ function App() {
       <Header />
       <main className="main">
         <div className="container">
-          <BurgerIngredients data={data} setActive={setModalActive} />
-          <BurgerConstructor data={data} setActive={setModalActive} />
+          <BurgerIngredients
+            data={data}
+            setActive={setModalActive}
+            setModalType={setModalType}
+          />
+          <BurgerConstructor
+            data={data}
+            setActive={setModalActive}
+            setModalType={setModalType}
+          />
         </div>
       </main>
     </div>
