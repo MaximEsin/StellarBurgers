@@ -4,8 +4,21 @@ import {
   DeleteIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../styles/BurgerConstructor.module.css';
+import substract from '../images/Subtract.svg';
 
 const ConstructorItem = (props) => {
+  let place;
+  let icon;
+  if (props.place === 'top') {
+    place = ' (верх)';
+    icon = <img src={substract} alt="замочек" />;
+  } else if (props.place === 'bottom') {
+    place = ' (низ)';
+    icon = <img src={substract} alt="замочек" />;
+  } else {
+    icon = <DeleteIcon type="primary" />;
+  }
+
   return (
     <li className={styles.constructorItem + ' ml-8 pl-6 pr-8 mb-4'}>
       <div className={styles.itemContainer}>
@@ -16,6 +29,8 @@ const ConstructorItem = (props) => {
           }
         >
           {props.data.name}
+          <br />
+          {place}
         </p>
       </div>
       <div className={styles.itemContainer}>
@@ -23,9 +38,7 @@ const ConstructorItem = (props) => {
           {props.data.price}
         </p>
         <CurrencyIcon type="primary" />
-        <div className="ml-5">
-          <DeleteIcon type="primary" />
-        </div>
+        <div className="ml-5">{icon}</div>
       </div>
     </li>
   );

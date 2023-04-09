@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
-import Header from './components/Header';
-import BurgerIngredients from './components/BurgerIngredients';
-import BurgerConstructor from './components/BurgerConstructor';
-import data from './data/Data';
-import ModalOverlay from './components/ModalOverlay';
+import styles from '../styles/App.module.css';
+import Header from './Header';
+import BurgerIngredients from './BurgerIngredients';
+import BurgerConstructor from './BurgerConstructor';
+import data from '../data/Data';
+import ModalOverlay from './ModalOverlay';
 
 function App() {
   const config = {
@@ -21,7 +21,7 @@ function App() {
   });
 
   useEffect(() => {
-    let Ingredients;
+    let ingredients;
     const getInitialData = () => {
       setState({ ...state, loading: true });
       fetch(config.baseUrl)
@@ -42,7 +42,7 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className={styles.App}>
       <ModalOverlay
         modalType={modalType}
         data={data}
@@ -50,8 +50,8 @@ function App() {
         setActive={setModalActive}
       />
       <Header />
-      <main className="main">
-        <div className="container">
+      <main className={styles.main}>
+        <div className={styles.container}>
           <BurgerIngredients
             data={data}
             setActive={setModalActive}

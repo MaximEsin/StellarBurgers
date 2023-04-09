@@ -9,7 +9,14 @@ const IngredientDetails = (props) => {
     <section className={styles.modal}>
       <div className={styles.modalHeader + ' pt-10 pl-10'}>
         <h2 className="text text_type_main-large">Детали ингредиента</h2>
-        <img src={cross} alt="Закрыть окно" className={styles.cross} />
+        <img
+          src={cross}
+          alt="Закрыть окно"
+          className={styles.cross}
+          onClick={() => {
+            props.data.modalType.setActive(false);
+          }}
+        />
       </div>
       <div className={styles.modalContainer}>
         <img

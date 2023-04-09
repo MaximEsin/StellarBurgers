@@ -11,13 +11,13 @@ const BurgerConstructor = (props) => {
   return (
     <section className="pt-25">
       <ul className={styles.scroll}>
-        <ConstructorItem data={props.data[0]} />
+        <ConstructorItem data={props.data[0]} place="top" />
         <ConstructorItem data={props.data[1]} />
         <ConstructorItem data={props.data[2]} />
         <ConstructorItem data={props.data[3]} />
         <ConstructorItem data={props.data[4]} />
         <ConstructorItem data={props.data[5]} />
-        <ConstructorItem data={props.data[6]} />
+        <ConstructorItem data={props.data[6]} place="bottom" />
       </ul>
       <div className={styles.totalContainer + ' mt-10 mr-4'}>
         <p className="text text_type_digits-medium mr-2">610</p>

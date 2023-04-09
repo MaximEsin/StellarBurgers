@@ -21,7 +21,7 @@ const BurgerIngredient = (props) => {
           extraClass="m-1"
           className={styles.counter}
         />
-        <img src={props.data.image} className="pl-4 pr-4 pb-1" />
+        <img src={props.data.image} className="pl-4 pr-4 pb-1" alt="Счетчик" />
         <div className={styles.priceContainer + ' pb-1'}>
           <p className="text text_type_digits-default pr-1">
             {props.data.price}
@@ -42,7 +42,7 @@ const BurgerIngredient = (props) => {
           props.setModalType('Ingredient');
         }}
       >
-        <img src={props.data.image} className="pl-4 pr-4 pb-1" />
+        <img src={props.data.image} className="pl-4 pr-4 pb-1" alt="Счетчик" />
         <div className={styles.priceContainer + ' pb-1'}>
           <p className="text text_type_digits-default pr-1">
             {props.data.price}
