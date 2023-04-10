@@ -44,3 +44,7 @@
   overflow: hidden;
   max-width: 270px;
 }
+
+.tab {
+  display: flex;
+}

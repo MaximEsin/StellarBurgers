@@ -1,7 +1,7 @@
 import React from 'react';
-import cross from '../images/icon.png';
 import styles from '../styles/Modal.module.css';
 import PropTypes from 'prop-types';
+import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const IngredientDetails = (props) => {
   const Ingredient = props.data.modalType.data[0];
@@ -9,14 +9,14 @@ const IngredientDetails = (props) => {
     <section className={styles.modal}>
       <div className={styles.modalHeader + ' pt-10 pl-10'}>
         <h2 className="text text_type_main-large">Детали ингредиента</h2>
-        <img
-          src={cross}
-          alt="Закрыть окно"
-          className={styles.cross}
-          onClick={() => {
-            props.data.modalType.setActive(false);
-          }}
-        />
+        <div className={styles.cross}>
+          <CloseIcon
+            alt="Закрыть окно"
+            onClick={() => {
+              props.data.modalType.setActive(false);
+            }}
+          />
+        </div>
       </div>
       <div className={styles.modalContainer}>
         <img
