@@ -2,15 +2,19 @@ import React from 'react';
 import done from '../images/done.png';
 import styles from '../styles/Modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import PropTypes from 'prop-types';
 
 const OrderDetails = (props) => {
+  OrderDetails.propTypes = {
+    data: PropTypes.object.isRequired,
+  };
   return (
     <section className={styles.modal}>
       <div className={styles.cross + ' mt-15'}>
         <CloseIcon
           alt="Закрыть окно"
           onClick={() => {
-            props.data.modalType.setActive(false);
+            props.data.setActive(false);
           }}
         />
       </div>

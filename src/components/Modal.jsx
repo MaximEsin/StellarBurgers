@@ -2,12 +2,27 @@ import React from 'react';
 import OrderDetails from './OrderDetails';
 import IngredientDetails from './IngredientDetails';
 import PropTypes from 'prop-types';
+import ModalOverlay from './ModalOverlay';
 
 const Modal = (props) => {
-  if (props.modalType.modalType === 'Order') {
-    return <OrderDetails data={props} />;
+  Modal.propTypes = {
+    active: PropTypes.bool.isRequired,
+    data: PropTypes.array.isRequired,
+    modalType: PropTypes.string,
+    setActive: PropTypes.func.isRequired,
+  };
+  if (props.modalType === 'Order') {
+    return (
+      <ModalOverlay data={props}>
+        <OrderDetails data={props} />;
+      </ModalOverlay>
+    );
   } else {
-    return <IngredientDetails data={props} />;
+    return (
+      <ModalOverlay data={props}>
+        <IngredientDetails data={props} />;
+      </ModalOverlay>
+    );
   }
 };
 

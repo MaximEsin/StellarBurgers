@@ -5,6 +5,11 @@ import BurgerIngredient from './BurgerIngredient';
 import PropTypes from 'prop-types';
 
 const BurgerIngredients = (props) => {
+  BurgerIngredients.propTypes = {
+    data: PropTypes.array.isRequired,
+    setActive: PropTypes.func.isRequired,
+    setModalType: PropTypes.func.isRequired,
+  };
   return (
     <section className={styles.container + ' pt-10'}>
       <h1 className="text text_type_main-large pb-5">Соберите бургер</h1>

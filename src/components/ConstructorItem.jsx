@@ -5,8 +5,13 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../styles/BurgerConstructor.module.css';
 import substract from '../images/Subtract.svg';
+import PropTypes from 'prop-types';
 
 const ConstructorItem = (props) => {
+  ConstructorItem.propTypes = {
+    data: PropTypes.object.isRequired,
+    place: PropTypes.string,
+  };
   let place;
   let icon;
   if (props.place === 'top') {

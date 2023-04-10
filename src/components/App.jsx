@@ -4,7 +4,7 @@ import Header from './Header';
 import BurgerIngredients from './BurgerIngredients';
 import BurgerConstructor from './BurgerConstructor';
 import data from '../data/Data';
-import ModalOverlay from './ModalOverlay';
+import Modal from './Modal';
 
 function App() {
   const config = {
@@ -43,7 +43,7 @@ function App() {
 
   return (
     <div className={styles.App}>
-      <ModalOverlay
+      <Modal
         modalType={modalType}
         data={data}
         active={modalActive}

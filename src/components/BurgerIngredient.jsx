@@ -4,8 +4,15 @@ import {
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../styles/BurgerIngredients.module.css';
+import PropTypes from 'prop-types';
 
 const BurgerIngredient = (props) => {
+  BurgerIngredient.propTypes = {
+    counter: PropTypes.bool.isRequired,
+    data: PropTypes.object.isRequired,
+    setActive: PropTypes.func.isRequired,
+    setModalType: PropTypes.func.isRequired,
+  };
   if (props.counter) {
     return (
       <li

@@ -8,6 +8,11 @@ import {
 import PropTypes from 'prop-types';
 
 const BurgerConstructor = (props) => {
+  BurgerConstructor.propTypes = {
+    data: PropTypes.array.isRequired,
+    setActive: PropTypes.func.isRequired,
+    setModalType: PropTypes.func.isRequired,
+  };
   return (
     <section className="pt-25">
       <ul className={styles.scroll}>

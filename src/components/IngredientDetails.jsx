@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const IngredientDetails = (props) => {
-  const Ingredient = props.data.modalType.data[0];
+  IngredientDetails.propTypes = {
+    data: PropTypes.object.isRequired,
+  };
+  const ingredient = props.data.data[0];
   return (
     <section className={styles.modal}>
       <div className={styles.modalHeader + ' pt-10 pl-10'}>
@@ -13,25 +16,25 @@ const IngredientDetails = (props) => {
           <CloseIcon
             alt="Закрыть окно"
             onClick={() => {
-              props.data.modalType.setActive(false);
+              props.data.setActive(false);
             }}
           />
         </div>
       </div>
       <div className={styles.modalContainer}>
         <img
-          src={Ingredient.image}
+          src={ingredient.image}
           alt="Ингредиент"
           className={styles.ingredientImage + ' mb-4'}
         />
-        <p className="text text_type_main-medium mb-8">{Ingredient.name}</p>
+        <p className="text text_type_main-medium mb-8">{ingredient.name}</p>
         <div className={styles.ingredientDataContainer + ' mb-15'}>
           <div className={styles.modalContainer}>
             <p className="text text_type_main-default text_color_inactive">
               Калории,ккал
             </p>
             <p className="text text_type_digits-default text_color_inactive">
-              {Ingredient.calories}
+              {ingredient.calories}
             </p>
           </div>
           <div className={styles.modalContainer}>
@@ -39,7 +42,7 @@ const IngredientDetails = (props) => {
               Белки, г
             </p>
             <p className="text text_type_digits-default text_color_inactive">
-              {Ingredient.proteins}
+              {ingredient.proteins}
             </p>
           </div>
           <div className={styles.modalContainer}>
@@ -47,7 +50,7 @@ const IngredientDetails = (props) => {
               Жиры, г
             </p>
             <p className="text text_type_digits-default text_color_inactive">
-              {Ingredient.fat}
+              {ingredient.fat}
             </p>
           </div>
           <div className={styles.modalContainer}>
@@ -55,7 +58,7 @@ const IngredientDetails = (props) => {
               Углеводы, г
             </p>
             <p className="text text_type_digits-default text_color_inactive">
-              {Ingredient.carbohydrates}
+              {ingredient.carbohydrates}
             </p>
           </div>
         </div>
