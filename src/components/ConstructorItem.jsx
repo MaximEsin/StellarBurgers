@@ -27,7 +27,11 @@ const ConstructorItem = (props) => {
   return (
     <li className={styles.constructorItem + ' ml-8 pl-6 pr-8 mb-4'}>
       <div className={styles.itemContainer}>
-        <img src={props.data.image} className={styles.itemImage} />
+        <img
+          src={props.data.image}
+          className={styles.itemImage}
+          alt="Ингредиент"
+        />
         <p
           className={
             styles.ingredientName + ' pl-5 text text_type_main-default'

@@ -9,18 +9,15 @@ const ModalOverlay = (props) => {
   };
 
   useEffect(() => {
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
+    function closeByEscape(evt) {
+      if (evt.key === 'Escape') {
         props.data.setActive(false);
       }
-    });
-    if (!props.data.active) {
-      window.removeEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          props.data.setActive(false);
-        }
-      });
     }
+    document.addEventListener('keydown', closeByEscape);
+    return () => {
+      document.removeEventListener('keydown', closeByEscape);
+    };
   }, []);
 
   return (
