@@ -11,7 +11,6 @@ const BurgerIngredient = (props) => {
     counter: PropTypes.bool.isRequired,
     data: PropTypes.object.isRequired,
     setActive: PropTypes.func.isRequired,
-    setModalType: PropTypes.func.isRequired,
   };
   let counter;
   if (props.counter) {
@@ -32,7 +31,6 @@ const BurgerIngredient = (props) => {
       className={styles.ingredientCard}
       onClick={() => {
         props.setActive(true);
-        props.setModalType('Ingredient');
       }}
     >
       {counter}

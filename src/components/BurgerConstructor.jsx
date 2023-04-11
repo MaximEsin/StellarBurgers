@@ -11,7 +11,6 @@ const BurgerConstructor = (props) => {
   BurgerConstructor.propTypes = {
     data: PropTypes.array.isRequired,
     setActive: PropTypes.func.isRequired,
-    setModalType: PropTypes.func.isRequired,
   };
   return (
     <section className="pt-25">
@@ -34,7 +33,6 @@ const BurgerConstructor = (props) => {
             size="large"
             onClick={() => {
               props.setActive(true);
-              props.setModalType('Order');
             }}
           >
             Оформить заказ

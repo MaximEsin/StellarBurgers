@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const ModalOverlay = (props) => {
   ModalOverlay.propTypes = {
-    children: PropTypes.array.isRequired,
+    children: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired,
   };
 

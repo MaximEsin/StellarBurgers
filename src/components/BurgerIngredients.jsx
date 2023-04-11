@@ -8,7 +8,6 @@ const BurgerIngredients = (props) => {
   BurgerIngredients.propTypes = {
     data: PropTypes.array.isRequired,
     setActive: PropTypes.func.isRequired,
-    setModalType: PropTypes.func.isRequired,
   };
   return (
     <section className={styles.container + ' pt-10'}>
@@ -22,13 +21,11 @@ const BurgerIngredients = (props) => {
               data={props.data[0]}
               counter={true}
               setActive={props.setActive}
-              setModalType={props.setModalType}
             />
             <BurgerIngredient
               data={props.data[1]}
               counter={false}
               setActive={props.setActive}
-              setModalType={props.setModalType}
             />
           </ul>
         </section>
@@ -39,49 +36,41 @@ const BurgerIngredients = (props) => {
               data={props.data[6]}
               counter={false}
               setActive={props.setActive}
-              setModalType={props.setModalType}
             />
             <BurgerIngredient
               data={props.data[7]}
               counter={false}
               setActive={props.setActive}
-              setModalType={props.setModalType}
             />
             <BurgerIngredient
               data={props.data[8]}
               counter={false}
               setActive={props.setActive}
-              setModalType={props.setModalType}
             />
             <BurgerIngredient
               data={props.data[9]}
               counter={false}
               setActive={props.setActive}
-              setModalType={props.setModalType}
             />
             <BurgerIngredient
               data={props.data[10]}
               counter={false}
               setActive={props.setActive}
-              setModalType={props.setModalType}
             />
             <BurgerIngredient
               data={props.data[11]}
               counter={false}
               setActive={props.setActive}
-              setModalType={props.setModalType}
             />
             <BurgerIngredient
               data={props.data[12]}
               counter={false}
               setActive={props.setActive}
-              setModalType={props.setModalType}
             />
             <BurgerIngredient
               data={props.data[13]}
               counter={false}
               setActive={props.setActive}
-              setModalType={props.setModalType}
             />
           </ul>
         </section>
@@ -92,25 +81,21 @@ const BurgerIngredients = (props) => {
               data={props.data[2]}
               counter={true}
               setActive={props.setActive}
-              setModalType={props.setModalType}
             />
             <BurgerIngredient
               data={props.data[3]}
               counter={false}
               setActive={props.setActive}
-              setModalType={props.setModalType}
             />
             <BurgerIngredient
               data={props.data[4]}
               counter={true}
               setActive={props.setActive}
-              setModalType={props.setModalType}
             />
             <BurgerIngredient
               data={props.data[5]}
               counter={false}
               setActive={props.setActive}
-              setModalType={props.setModalType}
             />
           </ul>
         </section>

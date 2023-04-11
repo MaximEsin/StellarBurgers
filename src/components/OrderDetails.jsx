@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const OrderDetails = (props) => {
   OrderDetails.propTypes = {
-    data: PropTypes.object.isRequired,
+    setActive: PropTypes.func.isRequired,
   };
   return (
     <section className={styles.modal}>
@@ -14,7 +14,7 @@ const OrderDetails = (props) => {
         <CloseIcon
           alt="Закрыть окно"
           onClick={() => {
-            props.data.setActive(false);
+            props.setActive(false);
           }}
         />
       </div>

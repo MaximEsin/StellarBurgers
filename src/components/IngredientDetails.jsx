@@ -5,9 +5,10 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const IngredientDetails = (props) => {
   IngredientDetails.propTypes = {
-    data: PropTypes.object.isRequired,
+    data: PropTypes.array.isRequired,
+    setActive: PropTypes.func.isRequired,
   };
-  const ingredient = props.data.data[0];
+  const ingredient = props.data[0];
   return (
     <section className={styles.modal}>
       <div className={styles.modalHeader + ' pt-10 pl-10'}>
@@ -16,7 +17,7 @@ const IngredientDetails = (props) => {
           <CloseIcon
             alt="Закрыть окно"
             onClick={() => {
-              props.data.setActive(false);
+              props.setActive(false);
             }}
           />
         </div>

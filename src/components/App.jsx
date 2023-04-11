@@ -5,6 +5,8 @@ import BurgerIngredients from './BurgerIngredients';
 import BurgerConstructor from './BurgerConstructor';
 import data from '../data/Data';
 import Modal from './Modal';
+import OrderDetails from './OrderDetails';
+import IngredientDetails from './IngredientDetails';
 
 function App() {
   const config = {
@@ -12,7 +14,6 @@ function App() {
   };
 
   const [modalActive, setModalActive] = useState(false);
-  const [modalType, setModalType] = useState('');
 
   const [state, setState] = useState({
     data: null,
@@ -21,7 +22,6 @@ function App() {
   });
 
   useEffect(() => {
-    let ingredients;
     const getInitialData = () => {
       setState({ ...state, loading: true });
       fetch(config.baseUrl)
@@ -43,25 +43,17 @@ function App() {
 
   return (
     <div className={styles.App}>
-      <Modal
-        modalType={modalType}
-        data={data}
-        active={modalActive}
-        setActive={setModalActive}
-      />
+      <Modal data={data} active={modalActive} setActive={setModalActive}>
+        <OrderDetails setActive={setModalActive} />
+      </Modal>
+      <Modal data={data} active={modalActive} setActive={setModalActive}>
+        <IngredientDetails setActive={setModalActive} data={data} />
+      </Modal>
       <Header />
       <main className={styles.main}>
         <div className={styles.container}>
-          <BurgerIngredients
-            data={data}
-            setActive={setModalActive}
-            setModalType={setModalType}
-          />
-          <BurgerConstructor
-            data={data}
-            setActive={setModalActive}
-            setModalType={setModalType}
-          />
+          <BurgerIngredients data={data} setActive={setModalActive} />
+          <BurgerConstructor data={data} setActive={setModalActive} />
         </div>
       </main>
     </div>
