@@ -17,86 +17,52 @@ const BurgerIngredients = (props) => {
         <section className={styles.ingredientsSection + ' pt-10'}>
           <h2 className="text text_type_main-medium pb-6">Булки</h2>
           <ul className={styles.ingredientTable + ' pl-4 pr-4'}>
-            <BurgerIngredient
-              data={props.data[0]}
-              counter={true}
-              setActive={props.setActive}
-            />
-            <BurgerIngredient
-              data={props.data[1]}
-              counter={false}
-              setActive={props.setActive}
-            />
+            {props.data.map((item) => {
+              if (item.type === 'bun') {
+                return (
+                  <BurgerIngredient
+                    key={item.name}
+                    data={item}
+                    counter={true}
+                    setActive={props.setActive}
+                  />
+                );
+              }
+            })}
           </ul>
         </section>
         <section className={styles.ingredientsSection + ' pt-10'}>
           <h2 className="text text_type_main-medium pb-6">Соусы</h2>
           <ul className={styles.ingredientTable + ' pl-4 pr-4'}>
-            <BurgerIngredient
-              data={props.data[6]}
-              counter={false}
-              setActive={props.setActive}
-            />
-            <BurgerIngredient
-              data={props.data[7]}
-              counter={false}
-              setActive={props.setActive}
-            />
-            <BurgerIngredient
-              data={props.data[8]}
-              counter={false}
-              setActive={props.setActive}
-            />
-            <BurgerIngredient
-              data={props.data[9]}
-              counter={false}
-              setActive={props.setActive}
-            />
-            <BurgerIngredient
-              data={props.data[10]}
-              counter={false}
-              setActive={props.setActive}
-            />
-            <BurgerIngredient
-              data={props.data[11]}
-              counter={false}
-              setActive={props.setActive}
-            />
-            <BurgerIngredient
-              data={props.data[12]}
-              counter={false}
-              setActive={props.setActive}
-            />
-            <BurgerIngredient
-              data={props.data[13]}
-              counter={false}
-              setActive={props.setActive}
-            />
+            {props.data.map((item) => {
+              if (item.type === 'sauce') {
+                return (
+                  <BurgerIngredient
+                    key={item.name}
+                    data={item}
+                    counter={true}
+                    setActive={props.setActive}
+                  />
+                );
+              }
+            })}
           </ul>
         </section>
         <section className={styles.ingredientsSection + ' pt-10'}>
           <h2 className="text text_type_main-medium pb-6">Начинки</h2>
           <ul className={styles.ingredientTable + ' pl-4 pr-4'}>
-            <BurgerIngredient
-              data={props.data[2]}
-              counter={true}
-              setActive={props.setActive}
-            />
-            <BurgerIngredient
-              data={props.data[3]}
-              counter={false}
-              setActive={props.setActive}
-            />
-            <BurgerIngredient
-              data={props.data[4]}
-              counter={true}
-              setActive={props.setActive}
-            />
-            <BurgerIngredient
-              data={props.data[5]}
-              counter={false}
-              setActive={props.setActive}
-            />
+            {props.data.map((item) => {
+              if (item.type === 'main') {
+                return (
+                  <BurgerIngredient
+                    key={item.name}
+                    data={item}
+                    counter={true}
+                    setActive={props.setActive}
+                  />
+                );
+              }
+            })}
           </ul>
         </section>
       </div>
