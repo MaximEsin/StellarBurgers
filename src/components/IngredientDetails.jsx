@@ -1,26 +1,16 @@
 import React from 'react';
 import styles from '../styles/Modal.module.css';
 import PropTypes from 'prop-types';
-import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const IngredientDetails = (props) => {
   IngredientDetails.propTypes = {
     data: PropTypes.array.isRequired,
-    setActive: PropTypes.func.isRequired,
   };
   const ingredient = props.data[0];
   return (
-    <section className={styles.modal}>
+    <>
       <div className={styles.modalHeader + ' pt-10 pl-10'}>
         <h2 className="text text_type_main-large">Детали ингредиента</h2>
-        <div className={styles.cross}>
-          <CloseIcon
-            alt="Закрыть окно"
-            onClick={() => {
-              props.setActive(false);
-            }}
-          />
-        </div>
       </div>
       <div className={styles.modalContainer}>
         <img
@@ -64,7 +54,7 @@ const IngredientDetails = (props) => {
           </div>
         </div>
       </div>
-    </section>
+    </>
   );
 };
 

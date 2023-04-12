@@ -13,7 +13,8 @@ function App() {
     baseUrl: `https://norma.nomoreparties.space/api/ingredients `,
   };
 
-  const [modalActive, setModalActive] = useState(false);
+  const [modalIngredientActive, setModalIngredientActive] = useState(false);
+  const [modalOrderActive, setModalOrderActive] = useState(false);
 
   const [state, setState] = useState({
     data: null,
@@ -43,17 +44,25 @@ function App() {
 
   return (
     <div className={styles.App}>
-      <Modal data={data} active={modalActive} setActive={setModalActive}>
-        <OrderDetails setActive={setModalActive} />
+      <Modal
+        data={data}
+        active={modalIngredientActive}
+        setActive={setModalIngredientActive}
+      >
+        <OrderDetails />
       </Modal>
-      <Modal data={data} active={modalActive} setActive={setModalActive}>
-        <IngredientDetails setActive={setModalActive} data={data} />
+      <Modal
+        data={data}
+        active={modalOrderActive}
+        setActive={setModalOrderActive}
+      >
+        <IngredientDetails data={data} />
       </Modal>
       <Header />
       <main className={styles.main}>
         <div className={styles.container}>
-          <BurgerIngredients data={data} setActive={setModalActive} />
-          <BurgerConstructor data={data} setActive={setModalActive} />
+          <BurgerIngredients data={data} setActive={setModalOrderActive} />
+          <BurgerConstructor data={data} setActive={setModalIngredientActive} />
         </div>
       </main>
     </div>

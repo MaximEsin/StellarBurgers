@@ -1,24 +1,11 @@
 import React from 'react';
 import done from '../images/done.png';
 import styles from '../styles/Modal.module.css';
-import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
 
-const OrderDetails = (props) => {
-  OrderDetails.propTypes = {
-    setActive: PropTypes.func.isRequired,
-  };
+const OrderDetails = () => {
   return (
-    <section className={styles.modal}>
-      <div className={styles.cross + ' mt-15'}>
-        <CloseIcon
-          alt="Закрыть окно"
-          onClick={() => {
-            props.setActive(false);
-          }}
-        />
-      </div>
-      <div className={styles.modalContainer + ' mt-2'}>
+    <>
+      <div className={styles.modalContainer + ' mt-25'}>
         <p className={styles.orderNumber + ' text text_type_digits-large'}>
           034536
         </p>
@@ -39,13 +26,13 @@ const OrderDetails = (props) => {
         </p>
         <p
           className={
-            styles.orderTextDark + ' text text_type_main-default mb-30'
+            styles.orderTextDark + ' text text_type_main-default mb-25'
           }
         >
           Дождитесь готовности на орбитальной станции
         </p>
       </div>
-    </section>
+    </>
   );
 };
 
