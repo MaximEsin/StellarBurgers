@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styles from '../styles/App.module.css';
 import Header from './Header';
 import BurgerIngredients from './BurgerIngredients';
@@ -9,6 +10,9 @@ import OrderDetails from './OrderDetails';
 import IngredientDetails from './IngredientDetails';
 
 function App() {
+  const initialData = useSelector((state) => state.initialData);
+  const dispatch = useDispatch();
+
   const config = {
     baseUrl: `https://norma.nomoreparties.space/api/ingredients `,
   };
@@ -16,15 +20,8 @@ function App() {
   const [modalIngredientActive, setModalIngredientActive] = useState(false);
   const [modalOrderActive, setModalOrderActive] = useState(false);
 
-  const [state, setState] = useState({
-    data: null,
-    loading: false,
-    recievedData: false,
-  });
-
   useEffect(() => {
     const getInitialData = () => {
-      setState({ ...state, loading: true });
       fetch(config.baseUrl)
         .then((res) => {
           if (res.ok) {
@@ -33,7 +30,7 @@ function App() {
           return Promise.reject(`Ошибка ${res.status}`);
         })
         .then((res) => {
-          setState({ data: res.data, loading: false, recievedData: true });
+          dispatch({ type: 'STORE_DATA', data: res.data });
         })
         .catch((err) => {
           console.log(err);
