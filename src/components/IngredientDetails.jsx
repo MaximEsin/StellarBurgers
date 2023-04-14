@@ -2,6 +2,7 @@ import React from 'react';
 import styles from '../styles/Modal.module.css';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import Loader from './Loader';
 
 const IngredientDetails = (props) => {
   IngredientDetails.propTypes = {
@@ -10,7 +11,7 @@ const IngredientDetails = (props) => {
   const data = useSelector((state) => state.ingredientReducer);
 
   if (props.data.length < 1) {
-    return <p>Загрузка...</p>;
+    return <Loader />;
   } else {
     return (
       <>

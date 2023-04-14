@@ -8,6 +8,7 @@ import OrderDetails from './OrderDetails';
 import IngredientDetails from './IngredientDetails';
 import { useDispatch, useSelector } from 'react-redux';
 import { getData } from '../services/actions';
+import Loader from './Loader';
 
 function App() {
   const [modalIngredientActive, setModalIngredientActive] = useState(false);
@@ -24,7 +25,7 @@ function App() {
   if (dataFailed) {
     return <p>Произошла ошибка при получении данных</p>;
   } else if (dataRequest) {
-    return <p>Загрузка...</p>;
+    return <Loader />;
   } else {
     return (
       <div className={styles.App}>

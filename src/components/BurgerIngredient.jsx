@@ -6,7 +6,7 @@ import {
 import styles from '../styles/BurgerIngredients.module.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { ingredientReducer } from '../services/reducers';
+import Loader from './Loader';
 import { getIngredient } from '../services/actions';
 
 const BurgerIngredient = (props) => {
@@ -31,7 +31,7 @@ const BurgerIngredient = (props) => {
     counter = '';
   }
   if (props.data.length > 1) {
-    return <p>Загрузка...</p>;
+    return <Loader />;
   } else {
     return (
       <li

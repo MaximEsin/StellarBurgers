@@ -2,6 +2,7 @@ import React from 'react';
 import done from '../images/done.png';
 import styles from '../styles/Modal.module.css';
 import { useSelector } from 'react-redux';
+import Loader from './Loader';
 
 const OrderDetails = () => {
   const { number, dataRequest, dataFailed } = useSelector(
@@ -10,7 +11,7 @@ const OrderDetails = () => {
   if (dataFailed) {
     return <p>Произошла ошибка при получении данных</p>;
   } else if (dataRequest) {
-    return <p>Загрузка...</p>;
+    return <Loader />;
   } else {
     return (
       <>
