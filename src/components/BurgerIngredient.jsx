@@ -25,25 +25,30 @@ const BurgerIngredient = (props) => {
   } else {
     counter = '';
   }
-
-  return (
-    <li
-      className={styles.ingredientCard}
-      onClick={() => {
-        props.setActive(true);
-      }}
-    >
-      {counter}
-      <img src={props.data.image} className="pl-4 pr-4 pb-1" alt="Счетчик" />
-      <div className={styles.priceContainer + ' pb-1'}>
-        <p className="text text_type_digits-default pr-1">{props.data.price}</p>
-        <CurrencyIcon type="primary" />
-      </div>
-      <p className={styles.ingredientName + ' text text_type_main-default'}>
-        {props.data.name}
-      </p>
-    </li>
-  );
+  if (props.data.length > 1) {
+    return <p>Загрузка...</p>;
+  } else {
+    return (
+      <li
+        className={styles.ingredientCard}
+        onClick={() => {
+          props.setActive(true);
+        }}
+      >
+        {counter}
+        <img src={props.data.image} className="pl-4 pr-4 pb-1" alt="Счетчик" />
+        <div className={styles.priceContainer + ' pb-1'}>
+          <p className="text text_type_digits-default pr-1">
+            {props.data.price}
+          </p>
+          <CurrencyIcon type="primary" />
+        </div>
+        <p className={styles.ingredientName + ' text text_type_main-default'}>
+          {props.data.name}
+        </p>
+      </li>
+    );
+  }
 };
 
 export default BurgerIngredient;

@@ -21,7 +21,7 @@ const BurgerIngredients = (props) => {
               if (item.type === 'bun') {
                 return (
                   <BurgerIngredient
-                    key={item.name}
+                    key={item._id}
                     data={item}
                     counter={true}
                     setActive={props.setActive}
@@ -38,7 +38,7 @@ const BurgerIngredients = (props) => {
               if (item.type === 'sauce') {
                 return (
                   <BurgerIngredient
-                    key={item.name}
+                    key={item._id}
                     data={item}
                     counter={true}
                     setActive={props.setActive}
@@ -55,7 +55,7 @@ const BurgerIngredients = (props) => {
               if (item.type === 'main') {
                 return (
                   <BurgerIngredient
-                    key={item.name}
+                    key={item._id}
                     data={item}
                     counter={true}
                     setActive={props.setActive}
