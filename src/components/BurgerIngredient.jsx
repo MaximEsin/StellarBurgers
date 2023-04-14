@@ -5,6 +5,9 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../styles/BurgerIngredients.module.css';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { ingredientReducer } from '../services/reducers';
+import { getIngredient } from '../services/actions';
 
 const BurgerIngredient = (props) => {
   BurgerIngredient.propTypes = {
@@ -12,6 +15,8 @@ const BurgerIngredient = (props) => {
     data: PropTypes.object.isRequired,
     setActive: PropTypes.func.isRequired,
   };
+  const dispatch = useDispatch();
+
   let counter;
   if (props.counter) {
     counter = (
@@ -33,6 +38,7 @@ const BurgerIngredient = (props) => {
         className={styles.ingredientCard}
         onClick={() => {
           props.setActive(true);
+          dispatch(getIngredient(props.data));
         }}
       >
         {counter}

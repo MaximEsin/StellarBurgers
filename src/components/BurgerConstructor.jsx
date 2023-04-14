@@ -5,6 +5,8 @@ import {
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { postOrder } from '../services/actions';
 import PropTypes from 'prop-types';
 
 const BurgerConstructor = (props) => {
@@ -12,9 +14,13 @@ const BurgerConstructor = (props) => {
     data: PropTypes.array.isRequired,
     setActive: PropTypes.func.isRequired,
   };
+
+  const dispatch = useDispatch();
+
   if (props.data.length < 1) {
     return <p>Загрузка...</p>;
   } else {
+    const ids = [props.data[0]._id, props.data[0]._id];
     return (
       <section className="pt-25">
         <ul>
@@ -22,6 +28,7 @@ const BurgerConstructor = (props) => {
           <div className={styles.scroll}>
             {props.data.map((item) => {
               if (item.type === 'main') {
+                ids.push(item._id);
                 return <ConstructorItem key={item._id} data={item} />;
               }
             })}
@@ -38,6 +45,7 @@ const BurgerConstructor = (props) => {
               size="large"
               onClick={() => {
                 props.setActive(true);
+                dispatch(postOrder(ids));
               }}
             >
               Оформить заказ

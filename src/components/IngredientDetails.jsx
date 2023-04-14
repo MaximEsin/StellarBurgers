@@ -1,15 +1,17 @@
 import React from 'react';
 import styles from '../styles/Modal.module.css';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
 const IngredientDetails = (props) => {
   IngredientDetails.propTypes = {
     data: PropTypes.array.isRequired,
   };
+  const data = useSelector((state) => state.ingredientReducer);
+
   if (props.data.length < 1) {
     return <p>Загрузка...</p>;
   } else {
-    const ingredient = props.data[0];
     return (
       <>
         <div className={styles.modalHeader + ' pt-10 pl-10'}>
@@ -17,18 +19,18 @@ const IngredientDetails = (props) => {
         </div>
         <div className={styles.modalContainer}>
           <img
-            src={ingredient.image}
+            src={data.data.image}
             alt="Ингредиент"
             className={styles.ingredientImage + ' mb-4'}
           />
-          <p className="text text_type_main-medium mb-8">{ingredient.name}</p>
+          <p className="text text_type_main-medium mb-8">{data.data.name}</p>
           <div className={styles.ingredientDataContainer + ' mb-15'}>
             <div className={styles.modalContainer}>
               <p className="text text_type_main-default text_color_inactive">
                 Калории,ккал
               </p>
               <p className="text text_type_digits-default text_color_inactive">
-                {ingredient.calories}
+                {data.data.calories}
               </p>
             </div>
             <div className={styles.modalContainer}>
@@ -36,7 +38,7 @@ const IngredientDetails = (props) => {
                 Белки, г
               </p>
               <p className="text text_type_digits-default text_color_inactive">
-                {ingredient.proteins}
+                {data.data.proteins}
               </p>
             </div>
             <div className={styles.modalContainer}>
@@ -44,7 +46,7 @@ const IngredientDetails = (props) => {
                 Жиры, г
               </p>
               <p className="text text_type_digits-default text_color_inactive">
-                {ingredient.fat}
+                {data.data.fat}
               </p>
             </div>
             <div className={styles.modalContainer}>
@@ -52,7 +54,7 @@ const IngredientDetails = (props) => {
                 Углеводы, г
               </p>
               <p className="text text_type_digits-default text_color_inactive">
-                {ingredient.carbohydrates}
+                {data.data.carbohydrates}
               </p>
             </div>
           </div>
