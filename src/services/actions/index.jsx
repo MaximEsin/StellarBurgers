@@ -29,47 +29,20 @@ export function getData() {
   };
 }
 
-export function getIngredient(item) {
+export function AddItem(itemId) {
   return function (dispatch) {
     dispatch({
-      type: 'STORE_INGREDIENT',
-      info: item,
+      type: 'ADD_ITEM',
+      id: itemId,
     });
   };
 }
 
-export function postOrder(ids) {
+export function UpdatePrice(price) {
   return function (dispatch) {
     dispatch({
-      type: 'POST_ORDER',
+      type: 'UPDATE_PRICE',
+      price: price,
     });
-    fetch('https://norma.nomoreparties.space/api/orders', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        ingredients: ids,
-      }),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        dispatch({
-          type: 'POST_SUCCESS',
-          number: res.order.number,
-        });
-      })
-      .then((res) => {
-        if (res && !res.ok) {
-          dispatch({
-            type: 'POST_FAILED',
-          });
-        }
-      })
-      .catch((err) => {
-        dispatch({
-          type: 'POST_FAILED',
-        });
-      });
   };
 }

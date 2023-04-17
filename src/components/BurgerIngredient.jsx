@@ -7,21 +7,32 @@ import styles from '../styles/BurgerIngredients.module.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from './Loader';
-import { getIngredient } from '../services/actions';
+import { getIngredient } from '../services/actions/Modals';
+import { useDrag } from 'react-dnd';
 
 const BurgerIngredient = (props) => {
   BurgerIngredient.propTypes = {
-    counter: PropTypes.bool.isRequired,
     data: PropTypes.object.isRequired,
     setActive: PropTypes.func.isRequired,
   };
+
+  const { constructorData } = useSelector((state) => state.dataReducer);
+
   const dispatch = useDispatch();
 
+  const id = props.data._id;
+
+  const [, dragRef] = useDrag({
+    type: 'ingredient',
+    item: { id },
+  });
+  console.log(constructorData.filter((item) => item._id));
   let counter;
-  if (props.counter) {
+  const amount = constructorData.filter((item) => item._id === id).length;
+  if (amount > 0) {
     counter = (
       <Counter
-        count={1}
+        count={amount}
         size="default"
         extraClass="m-1"
         className={styles.counter}
@@ -30,11 +41,13 @@ const BurgerIngredient = (props) => {
   } else {
     counter = '';
   }
+
   if (props.data.length > 1) {
     return <Loader />;
   } else {
     return (
       <li
+        ref={dragRef}
         className={styles.ingredientCard}
         onClick={() => {
           props.setActive(true);

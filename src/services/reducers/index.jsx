@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import { ingredientReducer, orderReducer } from './Modals';
 
 const initialState = {
   dataRequest: false,
   dataFailed: false,
   data: [],
+  constructorData: [],
 };
 
 export const dataReducer = (state = initialState, action) => {
@@ -31,54 +33,14 @@ export const dataReducer = (state = initialState, action) => {
         dataRequest: false,
       };
     }
-    default: {
-      return state;
-    }
-  }
-};
-
-export const ingredientReducer = (
-  state = { data: {}, dataRequest: false, dataFailed: false },
-  action
-) => {
-  switch (action.type) {
-    case 'STORE_INGREDIENT': {
+    case 'ADD_ITEM': {
+      console.log(state.data.filter((element) => element._id === action.id.id));
       return {
         ...state,
-        data: action.info,
-        dataRequest: false,
-      };
-    }
-    default: {
-      return state;
-    }
-  }
-};
-
-export const orderReducer = (
-  state = { number: 0, dataRequest: false, dataFailed: false },
-  action
-) => {
-  switch (action.type) {
-    case 'POST_ORDER': {
-      return {
-        ...state,
-        dataRequest: true,
-        dataFailed: false,
-      };
-    }
-    case 'POST_SUCCESS': {
-      return {
-        ...state,
-        number: action.number,
-        dataRequest: false,
-      };
-    }
-    case 'POST_FAILED': {
-      return {
-        ...state,
-        dataFailed: true,
-        dataRequest: false,
+        constructorData: [
+          ...state.constructorData,
+          state.data.filter((element) => element._id === action.id.id)[0],
+        ],
       };
     }
     default: {

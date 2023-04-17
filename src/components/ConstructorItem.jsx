@@ -12,6 +12,7 @@ const ConstructorItem = (props) => {
     data: PropTypes.object.isRequired,
     place: PropTypes.string,
   };
+
   let place;
   let icon;
   if (props.place === 'top') {

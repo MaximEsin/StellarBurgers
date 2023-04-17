@@ -9,6 +9,7 @@ const BurgerIngredients = (props) => {
     data: PropTypes.array.isRequired,
     setActive: PropTypes.func.isRequired,
   };
+
   return (
     <section className={styles.container + ' pt-10'}>
       <h1 className="text text_type_main-large pb-5">Соберите бургер</h1>
@@ -23,7 +24,6 @@ const BurgerIngredients = (props) => {
                   <BurgerIngredient
                     key={item._id}
                     data={item}
-                    counter={true}
                     setActive={props.setActive}
                   />
                 );
@@ -40,7 +40,6 @@ const BurgerIngredients = (props) => {
                   <BurgerIngredient
                     key={item._id}
                     data={item}
-                    counter={true}
                     setActive={props.setActive}
                   />
                 );
@@ -57,7 +56,6 @@ const BurgerIngredients = (props) => {
                   <BurgerIngredient
                     key={item._id}
                     data={item}
-                    counter={true}
                     setActive={props.setActive}
                   />
                 );

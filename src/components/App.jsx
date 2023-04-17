@@ -9,6 +9,8 @@ import IngredientDetails from './IngredientDetails';
 import { useDispatch, useSelector } from 'react-redux';
 import { getData } from '../services/actions';
 import Loader from './Loader';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 function App() {
   const [modalIngredientActive, setModalIngredientActive] = useState(false);
@@ -16,6 +18,7 @@ function App() {
   const { data, dataRequest, dataFailed } = useSelector(
     (state) => state.dataReducer
   );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -46,11 +49,10 @@ function App() {
         <Header />
         <main className={styles.main}>
           <div className={styles.container}>
-            <BurgerIngredients data={data} setActive={setModalOrderActive} />
-            <BurgerConstructor
-              data={data}
-              setActive={setModalIngredientActive}
-            />
+            <DndProvider backend={HTML5Backend}>
+              <BurgerIngredients data={data} setActive={setModalOrderActive} />
+              <BurgerConstructor setActive={setModalIngredientActive} />
+            </DndProvider>
           </div>
         </main>
       </div>
