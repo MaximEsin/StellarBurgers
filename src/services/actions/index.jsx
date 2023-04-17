@@ -46,3 +46,12 @@ export function UpdatePrice(price) {
     });
   };
 }
+
+export function RemoveItem(uniqueId) {
+  return function (dispatch) {
+    dispatch({
+      type: 'REMOVE_ITEM',
+      id: uniqueId,
+    });
+  };
+}

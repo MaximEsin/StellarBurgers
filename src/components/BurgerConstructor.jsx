@@ -18,9 +18,7 @@ const BurgerConstructor = (props) => {
     setActive: PropTypes.func.isRequired,
   };
 
-  const { data, constructorData, price } = useSelector(
-    (state) => state.dataReducer
-  );
+  const { data, constructorData } = useSelector((state) => state.dataReducer);
 
   const dispatch = useDispatch();
 
@@ -39,15 +37,17 @@ const BurgerConstructor = (props) => {
     return (
       <section className="pt-25">
         <ul ref={drop}>
-          <ConstructorItem data={data[0]} place="top" />
+          <ConstructorItem data={constructorData[0]} place="top" />
           <div className={styles.scroll}>
             {constructorData.map((item, index) => {
-              ids.push(item._id);
-              priceArray.push(item.price);
-              return <ConstructorItem data={item} key={index} />;
+              if (item.type !== 'bun') {
+                ids.push(item._id);
+                priceArray.push(item.price);
+                return <ConstructorItem data={item} key={index} />;
+              }
             })}
           </div>
-          <ConstructorItem data={data[0]} place="bottom" />
+          <ConstructorItem data={constructorData[1]} place="bottom" />
         </ul>
         <div className={styles.totalContainer + ' mt-10 mr-4'}>
           <p className="text text_type_digits-medium mr-2">

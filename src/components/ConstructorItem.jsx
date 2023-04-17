@@ -6,12 +6,15 @@ import {
 import styles from '../styles/BurgerConstructor.module.css';
 import substract from '../images/Subtract.svg';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 
 const ConstructorItem = (props) => {
   ConstructorItem.propTypes = {
     data: PropTypes.object.isRequired,
     place: PropTypes.string,
   };
+
+  const dispatch = useDispatch();
 
   let place;
   let icon;
@@ -48,7 +51,16 @@ const ConstructorItem = (props) => {
           {props.data.price}
         </p>
         <CurrencyIcon type="primary" />
-        <div className="ml-5">{icon}</div>
+        <div
+          className={styles.lock + ' ml-5'}
+          onClick={() => {
+            if (props.place !== 'top' && props.place !== 'bottom') {
+              dispatch({ type: 'REMOVE_ITEM', id: props.data.uniqueId });
+            }
+          }}
+        >
+          {icon}
+        </div>
       </div>
     </li>
   );

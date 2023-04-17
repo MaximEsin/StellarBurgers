@@ -48,3 +48,7 @@
   margin-left: 40px;
   cursor: pointer;
 }
+
+.lock {
+  cursor: pointer;
+}

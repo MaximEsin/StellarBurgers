@@ -26,7 +26,6 @@ const BurgerIngredient = (props) => {
     type: 'ingredient',
     item: { id },
   });
-  console.log(constructorData.filter((item) => item._id));
   let counter;
   const amount = constructorData.filter((item) => item._id === id).length;
   if (amount > 0) {
