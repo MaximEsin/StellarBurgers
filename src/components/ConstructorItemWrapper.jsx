@@ -1,8 +1,13 @@
 import React from 'react';
 import styles from '../styles/BurgerConstructor.module.css';
 import { useDrag } from 'react-dnd';
+import PropTypes from 'prop-types';
 
 const ConstructorItemWrapper = (props) => {
+  ConstructorItemWrapper.propTypes = {
+    data: PropTypes.object,
+    place: PropTypes.string,
+  };
   const id = props.data;
 
   const [, drag] = useDrag({

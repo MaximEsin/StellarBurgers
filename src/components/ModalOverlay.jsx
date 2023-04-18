@@ -6,6 +6,7 @@ const ModalOverlay = (props) => {
   ModalOverlay.propTypes = {
     children: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired,
+    setActive: PropTypes.func,
   };
 
   useEffect(() => {

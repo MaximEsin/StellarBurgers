@@ -6,7 +6,7 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const Modal = (props) => {
   Modal.propTypes = {
-    active: PropTypes.bool.isRequired,
+    active: PropTypes.bool,
     data: PropTypes.array.isRequired,
     setActive: PropTypes.func.isRequired,
   };
