@@ -17,11 +17,23 @@
   justify-content: space-between;
 }
 
-.constructorItem:first-of-type {
+.constructorItemTop {
+  width: 536px;
+  background-color: #1c1c21;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   border-radius: 88px 88px 40px 40px;
 }
 
-.constructorItem:last-of-type {
+.constructorItemBottom {
+  width: 536px;
+  background-color: #1c1c21;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   border-radius: 40px 40px 88px 88px;
 }
 
