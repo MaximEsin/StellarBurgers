@@ -33,7 +33,7 @@ const ConstructorItem = (props) => {
 
   return (
     <>
-      <ConstructorItemWrapper place={props.place}>
+      <ConstructorItemWrapper place={props.place} data={props.data.uniqueId}>
         <div className={styles.itemContainer + ' pl-3'}>
           <img
             src={props.data.image}

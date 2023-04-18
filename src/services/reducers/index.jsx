@@ -45,6 +45,20 @@ export const dataReducer = (state = initialState, action) => {
         ...newItem,
         uniqueId: uuidv4(),
       };
+      if (action.id.id.length > 25) {
+        const filteredItem = state.constructorData.filter(
+          (item) => item.uniqueId === action.id.id
+        )[0];
+        return {
+          ...state,
+          constructorData: [
+            ...state.constructorData.filter(
+              (item) => item.uniqueId !== action.id.id
+            ),
+            filteredItem,
+          ],
+        };
+      }
       if (modifyedItem.type === 'bun') {
         state.constructorData.splice(0, 2);
         state.constructorData.unshift(modifyedItem, modifyedItem);

@@ -23,7 +23,7 @@ const BurgerConstructor = (props) => {
   const dispatch = useDispatch();
 
   const [, drop] = useDrop({
-    accept: 'ingredient',
+    accept: ['ingredient', 'ingredient_wide'],
     drop(itemId) {
       dispatch(AddItem(itemId));
     },
