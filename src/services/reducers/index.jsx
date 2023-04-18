@@ -45,10 +45,19 @@ export const dataReducer = (state = initialState, action) => {
         ...newItem,
         uniqueId: uuidv4(),
       };
-      return {
-        ...state,
-        constructorData: [...state.constructorData, modifyedItem],
-      };
+      if (modifyedItem.type === 'bun') {
+        state.constructorData.splice(0, 2);
+        state.constructorData.unshift(modifyedItem, modifyedItem);
+        return {
+          ...state,
+          constructorData: [...state.constructorData],
+        };
+      } else {
+        return {
+          ...state,
+          constructorData: [...state.constructorData, modifyedItem],
+        };
+      }
     }
     case 'REMOVE_ITEM': {
       return {
