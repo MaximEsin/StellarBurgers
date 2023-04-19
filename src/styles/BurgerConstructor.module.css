@@ -1,4 +1,5 @@
 .scroll {
+  max-width: 566px;
   max-height: 656px;
   overflow: auto;
   display: flex;
@@ -25,6 +26,7 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 88px 88px 40px 40px;
+  margin-left: 19px;
 }
 
 .constructorItemBottom {
@@ -35,6 +37,7 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 40px 40px 88px 88px;
+  margin-left: 19px;
 }
 
 .itemImage {
@@ -63,4 +66,21 @@
 
 .lock {
   cursor: pointer;
+}
+
+.ingredientsList {
+  padding: 0;
+  margin-left: 40px;
+  max-width: 566px;
+}
+.dots {
+  width: 13px;
+  height: 18.3px;
+  margin-top: 30px;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.draggableItemContainer {
+  display: flex;
 }

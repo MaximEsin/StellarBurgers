@@ -13,6 +13,7 @@ import { useDrop } from 'react-dnd';
 import { addItem } from '../services/actions';
 import TotalPrice from './TotalPrice';
 import { v4 as uuidv4 } from 'uuid';
+import dots from '../images/dots.svg';
 
 const BurgerConstructor = (props) => {
   const { data, constructorData } = useSelector((state) => state.dataReducer);
@@ -34,14 +35,23 @@ const BurgerConstructor = (props) => {
     const priceArray = [data[0].price, data[0].price];
     return (
       <section className="pt-25">
-        <ul ref={drop}>
+        <ul ref={drop} className={styles.ingredientsList}>
           <ConstructorItem data={constructorData[0]} place="top" />
           <div className={styles.scroll}>
             {constructorData.map((item) => {
               if (item.type !== 'bun') {
                 ids.push(item._id);
                 priceArray.push(item.price);
-                return <ConstructorItem data={item} key={item.uniqueId} />;
+                return (
+                  <div className={styles.draggableItemContainer}>
+                    <img
+                      src={dots}
+                      alt="Иконка переноса"
+                      className={styles.dots}
+                    />
+                    <ConstructorItem data={item} key={item.uniqueId} />
+                  </div>
+                );
               }
             })}
           </div>
