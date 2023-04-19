@@ -1,3 +1,5 @@
+import { baseUrl } from './constants';
+
 export function getIngredient(item) {
   return function (dispatch) {
     dispatch({
@@ -12,7 +14,7 @@ export function postOrder(ids) {
     dispatch({
       type: 'POST_ORDER',
     });
-    fetch('https://norma.nomoreparties.space/api/orders', {
+    fetch(`${baseUrl}/orders`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

@@ -5,6 +5,7 @@ import {
   ADD_ITEM,
   UPDATE_PRICE,
   REMOVE_ITEM,
+  baseUrl,
 } from './constants';
 export function getData() {
   return function (dispatch) {
@@ -12,7 +13,7 @@ export function getData() {
       type: GET_DATA,
     });
 
-    fetch('https://norma.nomoreparties.space/api/ingredients')
+    fetch(`${baseUrl}/ingredients`)
       .then((res) => {
         return res.json();
       })
