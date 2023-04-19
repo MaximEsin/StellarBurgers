@@ -16,6 +16,8 @@ const initialState = {
   dataFailed: false,
   data: [],
   constructorData: [],
+  buns: [],
+  bunInOrder: [],
 };
 
 export const dataReducer = (state = initialState, action) => {
@@ -28,15 +30,13 @@ export const dataReducer = (state = initialState, action) => {
       };
     }
     case GET_DATA_SUCCESS: {
+      const buns = action.data.filter((item) => item.type === 'bun');
       return {
         ...state,
         data: action.data,
         dataRequest: false,
-        constructorData: [
-          ...state.constructorData,
-          action.data[0],
-          action.data[0],
-        ],
+        constructorData: [...state.constructorData],
+        buns: buns,
       };
     }
     case GET_DATA_FAILED: {
@@ -47,6 +47,15 @@ export const dataReducer = (state = initialState, action) => {
       };
     }
     case ADD_ITEM: {
+      const bun = state.buns.filter((item) => item._id === action.id.id)[0];
+
+      if (bun) {
+        return {
+          ...state,
+          bunInOrder: [bun],
+        };
+      }
+
       const newItem = state.data.filter((item) => item._id === action.id.id)[0];
       const modifyedItem = {
         ...newItem,
@@ -66,20 +75,13 @@ export const dataReducer = (state = initialState, action) => {
           ],
         };
       }
-      if (modifyedItem.type === 'bun') {
-        state.constructorData.splice(0, 2);
-        state.constructorData.unshift(modifyedItem, modifyedItem);
-        return {
-          ...state,
-          constructorData: [...state.constructorData],
-        };
-      } else {
-        return {
-          ...state,
-          constructorData: [...state.constructorData, modifyedItem],
-        };
-      }
+
+      return {
+        ...state,
+        constructorData: [...state.constructorData, modifyedItem],
+      };
     }
+
     case REMOVE_ITEM: {
       return {
         ...state,

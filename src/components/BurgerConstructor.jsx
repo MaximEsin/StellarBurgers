@@ -16,7 +16,9 @@ import { v4 as uuidv4 } from 'uuid';
 import dots from '../images/dots.svg';
 
 const BurgerConstructor = (props) => {
-  const { data, constructorData } = useSelector((state) => state.dataReducer);
+  const { data, constructorData, bunInOrder } = useSelector(
+    (state) => state.dataReducer
+  );
 
   const dispatch = useDispatch();
 
@@ -32,30 +34,37 @@ const BurgerConstructor = (props) => {
     return <Loader />;
   } else {
     const ids = [data[0]._id, data[0]._id];
-    const priceArray = [data[0].price, data[0].price];
+    let priceArray = [];
+    if (bunInOrder.length > 0) {
+      priceArray = [bunInOrder[0].price, bunInOrder[0].price];
+    }
     return (
-      <section className="pt-25">
+      <section className={styles.constructorContainer + ' pt-25'}>
         <ul ref={drop} className={styles.ingredientsList}>
-          <ConstructorItem data={constructorData[0]} place="top" />
+          <ConstructorItem data={bunInOrder[0]} place="top" />
           <div className={styles.scroll}>
             {constructorData.map((item) => {
               if (item.type !== 'bun') {
                 ids.push(item._id);
                 priceArray.push(item.price);
+                console.log(constructorData);
                 return (
-                  <div className={styles.draggableItemContainer}>
+                  <div
+                    className={styles.draggableItemContainer}
+                    key={item.uniqueId}
+                  >
                     <img
                       src={dots}
                       alt="Иконка переноса"
                       className={styles.dots}
                     />
-                    <ConstructorItem data={item} key={item.uniqueId} />
+                    <ConstructorItem data={item} />
                   </div>
                 );
               }
             })}
           </div>
-          <ConstructorItem data={constructorData[1]} place="bottom" />
+          <ConstructorItem data={bunInOrder[0]} place="bottom" />
         </ul>
         <div className={styles.totalContainer + ' mt-10 mr-4'}>
           <p className="text text_type_digits-medium mr-2">

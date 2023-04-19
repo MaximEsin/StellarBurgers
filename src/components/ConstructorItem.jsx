@@ -27,48 +27,50 @@ const ConstructorItem = (props) => {
     dots = <div className={styles.dots}></div>;
   }
 
-  return (
-    <>
-      <ConstructorItemWrapper place={props.place} data={props.data.uniqueId}>
-        <div className={styles.itemContainer + ' pl-3'}>
-          <img
-            src={props.data.image}
-            className={styles.itemImage}
-            alt="Ингредиент"
-          />
-          <p
-            className={
-              styles.ingredientName + ' pl-5 text text_type_main-default'
-            }
-          >
-            {props.data.name}
-            <br />
-            {place}
-          </p>
-        </div>
-        <div className={styles.itemContainer + ' pr-5'}>
-          <p className="text text_type_digits-default pr-1 pl-5">
-            {props.data.price}
-          </p>
-          <CurrencyIcon type="primary" />
-          <div
-            className={styles.lock + ' ml-5'}
-            onClick={() => {
-              if (props.place !== 'top' && props.place !== 'bottom') {
-                dispatch({ type: REMOVE_ITEM, id: props.data.uniqueId });
+  if (props.data) {
+    return (
+      <>
+        <ConstructorItemWrapper place={props.place} data={props.data.uniqueId}>
+          <div className={styles.itemContainer + ' pl-3'}>
+            <img
+              src={props.data.image}
+              className={styles.itemImage}
+              alt="Ингредиент"
+            />
+            <p
+              className={
+                styles.ingredientName + ' pl-5 text text_type_main-default'
               }
-            }}
-          >
-            {icon}
+            >
+              {props.data.name}
+              <br />
+              {place}
+            </p>
           </div>
-        </div>
-      </ConstructorItemWrapper>
-    </>
-  );
+          <div className={styles.itemContainer + ' pr-5'}>
+            <p className="text text_type_digits-default pr-1 pl-5">
+              {props.data.price}
+            </p>
+            <CurrencyIcon type="primary" />
+            <div
+              className={styles.lock + ' ml-5'}
+              onClick={() => {
+                if (props.place !== 'top' && props.place !== 'bottom') {
+                  dispatch({ type: REMOVE_ITEM, id: props.data.uniqueId });
+                }
+              }}
+            >
+              {icon}
+            </div>
+          </div>
+        </ConstructorItemWrapper>
+      </>
+    );
+  }
 };
 
 ConstructorItem.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.object,
   place: PropTypes.string,
 };
 
