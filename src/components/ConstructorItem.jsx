@@ -8,6 +8,7 @@ import substract from '../images/Subtract.svg';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import ConstructorItemWrapper from './ConstructorItemWrapper';
+import { REMOVE_ITEM } from '../services/actions/constants';
 
 const ConstructorItem = (props) => {
   ConstructorItem.propTypes = {
@@ -59,7 +60,7 @@ const ConstructorItem = (props) => {
             className={styles.lock + ' ml-5'}
             onClick={() => {
               if (props.place !== 'top' && props.place !== 'bottom') {
-                dispatch({ type: 'REMOVE_ITEM', id: props.data.uniqueId });
+                dispatch({ type: REMOVE_ITEM, id: props.data.uniqueId });
               }
             }}
           >

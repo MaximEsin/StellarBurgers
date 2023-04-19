@@ -3,6 +3,13 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { ingredientReducer, orderReducer } from './Modals';
 import { v4 as uuidv4 } from 'uuid';
+import {
+  GET_DATA,
+  GET_DATA_SUCCESS,
+  GET_DATA_FAILED,
+  ADD_ITEM,
+  REMOVE_ITEM,
+} from '../actions/constants';
 
 const initialState = {
   dataRequest: false,
@@ -13,14 +20,14 @@ const initialState = {
 
 export const dataReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'GET_DATA': {
+    case GET_DATA: {
       return {
         ...state,
         dataRequest: true,
         dataFailed: false,
       };
     }
-    case 'GET_DATA_SUCCESS': {
+    case GET_DATA_SUCCESS: {
       return {
         ...state,
         data: action.data,
@@ -32,14 +39,14 @@ export const dataReducer = (state = initialState, action) => {
         ],
       };
     }
-    case 'GET_DATA_FAILED': {
+    case GET_DATA_FAILED: {
       return {
         ...state,
         dataFailed: true,
         dataRequest: false,
       };
     }
-    case 'ADD_ITEM': {
+    case ADD_ITEM: {
       const newItem = state.data.filter((item) => item._id === action.id.id)[0];
       const modifyedItem = {
         ...newItem,
@@ -73,7 +80,7 @@ export const dataReducer = (state = initialState, action) => {
         };
       }
     }
-    case 'REMOVE_ITEM': {
+    case REMOVE_ITEM: {
       return {
         ...state,
         constructorData: [

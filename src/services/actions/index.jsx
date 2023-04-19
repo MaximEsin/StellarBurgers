@@ -1,7 +1,15 @@
+import {
+  GET_DATA,
+  GET_DATA_SUCCESS,
+  GET_DATA_FAILED,
+  ADD_ITEM,
+  UPDATE_PRICE,
+  REMOVE_ITEM,
+} from './constants';
 export function getData() {
   return function (dispatch) {
     dispatch({
-      type: 'GET_DATA',
+      type: GET_DATA,
     });
 
     fetch('https://norma.nomoreparties.space/api/ingredients')
@@ -10,20 +18,20 @@ export function getData() {
       })
       .then((res) => {
         dispatch({
-          type: 'GET_DATA_SUCCESS',
+          type: GET_DATA_SUCCESS,
           data: res.data,
         });
       })
       .then((res) => {
         if (res && !res.ok) {
           dispatch({
-            type: 'GET_DATA_FAILED',
+            type: GET_DATA_FAILED,
           });
         }
       })
       .catch((err) => {
         dispatch({
-          type: 'GET_DATA_FAILED',
+          type: GET_DATA_FAILED,
         });
       });
   };
@@ -32,7 +40,7 @@ export function getData() {
 export function AddItem(itemId) {
   return function (dispatch) {
     dispatch({
-      type: 'ADD_ITEM',
+      type: ADD_ITEM,
       id: itemId,
     });
   };
@@ -41,7 +49,7 @@ export function AddItem(itemId) {
 export function UpdatePrice(price) {
   return function (dispatch) {
     dispatch({
-      type: 'UPDATE_PRICE',
+      type: UPDATE_PRICE,
       price: price,
     });
   };
@@ -50,7 +58,7 @@ export function UpdatePrice(price) {
 export function RemoveItem(uniqueId) {
   return function (dispatch) {
     dispatch({
-      type: 'REMOVE_ITEM',
+      type: REMOVE_ITEM,
       id: uniqueId,
     });
   };
