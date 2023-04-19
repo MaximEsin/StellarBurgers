@@ -38,9 +38,21 @@ const BurgerConstructor = (props) => {
     if (bunInOrder.length > 0) {
       priceArray = [bunInOrder[0].price, bunInOrder[0].price];
     }
+
+    let announce;
+    console.log(bunInOrder.length);
+    if (constructorData.length === 0 && bunInOrder.length === 0) {
+      announce = (
+        <p className={styles.announce}>
+          Пожалуйста, перенесите сюда булку и ингредиенты для создания заказа
+        </p>
+      );
+    }
+
     return (
       <section className={styles.constructorContainer + ' pt-25'}>
         <ul ref={drop} className={styles.ingredientsList}>
+          {announce}
           <ConstructorItem data={bunInOrder[0]} place="top" />
           <div className={styles.scroll}>
             {constructorData.map((item) => {

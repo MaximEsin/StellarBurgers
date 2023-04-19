@@ -91,3 +91,9 @@
 .draggableItemContainer {
   display: flex;
 }
+
+.announce {
+  line-height: 1.3;
+  color: #f2f2f3;
+  font-size: xx-large;
+}
