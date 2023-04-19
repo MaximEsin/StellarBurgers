@@ -3,6 +3,7 @@ import Table from './Table';
 import styles from '../styles/BurgerIngredients.module.css';
 import BurgerIngredient from './BurgerIngredient';
 import PropTypes from 'prop-types';
+import { useInView } from 'react-intersection-observer';
 
 const BurgerIngredients = (props) => {
   BurgerIngredients.propTypes = {
@@ -10,12 +11,24 @@ const BurgerIngredients = (props) => {
     setActive: PropTypes.func.isRequired,
   };
 
+  const [bunRef, inBunView] = useInView({
+    threshold: 0,
+  });
+
+  const [sauceRef, inSauceView] = useInView({
+    threshold: 0,
+  });
+
+  const [mainRef, inMainView] = useInView({
+    threshold: 0,
+  });
+
   return (
     <section className={styles.container + ' pt-10'}>
       <h1 className="text text_type_main-large pb-5">Соберите бургер</h1>
-      <Table />
+      <Table bun={inBunView} sauce={inSauceView} main={inMainView} />
       <div className={styles.scroll}>
-        <section className={styles.ingredientsSection + ' pt-10'}>
+        <section className={styles.ingredientsSection + ' pt-10'} ref={bunRef}>
           <h2 className="text text_type_main-medium pb-6">Булки</h2>
           <ul className={styles.ingredientTable + ' pl-4 pr-4'}>
             {props.data.map((item) => {
@@ -31,7 +44,10 @@ const BurgerIngredients = (props) => {
             })}
           </ul>
         </section>
-        <section className={styles.ingredientsSection + ' pt-10'}>
+        <section
+          className={styles.ingredientsSection + ' pt-10'}
+          ref={sauceRef}
+        >
           <h2 className="text text_type_main-medium pb-6">Соусы</h2>
           <ul className={styles.ingredientTable + ' pl-4 pr-4'}>
             {props.data.map((item) => {
@@ -47,7 +63,7 @@ const BurgerIngredients = (props) => {
             })}
           </ul>
         </section>
-        <section className={styles.ingredientsSection + ' pt-10'}>
+        <section className={styles.ingredientsSection + ' pt-10'} ref={mainRef}>
           <h2 className="text text_type_main-medium pb-6">Начинки</h2>
           <ul className={styles.ingredientTable + ' pl-4 pr-4'}>
             {props.data.map((item) => {
