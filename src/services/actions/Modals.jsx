@@ -1,5 +1,4 @@
 import {
-  baseUrl,
   STORE_INGREDIENT,
   POST_ORDER,
   POST_SUCCESS,

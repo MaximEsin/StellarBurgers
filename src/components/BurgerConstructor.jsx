@@ -10,7 +10,7 @@ import { postOrder } from '../services/actions/Modals';
 import PropTypes from 'prop-types';
 import Loader from './Loader';
 import { useDrop } from 'react-dnd';
-import { AddItem } from '../services/actions';
+import { addItem } from '../services/actions';
 import TotalPrice from './TotalPrice';
 
 const BurgerConstructor = (props) => {
@@ -25,7 +25,7 @@ const BurgerConstructor = (props) => {
   const [, drop] = useDrop({
     accept: ['ingredient', 'ingredient_wide'],
     drop(itemId) {
-      dispatch(AddItem(itemId));
+      dispatch(addItem(itemId));
     },
   });
 

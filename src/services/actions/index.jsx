@@ -5,7 +5,6 @@ import {
   ADD_ITEM,
   UPDATE_PRICE,
   REMOVE_ITEM,
-  baseUrl,
 } from './constants';
 import { request } from '../../utils';
 
@@ -30,7 +29,7 @@ export function getData() {
   };
 }
 
-export function AddItem(itemId) {
+export function addItem(itemId) {
   return function (dispatch) {
     dispatch({
       type: ADD_ITEM,
