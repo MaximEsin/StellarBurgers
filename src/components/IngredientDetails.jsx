@@ -5,10 +5,6 @@ import { useSelector } from 'react-redux';
 import Loader from './Loader';
 
 const IngredientDetails = (props) => {
-  IngredientDetails.propTypes = {
-    data: PropTypes.array.isRequired,
-    setActive: PropTypes.func,
-  };
   const data = useSelector((state) => state.ingredientReducer);
 
   if (props.data.length < 1) {
@@ -64,6 +60,11 @@ const IngredientDetails = (props) => {
       </>
     );
   }
+};
+
+IngredientDetails.propTypes = {
+  data: PropTypes.array.isRequired,
+  setActive: PropTypes.func,
 };
 
 export default IngredientDetails;

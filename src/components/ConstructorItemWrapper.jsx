@@ -4,10 +4,6 @@ import { useDrag } from 'react-dnd';
 import PropTypes from 'prop-types';
 
 const ConstructorItemWrapper = (props) => {
-  ConstructorItemWrapper.propTypes = {
-    data: PropTypes.string,
-    place: PropTypes.string,
-  };
   const id = props.data;
 
   const [, drag] = useDrag({
@@ -32,6 +28,11 @@ const ConstructorItemWrapper = (props) => {
     );
   }
   return element;
+};
+
+ConstructorItemWrapper.propTypes = {
+  data: PropTypes.string,
+  place: PropTypes.string,
 };
 
 export default ConstructorItemWrapper;

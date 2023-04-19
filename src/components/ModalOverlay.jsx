@@ -3,12 +3,6 @@ import styles from '../styles/Modal.module.css';
 import PropTypes from 'prop-types';
 
 const ModalOverlay = (props) => {
-  ModalOverlay.propTypes = {
-    children: PropTypes.object.isRequired,
-    data: PropTypes.object.isRequired,
-    setActive: PropTypes.func,
-  };
-
   useEffect(() => {
     function closeByEscape(evt) {
       if (evt.key === 'Escape') {
@@ -35,6 +29,12 @@ const ModalOverlay = (props) => {
       {props.children}
     </div>
   );
+};
+
+ModalOverlay.propTypes = {
+  children: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+  setActive: PropTypes.func,
 };
 
 export default ModalOverlay;

@@ -11,11 +11,6 @@ import { getIngredient } from '../services/actions/Modals';
 import { useDrag } from 'react-dnd';
 
 const BurgerIngredient = (props) => {
-  BurgerIngredient.propTypes = {
-    data: PropTypes.object.isRequired,
-    setActive: PropTypes.func.isRequired,
-  };
-
   const { constructorData } = useSelector((state) => state.dataReducer);
 
   const dispatch = useDispatch();
@@ -68,6 +63,11 @@ const BurgerIngredient = (props) => {
       </li>
     );
   }
+};
+
+BurgerIngredient.propTypes = {
+  data: PropTypes.object.isRequired,
+  setActive: PropTypes.func.isRequired,
 };
 
 export default BurgerIngredient;

@@ -15,10 +15,6 @@ import TotalPrice from './TotalPrice';
 import { v4 as uuidv4 } from 'uuid';
 
 const BurgerConstructor = (props) => {
-  BurgerConstructor.propTypes = {
-    setActive: PropTypes.func.isRequired,
-  };
-
   const { data, constructorData } = useSelector((state) => state.dataReducer);
 
   const dispatch = useDispatch();
@@ -73,6 +69,10 @@ const BurgerConstructor = (props) => {
       </section>
     );
   }
+};
+
+BurgerConstructor.propTypes = {
+  setActive: PropTypes.func.isRequired,
 };
 
 export default BurgerConstructor;

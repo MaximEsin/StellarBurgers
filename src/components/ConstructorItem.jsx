@@ -11,11 +11,6 @@ import ConstructorItemWrapper from './ConstructorItemWrapper';
 import { REMOVE_ITEM } from '../services/actions/constants';
 
 const ConstructorItem = (props) => {
-  ConstructorItem.propTypes = {
-    data: PropTypes.object.isRequired,
-    place: PropTypes.string,
-  };
-
   const dispatch = useDispatch();
 
   let place;
@@ -70,6 +65,11 @@ const ConstructorItem = (props) => {
       </ConstructorItemWrapper>
     </>
   );
+};
+
+ConstructorItem.propTypes = {
+  data: PropTypes.object.isRequired,
+  place: PropTypes.string,
 };
 
 export default ConstructorItem;

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../styles/BurgerIngredients.module.css';
+import PropTypes from 'prop-types';
 
 const Table = (props) => {
   const [current, setCurrent] = React.useState('one');
@@ -27,6 +28,12 @@ const Table = (props) => {
       </Tab>
     </div>
   );
+};
+
+Table.propTypes = {
+  bun: PropTypes.bool.isRequired,
+  sauce: PropTypes.bool.isRequired,
+  main: PropTypes.bool.isRequired,
 };
 
 export default Table;

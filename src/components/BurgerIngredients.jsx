@@ -7,10 +7,6 @@ import { useInView } from 'react-intersection-observer';
 import { useSelector } from 'react-redux';
 
 const BurgerIngredients = (props) => {
-  BurgerIngredients.propTypes = {
-    setActive: PropTypes.func.isRequired,
-  };
-
   const { data } = useSelector((state) => state.dataReducer);
 
   const [bunRef, inBunView] = useInView({
@@ -84,6 +80,10 @@ const BurgerIngredients = (props) => {
       </div>
     </section>
   );
+};
+
+BurgerIngredients.propTypes = {
+  setActive: PropTypes.func.isRequired,
 };
 
 export default BurgerIngredients;
