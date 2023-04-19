@@ -7,28 +7,20 @@ import {
   REMOVE_ITEM,
   baseUrl,
 } from './constants';
+import { request } from '../../utils';
+
 export function getData() {
   return function (dispatch) {
     dispatch({
       type: GET_DATA,
     });
 
-    fetch(`${baseUrl}/ingredients`)
-      .then((res) => {
-        return res.json();
-      })
+    request(`/ingredients`)
       .then((res) => {
         dispatch({
           type: GET_DATA_SUCCESS,
           data: res.data,
         });
-      })
-      .then((res) => {
-        if (res && !res.ok) {
-          dispatch({
-            type: GET_DATA_FAILED,
-          });
-        }
       })
       .catch((err) => {
         dispatch({

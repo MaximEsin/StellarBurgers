@@ -4,7 +4,6 @@ import styles from '../styles/BurgerIngredients.module.css';
 
 const Table = (props) => {
   const [current, setCurrent] = React.useState('one');
-  console.log(props);
   useEffect(() => {
     if (props.bun) {
       setCurrent('one');
