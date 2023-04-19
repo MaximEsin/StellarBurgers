@@ -50,7 +50,7 @@ export const dataReducer = (state = initialState, action) => {
       const newItem = state.data.filter((item) => item._id === action.id.id)[0];
       const modifyedItem = {
         ...newItem,
-        uniqueId: uuidv4(),
+        uniqueId: action.uniqueId,
       };
       if (action.id.id.length > 25) {
         const filteredItem = state.constructorData.filter(

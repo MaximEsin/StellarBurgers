@@ -50,7 +50,7 @@ function App() {
         <main className={styles.main}>
           <div className={styles.container}>
             <DndProvider backend={HTML5Backend}>
-              <BurgerIngredients data={data} setActive={setModalOrderActive} />
+              <BurgerIngredients setActive={setModalOrderActive} />
               <BurgerConstructor setActive={setModalIngredientActive} />
             </DndProvider>
           </div>

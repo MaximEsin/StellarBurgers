@@ -4,12 +4,14 @@ import styles from '../styles/BurgerIngredients.module.css';
 import BurgerIngredient from './BurgerIngredient';
 import PropTypes from 'prop-types';
 import { useInView } from 'react-intersection-observer';
+import { useSelector } from 'react-redux';
 
 const BurgerIngredients = (props) => {
   BurgerIngredients.propTypes = {
-    data: PropTypes.array.isRequired,
     setActive: PropTypes.func.isRequired,
   };
+
+  const { data } = useSelector((state) => state.dataReducer);
 
   const [bunRef, inBunView] = useInView({
     threshold: 0,
@@ -31,7 +33,7 @@ const BurgerIngredients = (props) => {
         <section className={styles.ingredientsSection + ' pt-10'} ref={bunRef}>
           <h2 className="text text_type_main-medium pb-6">Булки</h2>
           <ul className={styles.ingredientTable + ' pl-4 pr-4'}>
-            {props.data.map((item) => {
+            {data.map((item) => {
               if (item.type === 'bun') {
                 return (
                   <BurgerIngredient
@@ -50,7 +52,7 @@ const BurgerIngredients = (props) => {
         >
           <h2 className="text text_type_main-medium pb-6">Соусы</h2>
           <ul className={styles.ingredientTable + ' pl-4 pr-4'}>
-            {props.data.map((item) => {
+            {data.map((item) => {
               if (item.type === 'sauce') {
                 return (
                   <BurgerIngredient
@@ -66,7 +68,7 @@ const BurgerIngredients = (props) => {
         <section className={styles.ingredientsSection + ' pt-10'} ref={mainRef}>
           <h2 className="text text_type_main-medium pb-6">Начинки</h2>
           <ul className={styles.ingredientTable + ' pl-4 pr-4'}>
-            {props.data.map((item) => {
+            {data.map((item) => {
               if (item.type === 'main') {
                 return (
                   <BurgerIngredient

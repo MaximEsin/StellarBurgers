@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const ConstructorItemWrapper = (props) => {
   ConstructorItemWrapper.propTypes = {
-    data: PropTypes.object,
+    data: PropTypes.string,
     place: PropTypes.string,
   };
   const id = props.data;

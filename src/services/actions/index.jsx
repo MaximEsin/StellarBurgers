@@ -29,11 +29,12 @@ export function getData() {
   };
 }
 
-export function addItem(itemId) {
+export function addItem(itemId, uniqueId) {
   return function (dispatch) {
     dispatch({
       type: ADD_ITEM,
       id: itemId,
+      uniqueId: uniqueId,
     });
   };
 }

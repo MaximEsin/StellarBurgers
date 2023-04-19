@@ -12,6 +12,7 @@ import Loader from './Loader';
 import { useDrop } from 'react-dnd';
 import { addItem } from '../services/actions';
 import TotalPrice from './TotalPrice';
+import { v4 as uuidv4 } from 'uuid';
 
 const BurgerConstructor = (props) => {
   BurgerConstructor.propTypes = {
@@ -25,7 +26,8 @@ const BurgerConstructor = (props) => {
   const [, drop] = useDrop({
     accept: ['ingredient', 'ingredient_wide'],
     drop(itemId) {
-      dispatch(addItem(itemId));
+      const uniqueId = uuidv4();
+      dispatch(addItem(itemId, uniqueId));
     },
   });
 
@@ -39,11 +41,11 @@ const BurgerConstructor = (props) => {
         <ul ref={drop}>
           <ConstructorItem data={constructorData[0]} place="top" />
           <div className={styles.scroll}>
-            {constructorData.map((item, index) => {
+            {constructorData.map((item) => {
               if (item.type !== 'bun') {
                 ids.push(item._id);
                 priceArray.push(item.price);
-                return <ConstructorItem data={item} key={index} />;
+                return <ConstructorItem data={item} key={item.uniqueId} />;
               }
             })}
           </div>
