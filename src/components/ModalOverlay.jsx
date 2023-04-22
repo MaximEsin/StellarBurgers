@@ -3,7 +3,11 @@ import styles from '../styles/Modal.module.css';
 import PropTypes from 'prop-types';
 
 const ModalOverlay = (props) => {
+  const isOpen = props.data.active;
   useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
     function closeByEscape(evt) {
       if (evt.key === 'Escape') {
         props.data.setActive(false);
@@ -13,7 +17,7 @@ const ModalOverlay = (props) => {
     return () => {
       document.removeEventListener('keydown', closeByEscape);
     };
-  }, []);
+  }, [isOpen]);
 
   return (
     <div
