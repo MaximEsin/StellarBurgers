@@ -11,7 +11,9 @@ import { getIngredient } from '../services/actions/Modals';
 import { useDrag } from 'react-dnd';
 
 const BurgerIngredient = (props) => {
-  const { constructorData } = useSelector((state) => state.dataReducer);
+  const { constructorData, bunInOrder } = useSelector(
+    (state) => state.dataReducer
+  );
 
   const dispatch = useDispatch();
 
@@ -24,10 +26,20 @@ const BurgerIngredient = (props) => {
 
   let counter;
   const amount = constructorData.filter((item) => item._id === id).length;
+  const bunsAmount = bunInOrder.filter((item) => item._id === id).length;
   if (amount > 0) {
     counter = (
       <Counter
         count={amount}
+        size="default"
+        extraClass="m-1"
+        className={styles.counter}
+      />
+    );
+  } else if (bunsAmount > 0) {
+    counter = (
+      <Counter
+        count={bunsAmount * 2}
         size="default"
         extraClass="m-1"
         className={styles.counter}

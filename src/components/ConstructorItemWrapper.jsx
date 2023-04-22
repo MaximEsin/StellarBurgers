@@ -1,15 +1,9 @@
 import React from 'react';
 import styles from '../styles/BurgerConstructor.module.css';
-import { useDrag } from 'react-dnd';
 import PropTypes from 'prop-types';
 
 const ConstructorItemWrapper = (props) => {
   const id = props.data;
-
-  const [, drag] = useDrag({
-    type: 'ingredient_wide',
-    item: { id },
-  });
 
   let element;
   if (props.place === 'top') {
@@ -22,9 +16,7 @@ const ConstructorItemWrapper = (props) => {
     );
   } else {
     element = (
-      <li className={styles.constructorItem + ' mb-4'} ref={drag}>
-        {props.children}
-      </li>
+      <li className={styles.constructorItem + ' mb-4'}>{props.children}</li>
     );
   }
   return element;

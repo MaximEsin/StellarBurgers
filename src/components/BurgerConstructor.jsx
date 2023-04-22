@@ -23,7 +23,7 @@ const BurgerConstructor = (props) => {
   const dispatch = useDispatch();
 
   const [, drop] = useDrop({
-    accept: ['ingredient', 'ingredient_wide'],
+    accept: 'ingredient',
     drop(itemId) {
       const uniqueId = uuidv4();
       dispatch(addItem(itemId, uniqueId));
@@ -40,7 +40,6 @@ const BurgerConstructor = (props) => {
     }
 
     let announce;
-    console.log(bunInOrder.length);
     if (constructorData.length === 0 && bunInOrder.length === 0) {
       announce = (
         <p className={styles.announce}>

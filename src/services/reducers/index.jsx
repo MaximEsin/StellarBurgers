@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { ingredientReducer, orderReducer } from './Modals';
-import { v4 as uuidv4 } from 'uuid';
 import {
   GET_DATA,
   GET_DATA_SUCCESS,
@@ -57,28 +56,10 @@ export const dataReducer = (state = initialState, action) => {
       }
 
       const newItem = state.data.filter((item) => item._id === action.id.id)[0];
-      const modifyedItem = {
-        ...newItem,
-        uniqueId: action.uniqueId,
-      };
-      if (action.id.id.length > 25) {
-        const filteredItem = state.constructorData.filter(
-          (item) => item.uniqueId === action.id.id
-        )[0];
-        return {
-          ...state,
-          constructorData: [
-            ...state.constructorData.filter(
-              (item) => item.uniqueId !== action.id.id
-            ),
-            filteredItem,
-          ],
-        };
-      }
 
       return {
         ...state,
-        constructorData: [...state.constructorData, modifyedItem],
+        constructorData: [...state.constructorData, newItem],
       };
     }
 
