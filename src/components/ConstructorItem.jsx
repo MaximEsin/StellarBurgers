@@ -35,7 +35,7 @@ const ConstructorItem = (props) => {
             <img
               src={props.data.image}
               className={styles.itemImage}
-              alt="Ингредиент"
+              alt={props.data.name}
             />
             <p
               className={

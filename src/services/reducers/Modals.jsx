@@ -1,9 +1,16 @@
+import {
+  STORE_INGREDIENT,
+  POST_ORDER,
+  POST_SUCCESS,
+  POST_FAILED,
+} from '../actions/constants';
+
 export const ingredientReducer = (
   state = { data: {}, dataRequest: false, dataFailed: false },
   action
 ) => {
   switch (action.type) {
-    case 'STORE_INGREDIENT': {
+    case STORE_INGREDIENT: {
       return {
         ...state,
         data: action.info,
@@ -21,21 +28,21 @@ export const orderReducer = (
   action
 ) => {
   switch (action.type) {
-    case 'POST_ORDER': {
+    case POST_ORDER: {
       return {
         ...state,
         dataRequest: true,
         dataFailed: false,
       };
     }
-    case 'POST_SUCCESS': {
+    case POST_SUCCESS: {
       return {
         ...state,
         number: action.number,
         dataRequest: false,
       };
     }
-    case 'POST_FAILED': {
+    case POST_FAILED: {
       return {
         ...state,
         dataFailed: true,
