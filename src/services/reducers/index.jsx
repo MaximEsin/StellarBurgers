@@ -58,7 +58,7 @@ export const dataReducer = (state = initialState, action) => {
       }
 
       const newItem = state.data.filter((item) => item._id === action.id.id)[0];
-
+      newItem.uniqueId = action.uniqueId;
       return {
         ...state,
         constructorData: [...state.constructorData, newItem],
@@ -66,6 +66,7 @@ export const dataReducer = (state = initialState, action) => {
     }
 
     case REMOVE_ITEM: {
+      console.log(action.id);
       return {
         ...state,
         constructorData: [

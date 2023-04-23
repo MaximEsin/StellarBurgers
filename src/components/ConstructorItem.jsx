@@ -13,6 +13,7 @@ import { useDrag, useDrop } from 'react-dnd';
 
 const ConstructorItem = ({ img, id, index, moveElement, data, place }) => {
   const dispatch = useDispatch();
+  console.log(data);
 
   const [{ handlerId }, drop] = useDrop({
     accept: 'item',

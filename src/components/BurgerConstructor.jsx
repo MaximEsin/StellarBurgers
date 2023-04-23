@@ -65,13 +65,14 @@ const BurgerConstructor = (props) => {
           <ConstructorItem data={bunInOrder[0]} place="top" />
           <div className={styles.scroll}>
             {constructorData.map((item, index) => {
+              console.log(constructorData);
               if (item.type !== 'bun') {
                 ids.push(item._id);
                 priceArray.push(item.price);
                 return (
                   <ConstructorItem
                     data={item}
-                    key={item.uniqueId}
+                    key={index}
                     img={dots}
                     moveElement={moveElement}
                     index={index}
