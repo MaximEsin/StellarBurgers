@@ -8,7 +8,9 @@ import {
   GET_DATA_FAILED,
   ADD_ITEM,
   REMOVE_ITEM,
+  MOVE_CONSTRUCTOR_ITEM,
 } from '../actions/constants';
+import update from 'immutability-helper';
 
 const initialState = {
   dataRequest: false,
@@ -70,6 +72,19 @@ export const dataReducer = (state = initialState, action) => {
           ...state.constructorData.filter(
             (item) => item.uniqueId !== action.id
           ),
+        ],
+      };
+    }
+    case MOVE_CONSTRUCTOR_ITEM: {
+      return {
+        ...state,
+        constructorData: [
+          ...update(state.constructorData, {
+            $splice: [
+              [action.dragIndex, 1],
+              [action.hoverIndex, 0, state.constructorData[action.dragIndex]],
+            ],
+          }),
         ],
       };
     }

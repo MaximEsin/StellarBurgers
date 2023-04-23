@@ -1,4 +1,4 @@
-import React from 'react';
+import { React } from 'react';
 import styles from '../styles/BurgerConstructor.module.css';
 import ConstructorItem from './ConstructorItem';
 import {
@@ -9,16 +9,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import { postOrder } from '../services/actions/Modals';
 import PropTypes from 'prop-types';
 import Loader from './Loader';
-import { useDrop } from 'react-dnd';
+import { useDrop, useDrag } from 'react-dnd';
 import { addItem } from '../services/actions';
 import TotalPrice from './TotalPrice';
 import { v4 as uuidv4 } from 'uuid';
 import dots from '../images/dots.svg';
+import { MOVE_CONSTRUCTOR_ITEM } from '../services/actions/constants';
+import { useCallback } from 'react';
 
 const BurgerConstructor = (props) => {
   const { data, constructorData, bunInOrder } = useSelector(
     (state) => state.dataReducer
   );
+
+  const moveElement = useCallback((dragIndex, hoverIndex) => {
+    dispatch({
+      type: MOVE_CONSTRUCTOR_ITEM,
+      dragIndex,
+      hoverIndex,
+    });
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -54,23 +64,20 @@ const BurgerConstructor = (props) => {
           {announce}
           <ConstructorItem data={bunInOrder[0]} place="top" />
           <div className={styles.scroll}>
-            {constructorData.map((item) => {
+            {constructorData.map((item, index) => {
               if (item.type !== 'bun') {
                 ids.push(item._id);
                 priceArray.push(item.price);
-                console.log(constructorData);
                 return (
-                  <div
-                    className={styles.draggableItemContainer}
+                  <ConstructorItem
+                    data={item}
                     key={item.uniqueId}
-                  >
-                    <img
-                      src={dots}
-                      alt="Иконка переноса"
-                      className={styles.dots}
-                    />
-                    <ConstructorItem data={item} />
-                  </div>
+                    img={dots}
+                    moveElement={moveElement}
+                    index={index}
+                    id={item._id}
+                    element={item}
+                  />
                 );
               }
             })}
