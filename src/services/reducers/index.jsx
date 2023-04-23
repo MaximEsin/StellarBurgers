@@ -56,17 +56,18 @@ export const dataReducer = (state = initialState, action) => {
           bunInOrder: [bun],
         };
       }
-
       const newItem = state.data.filter((item) => item._id === action.id.id)[0];
-      newItem.uniqueId = action.uniqueId;
+      const modifyedItem = {
+        ...newItem,
+        uniqueId: action.uniqueId,
+      };
       return {
         ...state,
-        constructorData: [...state.constructorData, newItem],
+        constructorData: [...state.constructorData, modifyedItem],
       };
     }
 
     case REMOVE_ITEM: {
-      console.log(action.id);
       return {
         ...state,
         constructorData: [
