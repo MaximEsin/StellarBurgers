@@ -71,7 +71,7 @@ const BurgerConstructor = (props) => {
                 return (
                   <ConstructorItem
                     data={item}
-                    key={item.uniqueId + Math.random()}
+                    key={item.uniqueId}
                     img={dots}
                     moveElement={moveElement}
                     index={index}
