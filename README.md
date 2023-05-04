@@ -1,13 +1,5 @@
 # Stellar burger
 
-### Обзор
-
-- Это космическая бургерная
-- В проекте использована технология построения сетки flexbox.
-- Сайт адаптивен под разные устройства при помощи медиазапросов.
-- Использована технология React.
-
-
 #Description
 - This is a space burger shop. Is is made in russian language. Here i trained React + Redux + Typescript.
 
