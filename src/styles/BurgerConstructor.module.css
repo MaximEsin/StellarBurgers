@@ -1,0 +1,99 @@
+.constructorContainer {
+  max-width: 650px;
+  width: 100%;
+}
+
+.scroll {
+  max-width: 566px;
+  width: 100%;
+  max-height: 656px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+
+.constructorItem {
+  width: 536px;
+  background-color: #1c1c21;
+  border-radius: 40px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.constructorItemTop {
+  width: 536px;
+  background-color: #1c1c21;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 88px 88px 40px 40px;
+  margin-left: 19px;
+}
+
+.constructorItemBottom {
+  width: 536px;
+  background-color: #1c1c21;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 40px 40px 88px 88px;
+  margin-left: 19px;
+}
+
+.itemImage {
+  width: 80px;
+  height: 40px;
+}
+
+.ingredientName {
+  min-width: 254px;
+}
+
+.itemContainer {
+  display: flex;
+}
+
+.totalContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.buttonWrapper {
+  margin-left: 40px;
+  cursor: pointer;
+}
+
+.lock {
+  cursor: pointer;
+}
+
+.ingredientsList {
+  padding: 0;
+  margin-left: 40px;
+  max-width: 566px;
+  min-height: 100px;
+}
+.dots {
+  width: 13px;
+  height: 18.3px;
+  margin-top: 30px;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.draggableItemContainer {
+  display: flex;
+}
+
+.announce {
+  line-height: 1.3;
+  color: #f2f2f3;
+  font-size: xx-large;
+}

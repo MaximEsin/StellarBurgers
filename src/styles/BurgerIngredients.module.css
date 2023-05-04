@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.ingredientsSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.ingredientTable {
+  display: flex;
+  gap: 24px;
+  min-width: 570px;
+  max-width: 660px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ingredientCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  max-width: 272px;
+}
+
+.scroll {
+  max-height: 740px;
+  overflow: auto;
+}
+
+.priceContainer {
+  display: flex;
+}
+
+.counter {
+  position: absolute;
+}
+
+.ingredientName {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 270px;
+}
+
+.tab {
+  display: flex;
+}
