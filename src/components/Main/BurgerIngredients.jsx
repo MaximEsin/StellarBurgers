@@ -1,6 +1,6 @@
 import React from 'react';
 import Table from './Table';
-import styles from '../styles/BurgerIngredients.module.css';
+import styles from '../../styles/BurgerIngredients.module.css';
 import BurgerIngredient from './BurgerIngredient';
 import PropTypes from 'prop-types';
 import { useInView } from 'react-intersection-observer';

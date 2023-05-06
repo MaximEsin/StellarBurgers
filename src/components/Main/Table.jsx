@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from '../styles/BurgerIngredients.module.css';
+import styles from '../../styles/BurgerIngredients.module.css';
 import PropTypes from 'prop-types';
 
 const Table = (props) => {

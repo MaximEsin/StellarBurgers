@@ -1,8 +1,8 @@
 import React from 'react';
-import done from '../images/done.png';
-import styles from '../styles/Modal.module.css';
+import done from '../../images/done.png';
+import styles from '../../styles/Modal.module.css';
 import { useSelector } from 'react-redux';
-import Loader from './Loader';
+import Loader from '../Loader';
 
 const OrderDetails = () => {
   const { number, dataRequest, dataFailed } = useSelector(

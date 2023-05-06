@@ -3,11 +3,11 @@ import {
   CurrencyIcon,
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from '../styles/BurgerIngredients.module.css';
+import styles from '../../styles/BurgerIngredients.module.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import Loader from './Loader';
-import { getIngredient } from '../services/actions/Modals';
+import Loader from '../Loader';
+import { getIngredient } from '../../services/actions/Modals';
 import { useDrag } from 'react-dnd';
 
 const BurgerIngredient = (props) => {

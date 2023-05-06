@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/BurgerConstructor.module.css';
+import styles from '../../styles/BurgerConstructor.module.css';
 import PropTypes from 'prop-types';
 
 const ConstructorItemWrapper = (props) => {

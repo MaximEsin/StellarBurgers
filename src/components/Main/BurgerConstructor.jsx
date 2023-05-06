@@ -1,20 +1,20 @@
 import { React } from 'react';
-import styles from '../styles/BurgerConstructor.module.css';
+import styles from '../../styles/BurgerConstructor.module.css';
 import ConstructorItem from './ConstructorItem';
 import {
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { postOrder } from '../services/actions/Modals';
+import { postOrder } from '../../services/actions/Modals';
 import PropTypes from 'prop-types';
-import Loader from './Loader';
+import Loader from '../Loader';
 import { useDrop, useDrag } from 'react-dnd';
-import { addItem } from '../services/actions';
+import { addItem } from '../../services/actions';
 import TotalPrice from './TotalPrice';
 import { v4 as uuidv4 } from 'uuid';
-import dots from '../images/dots.svg';
-import { MOVE_CONSTRUCTOR_ITEM } from '../services/actions/constants';
+import dots from '../../images/dots.svg';
+import { MOVE_CONSTRUCTOR_ITEM } from '../../services/actions/constants';
 import { useCallback } from 'react';
 
 const BurgerConstructor = (props) => {

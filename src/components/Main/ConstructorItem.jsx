@@ -3,12 +3,12 @@ import {
   CurrencyIcon,
   DeleteIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from '../styles/BurgerConstructor.module.css';
-import substract from '../images/Subtract.svg';
+import styles from '../../styles/BurgerConstructor.module.css';
+import substract from '../../images/Subtract.svg';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import ConstructorItemWrapper from './ConstructorItemWrapper';
-import { REMOVE_ITEM } from '../services/actions/constants';
+import { REMOVE_ITEM } from '../../services/actions/constants';
 import { useDrag, useDrop } from 'react-dnd';
 
 const ConstructorItem = ({ img, id, index, moveElement, data, place }) => {
