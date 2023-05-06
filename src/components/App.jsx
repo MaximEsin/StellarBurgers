@@ -5,6 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getData } from '../services/actions';
 import Loader from './Loader';
 import Main from '../pages/Main';
+import Registration from '../pages/Registration';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Authorisation from '../pages/Authorisation';
+import ForgotPassword from '../pages/ForgotPassword';
 
 function App() {
   const [modalIngredientActive, setModalIngredientActive] = useState(false);
@@ -27,13 +31,25 @@ function App() {
     return (
       <div className={styles.App}>
         <Header />
-        <Main
-          modalIngredientActive={modalIngredientActive}
-          setModalIngredientActive={setModalIngredientActive}
-          modalOrderActive={modalOrderActive}
-          setModalOrderActive={setModalOrderActive}
-          data={data}
-        />
+        <Router>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  modalIngredientActive={modalIngredientActive}
+                  setModalIngredientActive={setModalIngredientActive}
+                  modalOrderActive={modalOrderActive}
+                  setModalOrderActive={setModalOrderActive}
+                  data={data}
+                />
+              }
+            />
+            <Route path="/register" element={<Registration />} />
+            <Route path="/login" element={<Authorisation />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+          </Routes>
+        </Router>
       </div>
     );
   }
