@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Authorisation from '../pages/Authorisation';
 import ForgotPassword from '../pages/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword';
+import Profile from '../pages/Profile';
 
 function App() {
   const [modalIngredientActive, setModalIngredientActive] = useState(false);
@@ -31,8 +32,8 @@ function App() {
   } else {
     return (
       <div className={styles.App}>
-        <Header />
         <Router>
+          <Header />
           <Routes>
             <Route
               path="/"
@@ -50,6 +51,7 @@ function App() {
             <Route path="/login" element={<Authorisation />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </Router>
       </div>

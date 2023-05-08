@@ -6,6 +6,7 @@ import {
   Logo,
   ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -26,12 +27,14 @@ const Header = () => {
         <div className={styles.logo}>
           <Logo />
         </div>
-        <div className={styles.navItem + ' pt-4 pb-4 ml-5 mr-5'}>
-          <ProfileIcon type="secondary" />
-          <p className="text text_type_main-default text_color_inactive pl-2">
-            Личный кабинет
-          </p>
-        </div>
+        <Link style={{ textDecoration: 'none' }} to="/profile">
+          <div className={styles.navItem + ' pt-4 pb-4 ml-5 mr-5'}>
+            <ProfileIcon type="secondary" />
+            <p className="text text_type_main-default text_color_inactive pl-2">
+              Личный кабинет
+            </p>
+          </div>
+        </Link>
       </nav>
     </header>
   );
