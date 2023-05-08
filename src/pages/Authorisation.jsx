@@ -26,7 +26,7 @@ const Authorisation = () => {
           </Button>
         </div>
         <p className="text text_type_main-default text_color_inactive mt-20">
-          Уже зарегестрированы?{''}
+          Вы — новый пользователь?{''}
           <Link to="/register">
             <Button
               extraClass={styles.button}
@@ -34,7 +34,7 @@ const Authorisation = () => {
               type="secondary"
               size="small"
             >
-              Войти
+              Зарегистрироваться
             </Button>
           </Link>
         </p>

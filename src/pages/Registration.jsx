@@ -5,8 +5,36 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../styles/Registration.module.css';
 import { Link } from 'react-router-dom';
+import { request } from '../utils';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { STORE_TOKEN } from '../services/actions/constants';
 
 const Registration = () => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [name, setName] = useState();
+  const dispatch = useDispatch();
+
+  const register = (email, password, name) => {
+    request('/auth/register', {
+      method: 'POST',
+      headers: {
+        authorization: 'd5b34af3-ad0b-4c78-bdcc-85f9d783b0bc',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        name: name,
+      }),
+    }).then((res) => {
+      dispatch({
+        type: STORE_TOKEN,
+        token: res.refreshToken,
+      });
+    });
+  };
   return (
     <section className={styles.main}>
       <div className={styles.container}>
@@ -14,15 +42,33 @@ const Registration = () => {
           Регистрация
         </h1>
         <div>
-          <Input type={'text'} placeholder={'Имя'} extraClass="mb-6" />
-          <Input type={'email'} placeholder={'e-mail'} extraClass="mb-6" />
+          <Input
+            type={'text'}
+            placeholder={'Имя'}
+            extraClass="mb-6"
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Input
+            type={'email'}
+            placeholder={'e-mail'}
+            extraClass="mb-6"
+            onChange={(e) => setEmail(e.target.value)}
+          />
           <Input
             type={'password'}
             placeholder={'Пароль'}
             icon={'ShowIcon'}
             extraClass="mb-6"
+            onChange={(e) => setPassword(e.target.value)}
           />
-          <Button htmlType="button" type="primary" size="medium">
+          <Button
+            htmlType="button"
+            type="primary"
+            size="medium"
+            onClick={() => {
+              register(email, password, name);
+            }}
+          >
             Зарегестрироваться
           </Button>
         </div>

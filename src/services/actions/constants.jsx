@@ -9,5 +9,6 @@ export const POST_ORDER = 'POST_ORDER';
 export const POST_SUCCESS = 'POST_SUCCESS';
 export const POST_FAILED = 'POST_FAILED';
 export const MOVE_CONSTRUCTOR_ITEM = 'CONSTRUCTOR_ITEM';
+export const STORE_TOKEN = 'STORE_TOKEN';
 
 export const baseUrl = 'https://norma.nomoreparties.space/api';

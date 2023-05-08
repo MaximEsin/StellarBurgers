@@ -7,29 +7,26 @@ import styles from '../styles/Registration.module.css';
 import { Link } from 'react-router-dom';
 import { request } from '../utils';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const ForgotPassword = () => {
-  const [email, setEmail] = useState();
-  const navigate = useNavigate();
+const ResetPassword = () => {
+  const [password, setPassword] = useState();
+  const { token } = useSelector((state) => state.tokenReducer);
+  console.log(token);
 
-  const getEmailCode = (email) => {
-    request('/password-reset', {
+  const resetPassword = (password) => {
+    request('/password-reset/reset', {
       method: 'POST',
       headers: {
         authorization: 'd5b34af3-ad0b-4c78-bdcc-85f9d783b0bc',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: email,
+        password: password,
+        token: token,
       }),
-    }).then((res) => {
-      if (res.success) {
-        navigate('/reset-password', { replace: true });
-      }
-    });
+    }).then((res) => console.log(res));
   };
-
   return (
     <>
       <section className={styles.main}>
@@ -39,18 +36,23 @@ const ForgotPassword = () => {
           </h1>
           <div>
             <Input
-              type={'email'}
-              placeholder={'Укажите e-mail'}
+              type={'password'}
+              placeholder={'Введите новый пароль'}
               extraClass="mb-6"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Input
+              type={'text'}
+              placeholder={'Введите код из письма'}
+              extraClass="mb-6"
             />
             <Button
               htmlType="button"
               type="primary"
               size="medium"
-              onClick={() => getEmailCode(email)}
+              onClick={() => resetPassword(password)}
             >
-              Восстановить
+              Сохранить
             </Button>
           </div>
           <p className="text text_type_main-default text_color_inactive mt-20">
@@ -72,4 +74,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default ResetPassword;

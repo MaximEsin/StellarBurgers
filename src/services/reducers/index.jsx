@@ -11,6 +11,7 @@ import {
   MOVE_CONSTRUCTOR_ITEM,
 } from '../actions/constants';
 import update from 'immutability-helper';
+import { tokenReducer } from './ResetPassword';
 
 const initialState = {
   dataRequest: false,
@@ -99,6 +100,7 @@ export const rootReducer = combineReducers({
   dataReducer,
   ingredientReducer,
   orderReducer,
+  tokenReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
