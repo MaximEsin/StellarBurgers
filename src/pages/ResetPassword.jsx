@@ -7,12 +7,9 @@ import styles from '../styles/Registration.module.css';
 import { Link } from 'react-router-dom';
 import { request } from '../utils';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState();
-  const { token } = useSelector((state) => state.tokenReducer);
-  console.log(token);
 
   const resetPassword = (password) => {
     request('/password-reset/reset', {
@@ -23,10 +20,11 @@ const ResetPassword = () => {
       },
       body: JSON.stringify({
         password: password,
-        token: token,
+        token: localStorage.accessToken,
       }),
     }).then((res) => console.log(res));
   };
+
   return (
     <>
       <section className={styles.main}>

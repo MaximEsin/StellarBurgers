@@ -7,14 +7,13 @@ import styles from '../styles/Registration.module.css';
 import { Link } from 'react-router-dom';
 import { request } from '../utils';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { STORE_TOKEN } from '../services/actions/constants';
+import { useNavigate } from 'react-router-dom';
 
 const Registration = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [name, setName] = useState();
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const register = (email, password, name) => {
     request('/auth/register', {
@@ -29,12 +28,12 @@ const Registration = () => {
         name: name,
       }),
     }).then((res) => {
-      dispatch({
-        type: STORE_TOKEN,
-        token: res.refreshToken,
-      });
+      if (res.success) {
+        navigate('/login', { replace: true });
+      }
     });
   };
+
   return (
     <section className={styles.main}>
       <div className={styles.container}>
