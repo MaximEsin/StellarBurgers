@@ -10,3 +10,16 @@ export function checkResponse(res) {
 export function request(endPoint, options) {
   return fetch(`${baseUrl}${endPoint}`, options).then(checkResponse);
 }
+
+export function refresh() {
+  request('/auth/token', {
+    method: 'POST',
+    headers: {
+      authorization: 'd5b34af3-ad0b-4c78-bdcc-85f9d783b0bc',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      token: localStorage.refreshToken,
+    }),
+  });
+}

@@ -30,6 +30,9 @@ const Authorisation = () => {
         navigate('/', { replace: true });
         localStorage.setItem('accessToken', res.accessToken);
         localStorage.setItem('refreshToken', res.refreshToken);
+        setTimeout(() => {
+          localStorage.removeItem('accessToken');
+        }, 1200000);
       }
     });
   };

@@ -7,22 +7,27 @@ import styles from '../styles/Registration.module.css';
 import { Link } from 'react-router-dom';
 import { request } from '../utils';
 import { useState } from 'react';
+import { refresh } from '../utils';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState();
 
   const resetPassword = (password) => {
-    request('/password-reset/reset', {
-      method: 'POST',
-      headers: {
-        authorization: 'd5b34af3-ad0b-4c78-bdcc-85f9d783b0bc',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        password: password,
-        token: localStorage.accessToken,
-      }),
-    }).then((res) => console.log(res));
+    if (!localStorage.accessToken) {
+      refresh();
+    } else {
+      request('/reset-password/reset', {
+        method: 'POST',
+        headers: {
+          authorization: 'd5b34af3-ad0b-4c78-bdcc-85f9d783b0bc',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          password: password,
+          token: localStorage.refreshToken,
+        }),
+      }).then((res) => console.log(res));
+    }
   };
 
   return (

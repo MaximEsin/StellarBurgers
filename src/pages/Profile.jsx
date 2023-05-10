@@ -3,9 +3,13 @@ import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../styles/Profile.module.css';
 import { useNavigate } from 'react-router-dom';
 import { request } from '../utils';
+import { useEffect, useState } from 'react';
 
 const Profile = () => {
   const navigate = useNavigate();
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
   const logOut = () => {
     request('/auth/logout', {
@@ -21,9 +25,53 @@ const Profile = () => {
       navigate('/', { replace: true });
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
-      console.log(res);
     });
   };
+
+  const getUserInfo = () => {
+    request('/auth/user', {
+      method: 'GET',
+      headers: {
+        authorization: localStorage.accessToken,
+        'Content-Type': 'application/json',
+      },
+    }).then((res) => {
+      setName(res.user.name);
+      setEmail(res.user.email);
+      setPassword(password);
+    });
+  };
+
+  const editUserInfo = (name, email, password) => {
+    request('/auth/user', {
+      method: 'PATCH',
+      headers: {
+        authorization: localStorage.accessToken,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        password: password,
+      }),
+    });
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
+  useEffect(() => {
+    function onEnter(evt) {
+      if (evt.key === 'Enter') {
+        editUserInfo(name, email, password);
+      }
+    }
+    document.addEventListener('keydown', onEnter);
+    return () => {
+      document.removeEventListener('keydown', onEnter);
+    };
+  }, [name, email, password]);
 
   return (
     <section className={styles.profile}>
@@ -61,9 +109,27 @@ const Profile = () => {
           </p>
         </div>
         <div className="ml-15">
-          <Input placeholder="Имя" extraClass="mb-6" icon={'EditIcon'} />
-          <Input placeholder="Логин" extraClass="mb-6" icon={'EditIcon'} />
-          <Input placeholder="Пароль" extraClass="mb-6" icon={'EditIcon'} />
+          <Input
+            placeholder="Имя"
+            extraClass="mb-6"
+            icon={'EditIcon'}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Input
+            placeholder="Логин"
+            extraClass="mb-6"
+            icon={'EditIcon'}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            placeholder="Пароль"
+            extraClass="mb-6"
+            icon={'EditIcon'}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
       </div>
     </section>
