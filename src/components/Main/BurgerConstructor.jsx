@@ -16,11 +16,13 @@ import { v4 as uuidv4 } from 'uuid';
 import dots from '../../images/dots.svg';
 import { MOVE_CONSTRUCTOR_ITEM } from '../../services/actions/constants';
 import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const BurgerConstructor = (props) => {
   const { data, constructorData, bunInOrder } = useSelector(
     (state) => state.dataReducer
   );
+  const navigate = useNavigate();
 
   const moveElement = useCallback((dragIndex, hoverIndex) => {
     dispatch({
@@ -57,6 +59,15 @@ const BurgerConstructor = (props) => {
         </p>
       );
     }
+
+    const handleButtonClick = () => {
+      if (localStorage.refreshToken) {
+        props.setActive(true);
+        dispatch(postOrder(ids));
+      } else {
+        navigate('/login', { replace: true });
+      }
+    };
 
     return (
       <section className={styles.constructorContainer + ' pt-25'}>
@@ -95,8 +106,7 @@ const BurgerConstructor = (props) => {
               type="primary"
               size="large"
               onClick={() => {
-                props.setActive(true);
-                dispatch(postOrder(ids));
+                handleButtonClick();
               }}
             >
               Оформить заказ
