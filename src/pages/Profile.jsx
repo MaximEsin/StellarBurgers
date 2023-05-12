@@ -8,6 +8,7 @@ import {
   BurgerIcon,
   ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { refresh } from '../utils';
 
 const Profile = (props) => {
   const navigate = useNavigate();
@@ -32,6 +33,12 @@ const Profile = (props) => {
         </p>
       </div>
     );
+  }, []);
+
+  useEffect(() => {
+    if (!localStorage.accessToken) {
+      refresh();
+    }
   }, []);
 
   const logOut = () => {

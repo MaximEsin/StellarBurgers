@@ -7,27 +7,25 @@ import styles from '../styles/Registration.module.css';
 import { Link } from 'react-router-dom';
 import { request } from '../utils';
 import { useState } from 'react';
-import { refresh } from '../utils';
+import { useNavigate } from 'react-router-dom';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState();
+  const [code, setCode] = useState();
+  const navigate = useNavigate();
 
-  const resetPassword = (password) => {
-    if (!localStorage.accessToken) {
-      refresh();
-    } else {
-      request('/reset-password/reset', {
-        method: 'POST',
-        headers: {
-          authorization: 'd5b34af3-ad0b-4c78-bdcc-85f9d783b0bc',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          password: password,
-          token: localStorage.refreshToken,
-        }),
-      }).then((res) => console.log(res));
-    }
+  const resetPassword = (password, code) => {
+    request('/password-reset/reset', {
+      method: 'POST',
+      headers: {
+        authorization: 'd5b34af3-ad0b-4c78-bdcc-85f9d783b0bc',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        password: password,
+        token: code,
+      }),
+    }).then((res) => navigate('/login', { replace: true }));
   };
 
   return (
@@ -48,12 +46,13 @@ const ResetPassword = () => {
               type={'text'}
               placeholder={'Введите код из письма'}
               extraClass="mb-6"
+              onChange={(e) => setCode(e.target.value)}
             />
             <Button
               htmlType="button"
               type="primary"
               size="medium"
-              onClick={() => resetPassword(password)}
+              onClick={() => resetPassword(password, code)}
             >
               Сохранить
             </Button>

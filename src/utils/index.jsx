@@ -21,5 +21,5 @@ export function refresh() {
     body: JSON.stringify({
       token: localStorage.refreshToken,
     }),
-  });
+  }).then((res) => localStorage.setItem('accessToken', res.accessToken));
 }

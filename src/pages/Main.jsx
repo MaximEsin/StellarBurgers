@@ -11,6 +11,7 @@ import {
   BurgerIcon,
   ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { refresh } from '../utils';
 
 const Main = (props) => {
   useEffect(() => {
@@ -31,6 +32,13 @@ const Main = (props) => {
       </div>
     );
   }, []);
+
+  useEffect(() => {
+    if (!localStorage.accessToken) {
+      refresh();
+    }
+  }, []);
+
   return (
     <>
       <Modal
