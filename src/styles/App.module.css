@@ -32,3 +32,12 @@
   padding-bottom: 30px;
   padding-top: 30px;
 }
+
+.navItem {
+  display: flex;
+  cursor: pointer;
+}
+
+.activeText {
+  color: #f2f2f3;
+}

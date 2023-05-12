@@ -25,3 +25,12 @@
 .sidebarItem {
   cursor: pointer;
 }
+
+.navItem {
+  display: flex;
+  cursor: pointer;
+}
+
+.activeText {
+  color: #f2f2f3;
+}

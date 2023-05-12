@@ -4,12 +4,35 @@ import styles from '../styles/Profile.module.css';
 import { useNavigate } from 'react-router-dom';
 import { request } from '../utils';
 import { useEffect, useState } from 'react';
+import {
+  BurgerIcon,
+  ProfileIcon,
+} from '@ya.praktikum/react-developer-burger-ui-components';
 
-const Profile = () => {
+const Profile = (props) => {
   const navigate = useNavigate();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+  useEffect(() => {
+    props.setConstructor(
+      <div className={styles.navItem + ' pt-4 pb-4 ml-5 mr-5'}>
+        <BurgerIcon type="secondary" />
+        <p className="text text_type_main-default text_color_inactive pl-2">
+          Конструктор
+        </p>
+      </div>
+    );
+    props.setProfile(
+      <div className={styles.navItem + ' pt-4 pb-4 ml-5 mr-5'}>
+        <ProfileIcon type="primary" />
+        <p className={styles.activeText + ' text text_type_main-default  pl-2'}>
+          Личный кабинет
+        </p>
+      </div>
+    );
+  }, []);
 
   const logOut = () => {
     request('/auth/logout', {
