@@ -38,7 +38,7 @@ const Main = (props) => {
       refresh();
     }
   }, []);
-
+  console.log(props);
   return (
     <>
       <Modal

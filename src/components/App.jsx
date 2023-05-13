@@ -17,6 +17,7 @@ import {
   BurgerIcon,
   ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import Ingredient from '../pages/Ingredient';
 
 function App() {
   const [modalIngredientActive, setModalIngredientActive] = useState(false);
@@ -107,6 +108,10 @@ function App() {
                   }
                 />
               }
+            />
+            <Route
+              path="/ingredients/:_id"
+              element={<Ingredient data={data} />}
             />
           </Routes>
         </Router>

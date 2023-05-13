@@ -92,3 +92,10 @@
   display: flex;
   gap: 20px;
 }
+
+.ingredientDetails {
+  display: flex;
+  width: 95%;
+  align-items: center;
+  justify-content: center;
+}
