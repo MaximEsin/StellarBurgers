@@ -17,12 +17,14 @@ import dots from '../../images/dots.svg';
 import { MOVE_CONSTRUCTOR_ITEM } from '../../services/actions/constants';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const BurgerConstructor = (props) => {
   const { data, constructorData, bunInOrder } = useSelector(
     (state) => state.dataReducer
   );
   const navigate = useNavigate();
+  const location = useLocation();
 
   const moveElement = useCallback((dragIndex, hoverIndex) => {
     dispatch({
@@ -101,16 +103,18 @@ const BurgerConstructor = (props) => {
           </p>
           <CurrencyIcon />
           <div className={styles.buttonWrapper}>
-            <Button
-              htmlType="button"
-              type="primary"
-              size="large"
-              onClick={() => {
-                handleButtonClick();
-              }}
-            >
-              Оформить заказ
-            </Button>
+            <Link to="/order" state={{ background: location }}>
+              <Button
+                htmlType="button"
+                type="primary"
+                size="large"
+                onClick={() => {
+                  handleButtonClick();
+                }}
+              >
+                Оформить заказ
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

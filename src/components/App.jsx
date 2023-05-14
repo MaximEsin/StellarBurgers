@@ -6,7 +6,7 @@ import { getData } from '../services/actions';
 import Loader from './Loader';
 import Main from '../pages/Main';
 import Registration from '../pages/Registration';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Authorisation from '../pages/Authorisation';
 import ForgotPassword from '../pages/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword';
@@ -18,6 +18,10 @@ import {
   ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import Ingredient from '../pages/Ingredient';
+import { useLocation } from 'react-router-dom';
+import Modal from './Modal';
+import IngredientDetails from './Main/IngredientDetails';
+import OrderDetails from './Main/OrderDetails';
 
 function App() {
   const [modalIngredientActive, setModalIngredientActive] = useState(false);
@@ -42,6 +46,9 @@ function App() {
     (state) => state.dataReducer
   );
 
+  const location = useLocation();
+  const background = location.state && location.state.background;
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -55,66 +62,114 @@ function App() {
   } else {
     return (
       <div className={styles.App}>
-        <Router>
-          <Header constructor={constructor} profile={profile} />
+        <Header constructor={constructor} profile={profile} />
+        <Routes location={background || location}>
+          <Route
+            path="/"
+            element={
+              <Main
+                modalIngredientActive={modalIngredientActive}
+                setModalIngredientActive={setModalIngredientActive}
+                modalOrderActive={modalOrderActive}
+                setModalOrderActive={setModalOrderActive}
+                data={data}
+                setConstructor={setConstructor}
+                setProfile={setProfile}
+              />
+            }
+          />
+          <Route
+            path="/ingredients/:_id"
+            element={
+              <Modal
+                data={data}
+                active={modalOrderActive}
+                setActive={setModalOrderActive}
+              >
+                <IngredientDetails data={data} />
+              </Modal>
+            }
+          />
+          <Route
+            path="/order"
+            element={
+              <Modal
+                data={data}
+                active={modalIngredientActive}
+                setActive={setModalIngredientActive}
+              >
+                <OrderDetails />
+              </Modal>
+            }
+          />
+          <Route
+            path="/register"
+            element={<ProtectedSignedRouteElement element={<Registration />} />}
+          />
+          <Route
+            path="/login"
+            element={
+              <ProtectedSignedRouteElement element={<Authorisation />} />
+            }
+          />
+          <Route
+            path="/forgot-password"
+            element={
+              <ProtectedSignedRouteElement element={<ForgotPassword />} />
+            }
+          />
+          <Route
+            path="/reset-password"
+            element={
+              <ProtectedSignedRouteElement element={<ResetPassword />} />
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedUnSignedRouteElement
+                element={
+                  <Profile
+                    setConstructor={setConstructor}
+                    setProfile={setProfile}
+                  />
+                }
+              />
+            }
+          />
+          <Route
+            path="/ingredients/:_id"
+            element={<Ingredient data={data} />}
+          />
+        </Routes>
+        {background && (
           <Routes>
             <Route
-              path="/"
-              element={
-                <Main
-                  modalIngredientActive={modalIngredientActive}
-                  setModalIngredientActive={setModalIngredientActive}
-                  modalOrderActive={modalOrderActive}
-                  setModalOrderActive={setModalOrderActive}
-                  data={data}
-                  setConstructor={setConstructor}
-                  setProfile={setProfile}
-                />
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                <ProtectedSignedRouteElement element={<Registration />} />
-              }
-            />
-            <Route
-              path="/login"
-              element={
-                <ProtectedSignedRouteElement element={<Authorisation />} />
-              }
-            />
-            <Route
-              path="/forgot-password"
-              element={
-                <ProtectedSignedRouteElement element={<ForgotPassword />} />
-              }
-            />
-            <Route
-              path="/reset-password"
-              element={
-                <ProtectedSignedRouteElement element={<ResetPassword />} />
-              }
-            />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedUnSignedRouteElement
-                  element={
-                    <Profile
-                      setConstructor={setConstructor}
-                      setProfile={setProfile}
-                    />
-                  }
-                />
-              }
-            />
-            <Route
               path="/ingredients/:_id"
-              element={<Ingredient data={data} />}
+              element={
+                <Modal
+                  data={data}
+                  active={modalOrderActive}
+                  setActive={setModalOrderActive}
+                >
+                  <IngredientDetails data={data} />
+                </Modal>
+              }
+            />
+            <Route
+              path="/order"
+              element={
+                <Modal
+                  data={data}
+                  active={modalIngredientActive}
+                  setActive={setModalIngredientActive}
+                >
+                  <OrderDetails />
+                </Modal>
+              }
             />
           </Routes>
-        </Router>
+        )}
       </div>
     );
   }
