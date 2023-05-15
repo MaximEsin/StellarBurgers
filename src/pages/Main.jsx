@@ -31,7 +31,7 @@ const Main = (props) => {
   }, []);
 
   useEffect(() => {
-    if (!localStorage.accessToken) {
+    if (!localStorage.accessToken && localStorage.refeshToken) {
       refresh();
     }
   }, []);

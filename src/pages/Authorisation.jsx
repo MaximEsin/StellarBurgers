@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { request } from '../utils';
+import { handleFormSubmit } from '../utils';
 
 const Authorisation = () => {
   const [email, setEmail] = useState();
@@ -47,7 +48,9 @@ const Authorisation = () => {
         <h1 className={styles.heading + ' text text_type_main-medium mb-6'}>
           Вход
         </h1>
-        <div>
+        <form
+          onSubmit={(event) => handleFormSubmit(event, auth(email, password))}
+        >
           <Input
             type={'email'}
             placeholder={'E-mail'}
@@ -61,15 +64,10 @@ const Authorisation = () => {
             extraClass="mb-6"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button
-            htmlType="button"
-            type="primary"
-            size="medium"
-            onClick={() => auth(email, password)}
-          >
+          <Button htmlType="submit" type="primary" size="medium">
             Войти
           </Button>
-        </div>
+        </form>
         <p className="text text_type_main-default text_color_inactive mt-20">
           Вы — новый пользователь?{''}
           <Link to="/register">

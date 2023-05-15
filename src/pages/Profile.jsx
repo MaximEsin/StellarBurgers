@@ -36,7 +36,7 @@ const Profile = (props) => {
   }, []);
 
   useEffect(() => {
-    if (!localStorage.accessToken) {
+    if (!localStorage.accessToken && localStorage.refreshToken) {
       refresh();
     }
   }, []);

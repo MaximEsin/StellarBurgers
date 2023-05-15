@@ -4,10 +4,11 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../styles/Registration.module.css';
-import { Link } from 'react-router-dom';
+import { Form, Link } from 'react-router-dom';
 import { request } from '../utils';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { handleFormSubmit } from '../utils';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState();
@@ -39,7 +40,11 @@ const ResetPassword = () => {
           <h1 className={styles.heading + ' text text_type_main-medium mb-6'}>
             Восстановление пароля
           </h1>
-          <div>
+          <form
+            onSubmit={(event) =>
+              handleFormSubmit(event, resetPassword(password, code))
+            }
+          >
             <Input
               type={'password'}
               placeholder={'Введите новый пароль'}
@@ -52,15 +57,10 @@ const ResetPassword = () => {
               extraClass="mb-6"
               onChange={(e) => setCode(e.target.value)}
             />
-            <Button
-              htmlType="button"
-              type="primary"
-              size="medium"
-              onClick={() => resetPassword(password, code)}
-            >
+            <Button htmlType="submit" type="primary" size="medium">
               Сохранить
             </Button>
-          </div>
+          </form>
           <p className="text text_type_main-default text_color_inactive mt-20">
             Вспомнили пароль?{''}
             <Link to="/login">

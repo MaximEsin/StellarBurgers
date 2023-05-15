@@ -27,3 +27,7 @@ export function refresh() {
       console.log(err);
     });
 }
+
+export const handleFormSubmit = (event) => {
+  event.preventDefault();
+};

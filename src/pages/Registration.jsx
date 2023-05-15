@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { request } from '../utils';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { handleFormSubmit } from '../utils';
 
 const Registration = () => {
   const [email, setEmail] = useState();
@@ -44,7 +45,11 @@ const Registration = () => {
         <h1 className={styles.heading + ' text text_type_main-medium mb-6'}>
           Регистрация
         </h1>
-        <div>
+        <form
+          onSubmit={(event) =>
+            handleFormSubmit(event, register(email, password, name))
+          }
+        >
           <Input
             type={'text'}
             placeholder={'Имя'}
@@ -64,17 +69,10 @@ const Registration = () => {
             extraClass="mb-6"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button
-            htmlType="button"
-            type="primary"
-            size="medium"
-            onClick={() => {
-              register(email, password, name);
-            }}
-          >
+          <Button htmlType="submit" type="primary" size="medium">
             Зарегестрироваться
           </Button>
-        </div>
+        </form>
         <p className="text text_type_main-default text_color_inactive mt-20">
           Уже зарегестрированы?{''}
           <Link to="/login">

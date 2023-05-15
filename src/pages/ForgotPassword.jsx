@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { request } from '../utils';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { handleFormSubmit } from '../utils';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState();
@@ -41,22 +42,19 @@ const ForgotPassword = () => {
           <h1 className={styles.heading + ' text text_type_main-medium mb-6'}>
             Восстановление пароля
           </h1>
-          <div>
+          <form
+            onSubmit={(event) => handleFormSubmit(event, getEmailCode(email))}
+          >
             <Input
               type={'email'}
               placeholder={'Укажите e-mail'}
               extraClass="mb-6"
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Button
-              htmlType="button"
-              type="primary"
-              size="medium"
-              onClick={() => getEmailCode(email)}
-            >
+            <Button htmlType="submit" type="primary" size="medium">
               Восстановить
             </Button>
-          </div>
+          </form>
           <p className="text text_type_main-default text_color_inactive mt-20">
             Вспомнили пароль?{''}
             <Link to="/login">
