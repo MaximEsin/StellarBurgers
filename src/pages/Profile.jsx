@@ -51,11 +51,15 @@ const Profile = (props) => {
       body: JSON.stringify({
         token: localStorage.refreshToken,
       }),
-    }).then((res) => {
-      navigate('/', { replace: true });
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-    });
+    })
+      .then((res) => {
+        navigate('/', { replace: true });
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const getUserInfo = () => {
@@ -65,11 +69,15 @@ const Profile = (props) => {
         authorization: localStorage.accessToken,
         'Content-Type': 'application/json',
       },
-    }).then((res) => {
-      setName(res.user.name);
-      setEmail(res.user.email);
-      setPassword(password);
-    });
+    })
+      .then((res) => {
+        setName(res.user.name);
+        setEmail(res.user.email);
+        setPassword(password);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const editUserInfo = (name, email, password) => {
@@ -84,6 +92,8 @@ const Profile = (props) => {
         email: email,
         password: password,
       }),
+    }).catch((err) => {
+      console.log(err);
     });
   };
 

@@ -25,16 +25,20 @@ const Authorisation = () => {
         email: email,
         password: password,
       }),
-    }).then((res) => {
-      if (res.success) {
-        navigate('/', { replace: true });
-        localStorage.setItem('accessToken', res.accessToken);
-        localStorage.setItem('refreshToken', res.refreshToken);
-        setTimeout(() => {
-          localStorage.removeItem('accessToken');
-        }, 1200000);
-      }
-    });
+    })
+      .then((res) => {
+        if (res.success) {
+          navigate('/', { replace: true });
+          localStorage.setItem('accessToken', res.accessToken);
+          localStorage.setItem('refreshToken', res.refreshToken);
+          setTimeout(() => {
+            localStorage.removeItem('accessToken');
+          }, 1200000);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

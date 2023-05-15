@@ -23,11 +23,15 @@ const ForgotPassword = () => {
       body: JSON.stringify({
         email: email,
       }),
-    }).then((res) => {
-      if (res.success) {
-        navigate('/reset-password', { replace: true });
-      }
-    });
+    })
+      .then((res) => {
+        if (res.success) {
+          navigate('/reset-password', { replace: true });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

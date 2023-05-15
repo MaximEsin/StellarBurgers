@@ -27,11 +27,15 @@ const Registration = () => {
         password: password,
         name: name,
       }),
-    }).then((res) => {
-      if (res.success) {
-        navigate('/login', { replace: true });
-      }
-    });
+    })
+      .then((res) => {
+        if (res.success) {
+          navigate('/login', { replace: true });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

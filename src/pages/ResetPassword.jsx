@@ -25,7 +25,11 @@ const ResetPassword = () => {
         password: password,
         token: code,
       }),
-    }).then((res) => navigate('/login', { replace: true }));
+    })
+      .then((res) => navigate('/login', { replace: true }))
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
