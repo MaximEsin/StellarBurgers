@@ -2,16 +2,18 @@ import React from 'react';
 import Loader from '../components/Loader';
 import styles from '../styles/Modal.module.css';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const Ingredient = (props) => {
-  let { _id } = useParams();
+const Ingredient = () => {
+  const { _id } = useParams();
+  const { data } = useSelector((state) => state.dataReducer);
 
-  if (props.data.length < 1) {
+  if (data.length < 1) {
     return <Loader />;
   } else {
     return (
       <>
-        {props.data
+        {data
           .filter((item) => item._id === _id)
           .map((item, index) => {
             return (

@@ -17,25 +17,6 @@ const Profile = (props) => {
   const [password, setPassword] = useState();
 
   useEffect(() => {
-    props.setConstructor(
-      <div className={styles.navItem + ' pt-4 pb-4 ml-5 mr-5'}>
-        <BurgerIcon type="secondary" />
-        <p className="text text_type_main-default text_color_inactive pl-2">
-          Конструктор
-        </p>
-      </div>
-    );
-    props.setProfile(
-      <div className={styles.navItem + ' pt-4 pb-4 ml-5 mr-5'}>
-        <ProfileIcon type="primary" />
-        <p className={styles.activeText + ' text text_type_main-default  pl-2'}>
-          Личный кабинет
-        </p>
-      </div>
-    );
-  }, []);
-
-  useEffect(() => {
     if (!localStorage.accessToken && localStorage.refreshToken) {
       refresh();
     }
