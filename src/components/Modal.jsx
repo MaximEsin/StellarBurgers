@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import ModalOverlay from './ModalOverlay';
 import styles from '../styles/Modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useNavigate } from 'react-router-dom';
+import { onClose } from '../utils';
 
 const Modal = (props) => {
-  const navigate = useNavigate();
-
   return (
     <ModalOverlay data={props}>
       <section className={styles.modal}>
@@ -16,7 +14,7 @@ const Modal = (props) => {
             alt="Закрыть окно"
             onClick={() => {
               props.setActive(false);
-              navigate(-1);
+              onClose();
             }}
           />
         </div>

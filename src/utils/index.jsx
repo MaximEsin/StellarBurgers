@@ -1,4 +1,5 @@
 import { baseUrl } from '../services/actions/constants';
+import { Navigate } from 'react-router-dom';
 
 export function checkResponse(res) {
   if (res.ok) {
@@ -30,4 +31,8 @@ export function refresh() {
 
 export const handleFormSubmit = (event) => {
   event.preventDefault();
+};
+
+export const onClose = () => {
+  return <Navigate to="/" replace />;
 };

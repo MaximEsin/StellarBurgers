@@ -17,7 +17,6 @@ import Ingredient from '../pages/Ingredient';
 import { useLocation } from 'react-router-dom';
 import Modal from './Modal';
 import IngredientDetails from './Main/IngredientDetails';
-import OrderDetails from './Main/OrderDetails';
 
 function App() {
   const [modalIngredientActive, setModalIngredientActive] = useState(false);
@@ -70,18 +69,6 @@ function App() {
             }
           />
           <Route
-            path="/order"
-            element={
-              <Modal
-                data={data}
-                active={modalIngredientActive}
-                setActive={setModalIngredientActive}
-              >
-                <OrderDetails />
-              </Modal>
-            }
-          />
-          <Route
             path="/register"
             element={<ProtectedSignedRouteElement element={<Registration />} />}
           />
@@ -120,18 +107,6 @@ function App() {
                   setActive={setModalOrderActive}
                 >
                   <IngredientDetails data={data} />
-                </Modal>
-              }
-            />
-            <Route
-              path="/order"
-              element={
-                <Modal
-                  data={data}
-                  active={modalIngredientActive}
-                  setActive={setModalIngredientActive}
-                >
-                  <OrderDetails />
                 </Modal>
               }
             />

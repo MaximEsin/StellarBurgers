@@ -9,7 +9,7 @@ import {
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
-const Header = (props) => {
+const Header = () => {
   const { pathname } = useLocation();
   return (
     <header className={styles.header}>

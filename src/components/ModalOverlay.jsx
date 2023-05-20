@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import styles from '../styles/Modal.module.css';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+import { onClose } from '../utils';
 
 const ModalOverlay = (props) => {
   const isOpen = props.data.active;
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (!isOpen) {
@@ -14,7 +13,7 @@ const ModalOverlay = (props) => {
     function closeByEscape(evt) {
       if (evt.key === 'Escape') {
         props.data.setActive(false);
-        navigate(-1);
+        onClose();
       }
     }
     document.addEventListener('keydown', closeByEscape);
@@ -31,7 +30,7 @@ const ModalOverlay = (props) => {
       onClick={(event) => {
         if (event.target === event.currentTarget) {
           props.data.setActive(false);
-          navigate(-1);
+          onClose();
         }
       }}
     >

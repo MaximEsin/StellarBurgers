@@ -103,18 +103,16 @@ const BurgerConstructor = (props) => {
           </p>
           <CurrencyIcon />
           <div className={styles.buttonWrapper}>
-            <Link to="/order" state={{ background: location }}>
-              <Button
-                htmlType="button"
-                type="primary"
-                size="large"
-                onClick={() => {
-                  handleButtonClick();
-                }}
-              >
-                Оформить заказ
-              </Button>
-            </Link>
+            <Button
+              htmlType="button"
+              type="primary"
+              size="large"
+              onClick={() => {
+                handleButtonClick();
+              }}
+            >
+              Оформить заказ
+            </Button>
           </div>
         </div>
       </section>

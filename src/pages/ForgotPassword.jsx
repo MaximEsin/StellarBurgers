@@ -9,10 +9,12 @@ import { request } from '../utils';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { handleFormSubmit } from '../utils';
+import { useLocation } from 'react-router-dom';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState();
   const navigate = useNavigate();
+  const prevRoute = useLocation();
 
   const getEmailCode = (email) => {
     request('/password-reset', {
@@ -27,7 +29,7 @@ const ForgotPassword = () => {
     })
       .then((res) => {
         if (res.success) {
-          navigate('/reset-password', { replace: true });
+          navigate('/reset-password', { state: { prevRoute }, replace: true });
         }
       })
       .catch((err) => {
