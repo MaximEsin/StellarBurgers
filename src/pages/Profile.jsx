@@ -4,13 +4,9 @@ import styles from '../styles/Profile.module.css';
 import { useNavigate } from 'react-router-dom';
 import { request } from '../utils';
 import { useEffect, useState } from 'react';
-import {
-  BurgerIcon,
-  ProfileIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components';
 import { refresh } from '../utils';
 
-const Profile = (props) => {
+const Profile = () => {
   const navigate = useNavigate();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
@@ -33,7 +29,7 @@ const Profile = (props) => {
         token: localStorage.refreshToken,
       }),
     })
-      .then((res) => {
+      .then(() => {
         navigate('/', { replace: true });
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
@@ -134,21 +130,21 @@ const Profile = (props) => {
             placeholder="Имя"
             extraClass="mb-6"
             icon={'EditIcon'}
-            value={name}
+            value={name || ''}
             onChange={(e) => setName(e.target.value)}
           />
           <Input
             placeholder="Логин"
             extraClass="mb-6"
             icon={'EditIcon'}
-            value={email}
+            value={email || ''}
             onChange={(e) => setEmail(e.target.value)}
           />
           <Input
             placeholder="Пароль"
             extraClass="mb-6"
             icon={'EditIcon'}
-            value={password}
+            value={password || ''}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>

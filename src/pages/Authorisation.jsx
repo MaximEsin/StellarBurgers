@@ -56,6 +56,7 @@ const Authorisation = () => {
             placeholder={'E-mail'}
             extraClass="mb-6"
             onChange={(e) => setEmail(e.target.value)}
+            value={email || ''}
           />
           <Input
             type={'password'}
@@ -63,6 +64,7 @@ const Authorisation = () => {
             icon={'ShowIcon'}
             extraClass="mb-6"
             onChange={(e) => setPassword(e.target.value)}
+            value={password || ''}
           />
           <Button htmlType="submit" type="primary" size="medium">
             Войти

@@ -52,6 +52,7 @@ const ForgotPassword = () => {
               placeholder={'Укажите e-mail'}
               extraClass="mb-6"
               onChange={(e) => setEmail(e.target.value)}
+              value={email || ''}
             />
             <Button htmlType="submit" type="primary" size="medium">
               Восстановить

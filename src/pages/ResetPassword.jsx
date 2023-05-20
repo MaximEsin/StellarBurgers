@@ -57,12 +57,14 @@ const ResetPassword = () => {
                 placeholder={'Введите новый пароль'}
                 extraClass="mb-6"
                 onChange={(e) => setPassword(e.target.value)}
+                value={password || ''}
               />
               <Input
                 type={'text'}
                 placeholder={'Введите код из письма'}
                 extraClass="mb-6"
                 onChange={(e) => setCode(e.target.value)}
+                value={code || ''}
               />
               <Button htmlType="submit" type="primary" size="medium">
                 Сохранить
