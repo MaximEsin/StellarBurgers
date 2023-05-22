@@ -13,12 +13,12 @@ import { useLocation } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
 const ResetPassword = () => {
-  const [password, setPassword] = useState();
-  const [code, setCode] = useState();
+  const [password, setPassword] = useState<string>('');
+  const [code, setCode] = useState<string>('');
   const navigate = useNavigate();
   const prevRoute = useLocation();
 
-  const resetPassword = (password, code) => {
+  const resetPassword = (password: string, code: string) => {
     request('/password-reset/reset', {
       method: 'POST',
       headers: {

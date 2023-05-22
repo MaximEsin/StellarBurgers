@@ -1,23 +1,22 @@
 import React from 'react';
+import styles from '../styles/Registration.module.css';
 import {
   Input,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from '../styles/Registration.module.css';
 import { Link } from 'react-router-dom';
-import { request } from '../utils';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { request } from '../utils';
 import { handleFormSubmit } from '../utils';
 
-const Registration = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [name, setName] = useState();
+const Authorisation = () => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const navigate = useNavigate();
 
-  const register = (email, password, name) => {
-    request('/auth/register', {
+  const auth = (email: string, password: string): void => {
+    request('/auth/login', {
       method: 'POST',
       headers: {
         authorization: 'd5b34af3-ad0b-4c78-bdcc-85f9d783b0bc',
@@ -26,12 +25,16 @@ const Registration = () => {
       body: JSON.stringify({
         email: email,
         password: password,
-        name: name,
       }),
     })
       .then((res) => {
         if (res.success) {
-          navigate('/login', { replace: true });
+          navigate('/', { replace: true });
+          localStorage.setItem('accessToken', res.accessToken);
+          localStorage.setItem('refreshToken', res.refreshToken);
+          setTimeout(() => {
+            localStorage.removeItem('accessToken');
+          }, 1200000);
         }
       })
       .catch((err) => {
@@ -43,23 +46,16 @@ const Registration = () => {
     <section className={styles.main}>
       <div className={styles.container}>
         <h1 className={styles.heading + ' text text_type_main-medium mb-6'}>
-          Регистрация
+          Вход
         </h1>
         <form
-          onSubmit={(event) =>
-            handleFormSubmit(event, register(email, password, name))
+          onSubmit={(event: any) =>
+            handleFormSubmit(event, auth(email, password))
           }
         >
           <Input
-            type={'text'}
-            placeholder={'Имя'}
-            extraClass="mb-6"
-            onChange={(e) => setName(e.target.value)}
-            value={name || ''}
-          />
-          <Input
             type={'email'}
-            placeholder={'e-mail'}
+            placeholder={'E-mail'}
             extraClass="mb-6"
             onChange={(e) => setEmail(e.target.value)}
             value={email || ''}
@@ -73,19 +69,32 @@ const Registration = () => {
             value={password || ''}
           />
           <Button htmlType="submit" type="primary" size="medium">
-            Зарегестрироваться
+            Войти
           </Button>
         </form>
         <p className="text text_type_main-default text_color_inactive mt-20">
-          Уже зарегестрированы?{''}
-          <Link to="/login">
+          Вы — новый пользователь?{''}
+          <Link to="/register">
             <Button
               extraClass={styles.button}
               htmlType="button"
               type="secondary"
               size="small"
             >
-              Войти
+              Зарегистрироваться
+            </Button>
+          </Link>
+        </p>
+        <p className="text text_type_main-default text_color_inactive mt-4">
+          Забыли пароль?{''}
+          <Link to="/forgot-password">
+            <Button
+              extraClass={styles.button}
+              htmlType="button"
+              type="secondary"
+              size="small"
+            >
+              Восстановить пароль
             </Button>
           </Link>
         </p>
@@ -94,4 +103,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default Authorisation;

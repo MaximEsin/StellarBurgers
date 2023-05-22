@@ -8,9 +8,9 @@ import { refresh } from '../utils';
 
 const Profile = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   useEffect(() => {
     if (!localStorage.accessToken && localStorage.refreshToken) {
@@ -57,7 +57,7 @@ const Profile = () => {
       });
   };
 
-  const editUserInfo = (name, email, password) => {
+  const editUserInfo = (name: string, email: string, password: string) => {
     request('/auth/user', {
       method: 'PATCH',
       headers: {
@@ -79,7 +79,7 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-    function onEnter(evt) {
+    function onEnter(evt: any) {
       if (evt.key === 'Enter') {
         editUserInfo(name, email, password);
       }

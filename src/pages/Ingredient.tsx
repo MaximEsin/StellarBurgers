@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 const Ingredient = () => {
   const { _id } = useParams();
-  const { data } = useSelector((state) => state.dataReducer);
+  const { data } = useSelector((state: any) => state.dataReducer);
 
   if (data.length < 1) {
     return <Loader />;
@@ -14,8 +14,8 @@ const Ingredient = () => {
     return (
       <>
         {data
-          .filter((item) => item._id === _id)
-          .map((item, index) => {
+          .filter((item: any) => item._id === _id)
+          .map((item: any, index: number) => {
             return (
               <section key={index}>
                 <div className={styles.ingredientDetails + ' pt-10 pl-10'}>

@@ -12,11 +12,11 @@ import { handleFormSubmit } from '../utils';
 import { useLocation } from 'react-router-dom';
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState<string>('');
   const navigate = useNavigate();
   const prevRoute = useLocation();
 
-  const getEmailCode = (email) => {
+  const getEmailCode = (email: string) => {
     request('/password-reset', {
       method: 'POST',
       headers: {

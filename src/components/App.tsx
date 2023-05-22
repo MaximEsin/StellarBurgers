@@ -19,17 +19,18 @@ import Modal from './Modal';
 import IngredientDetails from './Main/IngredientDetails';
 
 function App() {
-  const [modalIngredientActive, setModalIngredientActive] = useState(false);
-  const [modalOrderActive, setModalOrderActive] = useState(false);
+  const [modalIngredientActive, setModalIngredientActive] =
+    useState<boolean>(false);
+  const [modalOrderActive, setModalOrderActive] = useState<boolean>(false);
 
   const { data, dataRequest, dataFailed } = useSelector(
-    (state) => state.dataReducer
+    (state: any) => state.dataReducer
   );
 
   const location = useLocation();
   const background = location.state && location.state.background;
 
-  const dispatch = useDispatch();
+  const dispatch: any = useDispatch();
 
   useEffect(() => {
     dispatch(getData());
@@ -42,7 +43,7 @@ function App() {
   } else {
     return (
       <div className={styles.App}>
-        <Header constructor={constructor} />
+        <Header />
         <Routes location={background || location}>
           <Route
             path="/"
@@ -64,7 +65,7 @@ function App() {
                 active={modalOrderActive}
                 setActive={setModalOrderActive}
               >
-                <IngredientDetails data={data} />
+                <IngredientDetails info={data} />
               </Modal>
             }
           />
@@ -106,7 +107,7 @@ function App() {
                   active={modalOrderActive}
                   setActive={setModalOrderActive}
                 >
-                  <IngredientDetails data={data} />
+                  <IngredientDetails info={data} />
                 </Modal>
               }
             />
