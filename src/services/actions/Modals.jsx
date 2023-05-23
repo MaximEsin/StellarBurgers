@@ -22,7 +22,10 @@ export function postOrder(ids) {
     });
     request(`/orders`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.refreshToken,
+      },
       body: JSON.stringify({
         ingredients: ids,
       }),

@@ -30,6 +30,10 @@
   cursor: pointer;
 }
 
+.activeText {
+  color: #f2f2f3;
+}
+
 @media all and (max-width: 1120px) {
   .navbar {
     max-width: 800px;

@@ -1,13 +1,17 @@
 import React from 'react';
-import styles from '../styles/Modal.module.css';
-import PropTypes from 'prop-types';
+import styles from '../../styles/Modal.module.css';
 import { useSelector } from 'react-redux';
-import Loader from './Loader';
+import Loader from '../Loader';
+import { FC } from 'react';
 
-const IngredientDetails = (props) => {
-  const data = useSelector((state) => state.ingredientReducer);
+interface IIngredientDetails {
+  info: any;
+}
 
-  if (props.data.length < 1) {
+const IngredientDetails: FC<IIngredientDetails> = ({ info }) => {
+  const data = useSelector((state: any) => state.ingredientReducer);
+
+  if (data.length < 1) {
     return <Loader />;
   } else {
     return (
@@ -60,11 +64,6 @@ const IngredientDetails = (props) => {
       </>
     );
   }
-};
-
-IngredientDetails.propTypes = {
-  data: PropTypes.array.isRequired,
-  setActive: PropTypes.func,
 };
 
 export default IngredientDetails;

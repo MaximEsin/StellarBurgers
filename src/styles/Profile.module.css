@@ -1,0 +1,36 @@
+.profile {
+  width: 90vw;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileContainer {
+  max-width: 1240px;
+  width: 100%;
+  margin-left: 120px;
+  display: flex;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+.description {
+  max-width: 300px;
+}
+
+.sidebarItem {
+  cursor: pointer;
+}
+
+.navItem {
+  display: flex;
+  cursor: pointer;
+}
+
+.activeText {
+  color: #f2f2f3;
+}
