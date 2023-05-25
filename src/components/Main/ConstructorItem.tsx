@@ -10,6 +10,7 @@ import ConstructorItemWrapper from './ConstructorItemWrapper';
 import { REMOVE_ITEM } from '../../services/actions/constants';
 import { useDrag, useDrop } from 'react-dnd';
 import { FC } from 'react';
+import { AppDispatch } from '../../services/reducers';
 
 interface IConstructorItem {
   img?: any;
@@ -28,7 +29,7 @@ const ConstructorItem: FC<IConstructorItem> = ({
   data,
   place,
 }): any => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   const [{ handlerId }, drop] = useDrop({
     accept: 'item',

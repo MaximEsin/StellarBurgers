@@ -10,6 +10,7 @@ import { getIngredient } from '../../services/actions/Modals';
 import { useDrag } from 'react-dnd';
 import { Link, useLocation } from 'react-router-dom';
 import { FC } from 'react';
+import { AppDispatch } from '../../services/reducers';
 
 interface IBurgerIngredient {
   data: any;
@@ -21,7 +22,7 @@ const BurgerIngredient: FC<IBurgerIngredient> = ({ data, setActive }) => {
     (state: any) => state.dataReducer
   );
 
-  const dispatch: any = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const location = useLocation();
 
   const id = data._id;

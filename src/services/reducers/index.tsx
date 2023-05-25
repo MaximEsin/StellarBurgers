@@ -21,7 +21,7 @@ const initialState = {
   bunInOrder: [],
 };
 
-export const dataReducer = (state = initialState, action) => {
+export const dataReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case GET_DATA: {
       return {
@@ -31,7 +31,7 @@ export const dataReducer = (state = initialState, action) => {
       };
     }
     case GET_DATA_SUCCESS: {
-      const buns = action.data.filter((item) => item.type === 'bun');
+      const buns = action.data.filter((item: any) => item.type === 'bun');
       return {
         ...state,
         data: action.data,
@@ -48,7 +48,9 @@ export const dataReducer = (state = initialState, action) => {
       };
     }
     case ADD_ITEM: {
-      const bun = state.buns.filter((item) => item._id === action.id.id)[0];
+      const bun = state.buns.filter(
+        (item: any) => item._id === action.id.id
+      )[0];
 
       if (bun) {
         return {
@@ -56,7 +58,9 @@ export const dataReducer = (state = initialState, action) => {
           bunInOrder: [bun],
         };
       }
-      const newItem = state.data.filter((item) => item._id === action.id.id)[0];
+      const newItem: any = state.data.filter(
+        (item: any) => item._id === action.id.id
+      )[0];
       const modifyedItem = {
         ...newItem,
         uniqueId: action.uniqueId,
@@ -72,7 +76,7 @@ export const dataReducer = (state = initialState, action) => {
         ...state,
         constructorData: [
           ...state.constructorData.filter(
-            (item) => item.uniqueId !== action.id
+            (item: any) => item.uniqueId !== action.id
           ),
         ],
       };
@@ -102,5 +106,7 @@ export const rootReducer = combineReducers({
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
+
+export type AppDispatch = typeof store.dispatch;
 
 export default store;

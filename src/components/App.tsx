@@ -17,6 +17,7 @@ import Ingredient from '../pages/Ingredient';
 import { useLocation } from 'react-router-dom';
 import Modal from './Modal';
 import IngredientDetails from './Main/IngredientDetails';
+import { AppDispatch } from '../services/reducers';
 
 function App() {
   const [modalIngredientActive, setModalIngredientActive] =
@@ -30,7 +31,7 @@ function App() {
   const location = useLocation();
   const background = location.state && location.state.background;
 
-  const dispatch: any = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getData());

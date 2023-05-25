@@ -18,6 +18,7 @@ import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link, useLocation } from 'react-router-dom';
 import { FC } from 'react';
+import { AppDispatch } from '../../services/reducers';
 
 interface IBurgerConstructor {
   setActive: any;
@@ -38,7 +39,7 @@ const BurgerConstructor: FC<IBurgerConstructor> = ({ setActive }) => {
     });
   }, []);
 
-  const dispatch: any = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   const [, drop] = useDrop({
     accept: 'ingredient',

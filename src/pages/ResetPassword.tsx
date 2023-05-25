@@ -30,7 +30,7 @@ const ResetPassword = () => {
         token: code,
       }),
     })
-      .then((res) => navigate('/login', { replace: true }))
+      .then(() => navigate('/login', { replace: true }))
       .catch((err) => {
         console.log(err);
       });
