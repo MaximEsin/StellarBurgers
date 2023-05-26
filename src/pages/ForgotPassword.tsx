@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, FormEvent } from 'react';
 import {
   Input,
   Button,
@@ -45,13 +45,17 @@ const ForgotPassword = () => {
             Восстановление пароля
           </h1>
           <form
-            onSubmit={(event) => handleFormSubmit(event, getEmailCode(email))}
+            onSubmit={(event: FormEvent<HTMLFormElement>) =>
+              handleFormSubmit(event, getEmailCode(email))
+            }
           >
             <Input
               type={'email'}
               placeholder={'Укажите e-mail'}
               extraClass="mb-6"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setEmail(e.target.value)
+              }
               value={email || ''}
             />
             <Button htmlType="submit" type="primary" size="medium">

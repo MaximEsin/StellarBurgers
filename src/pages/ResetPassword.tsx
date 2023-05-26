@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect } from 'react';
 import {
   Input,
   Button,
@@ -48,7 +48,7 @@ const ResetPassword = () => {
               Восстановление пароля
             </h1>
             <form
-              onSubmit={(event) =>
+              onSubmit={(event: FormEvent<HTMLFormElement>) =>
                 handleFormSubmit(event, resetPassword(password, code))
               }
             >
@@ -56,14 +56,18 @@ const ResetPassword = () => {
                 type={'password'}
                 placeholder={'Введите новый пароль'}
                 extraClass="mb-6"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setPassword(e.target.value)
+                }
                 value={password || ''}
               />
               <Input
                 type={'text'}
                 placeholder={'Введите код из письма'}
                 extraClass="mb-6"
-                onChange={(e) => setCode(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setCode(e.target.value)
+                }
                 value={code || ''}
               />
               <Button htmlType="submit" type="primary" size="medium">

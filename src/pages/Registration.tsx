@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, FormEvent } from 'react';
 import {
   Input,
   Button,
@@ -46,7 +46,7 @@ const Registration = () => {
           Регистрация
         </h1>
         <form
-          onSubmit={(event) =>
+          onSubmit={(event: FormEvent<HTMLFormElement>) =>
             handleFormSubmit(event, register(email, password, name))
           }
         >
@@ -54,14 +54,18 @@ const Registration = () => {
             type={'text'}
             placeholder={'Имя'}
             extraClass="mb-6"
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setName(e.target.value)
+            }
             value={name || ''}
           />
           <Input
             type={'email'}
             placeholder={'e-mail'}
             extraClass="mb-6"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setEmail(e.target.value)
+            }
             value={email || ''}
           />
           <Input
@@ -69,7 +73,9 @@ const Registration = () => {
             placeholder={'Пароль'}
             icon={'ShowIcon'}
             extraClass="mb-6"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setPassword(e.target.value)
+            }
             value={password || ''}
           />
           <Button htmlType="submit" type="primary" size="medium">

@@ -6,7 +6,6 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { postOrder } from '../../services/actions/Modals';
-import PropTypes from 'prop-types';
 import Loader from '../Loader';
 import { useDrop, useDrag } from 'react-dnd';
 import { addItem } from '../../services/actions';
@@ -111,7 +110,7 @@ const BurgerConstructor: FC<IBurgerConstructor> = ({ setActive }) => {
               htmlType="button"
               type="primary"
               size="large"
-              onClick={() => {
+              onClick={(): void => {
                 handleButtonClick();
               }}
             >

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../styles/Profile.module.css';
 import { useNavigate } from 'react-router-dom';
@@ -79,7 +79,7 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-    function onEnter(evt: any) {
+    function onEnter(evt: KeyboardEvent) {
       if (evt.key === 'Enter') {
         editUserInfo(name, email, password);
       }
@@ -131,21 +131,27 @@ const Profile = () => {
             extraClass="mb-6"
             icon={'EditIcon'}
             value={name || ''}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setName(e.target.value)
+            }
           />
           <Input
             placeholder="Логин"
             extraClass="mb-6"
             icon={'EditIcon'}
             value={email || ''}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setEmail(e.target.value)
+            }
           />
           <Input
             placeholder="Пароль"
             extraClass="mb-6"
             icon={'EditIcon'}
             value={password || ''}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setPassword(e.target.value)
+            }
           />
         </div>
       </div>

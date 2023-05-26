@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, FormEvent } from 'react';
 import styles from '../styles/Registration.module.css';
 import {
   Input,
@@ -49,7 +49,7 @@ const Authorisation = () => {
           Вход
         </h1>
         <form
-          onSubmit={(event: any) =>
+          onSubmit={(event: FormEvent<HTMLFormElement>) =>
             handleFormSubmit(event, auth(email, password))
           }
         >
@@ -57,7 +57,9 @@ const Authorisation = () => {
             type={'email'}
             placeholder={'E-mail'}
             extraClass="mb-6"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setEmail(e.target.value)
+            }
             value={email || ''}
           />
           <Input
@@ -65,7 +67,9 @@ const Authorisation = () => {
             placeholder={'Пароль'}
             icon={'ShowIcon'}
             extraClass="mb-6"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setPassword(e.target.value)
+            }
             value={password || ''}
           />
           <Button htmlType="submit" type="primary" size="medium">

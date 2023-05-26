@@ -1,6 +1,7 @@
+import { FormEvent } from 'react';
 import { baseUrl } from '../services/actions/constants';
 
-export function checkResponse(res: any) {
+export function checkResponse(res: Response) {
   if (res.ok) {
     return res.json();
   }
@@ -28,6 +29,9 @@ export function refresh() {
     });
 }
 
-export const handleFormSubmit = (event: any, handler: any) => {
+export const handleFormSubmit = (
+  event: FormEvent<HTMLFormElement>,
+  handler: any
+) => {
   event.preventDefault();
 };
