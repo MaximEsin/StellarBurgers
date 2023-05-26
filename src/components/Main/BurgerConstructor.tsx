@@ -4,7 +4,7 @@ import {
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postOrder } from '../../services/actions/Modals';
 import Loader from '../Loader';
 import { useDrop, useDrag } from 'react-dnd';
@@ -24,7 +24,7 @@ interface IBurgerConstructor {
 }
 
 const BurgerConstructor: FC<IBurgerConstructor> = ({ setActive }) => {
-  const { data, constructorData, bunInOrder } = useSelector(
+  const { data, constructorData, bunInOrder } = useAppSelector(
     (state: any) => state.dataReducer
   );
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const BurgerConstructor: FC<IBurgerConstructor> = ({ setActive }) => {
     });
   }, []);
 
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useAppDispatch();
 
   const [, drop] = useDrop({
     accept: 'ingredient',

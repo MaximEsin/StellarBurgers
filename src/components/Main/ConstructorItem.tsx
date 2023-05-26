@@ -5,7 +5,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../../styles/BurgerConstructor.module.css';
 import substract from '../../images/Subtract.svg';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../hooks';
 import ConstructorItemWrapper from './ConstructorItemWrapper';
 import { REMOVE_ITEM } from '../../services/actions/constants';
 import { useDrag, useDrop } from 'react-dnd';
@@ -29,7 +29,7 @@ const ConstructorItem: FC<IConstructorItem> = ({
   data,
   place,
 }): any => {
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useAppDispatch();
 
   const [{ handlerId }, drop] = useDrop({
     accept: 'item',

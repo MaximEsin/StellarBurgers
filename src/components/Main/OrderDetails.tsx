@@ -1,11 +1,11 @@
 import React from 'react';
 import done from '../../images/done.png';
 import styles from '../../styles/Modal.module.css';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../hooks';
 import Loader from '../Loader';
 
 const OrderDetails = () => {
-  const { number, dataRequest, dataFailed } = useSelector(
+  const { number, dataRequest, dataFailed } = useAppSelector(
     (state: any) => state.orderReducer
   );
   if (dataFailed) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/App.module.css';
 import Header from './Header';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { getData } from '../services/actions';
 import Loader from './Loader';
 import Main from '../pages/Main';
@@ -24,14 +24,14 @@ function App() {
     useState<boolean>(false);
   const [modalOrderActive, setModalOrderActive] = useState<boolean>(false);
 
-  const { data, dataRequest, dataFailed } = useSelector(
+  const { data, dataRequest, dataFailed } = useAppSelector(
     (state: any) => state.dataReducer
   );
 
   const location = useLocation();
   const background = location.state && location.state.background;
 
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getData());

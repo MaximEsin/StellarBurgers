@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../../styles/Modal.module.css';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../hooks';
 import Loader from '../Loader';
 import { FC } from 'react';
 
@@ -9,7 +9,7 @@ interface IIngredientDetails {
 }
 
 const IngredientDetails: FC<IIngredientDetails> = ({ info }) => {
-  const data = useSelector((state: any) => state.ingredientReducer);
+  const data = useAppSelector((state: any) => state.ingredientReducer);
 
   if (data.length < 1) {
     return <Loader />;

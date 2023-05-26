@@ -4,7 +4,7 @@ import {
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../../styles/BurgerIngredients.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import Loader from '../Loader';
 import { getIngredient } from '../../services/actions/Modals';
 import { useDrag } from 'react-dnd';
@@ -18,11 +18,11 @@ interface IBurgerIngredient {
 }
 
 const BurgerIngredient: FC<IBurgerIngredient> = ({ data, setActive }) => {
-  const { constructorData, bunInOrder } = useSelector(
+  const { constructorData, bunInOrder } = useAppSelector(
     (state: any) => state.dataReducer
   );
 
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useAppDispatch();
   const location = useLocation();
 
   const id = data._id;

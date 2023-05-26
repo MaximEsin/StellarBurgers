@@ -2,11 +2,11 @@ import React from 'react';
 import Loader from '../components/Loader';
 import styles from '../styles/Modal.module.css';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../hooks';
 
 const Ingredient = () => {
   const { _id } = useParams();
-  const { data } = useSelector((state: any) => state.dataReducer);
+  const { data } = useAppSelector((state: any) => state.dataReducer);
 
   if (data.length < 1) {
     return <Loader />;

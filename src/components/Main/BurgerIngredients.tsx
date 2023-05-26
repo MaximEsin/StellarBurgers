@@ -3,7 +3,7 @@ import Table from './Table';
 import styles from '../../styles/BurgerIngredients.module.css';
 import BurgerIngredient from './BurgerIngredient';
 import { useInView } from 'react-intersection-observer';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../hooks';
 import { FC } from 'react';
 
 interface IBurgerIngredients {
@@ -11,7 +11,7 @@ interface IBurgerIngredients {
 }
 
 const BurgerIngredients: FC<IBurgerIngredients> = ({ setActive }) => {
-  const { data } = useSelector((state: any) => state.dataReducer);
+  const { data } = useAppSelector((state: any) => state.dataReducer);
 
   const [bunRef, inBunView] = useInView({
     threshold: 0,
