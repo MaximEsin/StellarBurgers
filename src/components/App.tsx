@@ -97,7 +97,10 @@ function App() {
                   active={modalOrderActive}
                   setActive={setModalOrderActive}
                 >
-                  <IngredientDetails info={data} />
+                  <IngredientDetails
+                    info={data}
+                    setActive={setModalOrderActive}
+                  />
                 </Modal>
               }
             />

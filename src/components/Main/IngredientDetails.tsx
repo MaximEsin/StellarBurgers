@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from '../../styles/Modal.module.css';
 import { useAppSelector } from '../../hooks';
 import Loader from '../Loader';
@@ -6,10 +6,15 @@ import { FC } from 'react';
 
 interface IIngredientDetails {
   info: any;
+  setActive: any;
 }
 
-const IngredientDetails: FC<IIngredientDetails> = ({ info }) => {
+const IngredientDetails: FC<IIngredientDetails> = ({ info, setActive }) => {
   const data = useAppSelector((state: any) => state.ingredientReducer);
+
+  useEffect(() => {
+    setActive(true);
+  }, []);
 
   if (data.length < 1) {
     return <Loader />;
