@@ -58,18 +58,7 @@ function App() {
               />
             }
           />
-          <Route
-            path="/ingredients/:_id"
-            element={
-              <Modal
-                data={data}
-                active={modalOrderActive}
-                setActive={setModalOrderActive}
-              >
-                <IngredientDetails info={data} />
-              </Modal>
-            }
-          />
+
           <Route
             path="/register"
             element={<ProtectedSignedRouteElement element={<Registration />} />}
@@ -96,7 +85,7 @@ function App() {
             path="/profile"
             element={<ProtectedUnSignedRouteElement element={<Profile />} />}
           />
-          <Route path="/ingredient/:_id" element={<Ingredient />} />
+          <Route path="/ingredients/:_id" element={<Ingredient />} />
         </Routes>
         {background && (
           <Routes>
