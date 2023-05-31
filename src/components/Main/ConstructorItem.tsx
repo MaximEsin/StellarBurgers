@@ -5,14 +5,31 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../../styles/BurgerConstructor.module.css';
 import substract from '../../images/Subtract.svg';
-import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../hooks';
 import ConstructorItemWrapper from './ConstructorItemWrapper';
 import { REMOVE_ITEM } from '../../services/actions/constants';
 import { useDrag, useDrop } from 'react-dnd';
+import { FC } from 'react';
+import { AppDispatch } from '../../services/reducers';
 
-const ConstructorItem = ({ img, id, index, moveElement, data, place }) => {
-  const dispatch = useDispatch();
+interface IConstructorItem {
+  img?: any;
+  id?: any;
+  index?: number;
+  moveElement?: any;
+  data?: any;
+  place?: string;
+}
+
+const ConstructorItem: FC<IConstructorItem> = ({
+  img,
+  id,
+  index,
+  moveElement,
+  data,
+  place,
+}): any => {
+  const dispatch: AppDispatch = useAppDispatch();
 
   const [{ handlerId }, drop] = useDrop({
     accept: 'item',
@@ -21,19 +38,19 @@ const ConstructorItem = ({ img, id, index, moveElement, data, place }) => {
         handlerId: monitor.getHandlerId(),
       };
     },
-    hover(item, monitor) {
+    hover(item: any, monitor) {
       if (!ref.current) {
         return;
       }
       const dragIndex = item.index;
-      const hoverIndex = index;
+      const hoverIndex: any = index;
       if (dragIndex === hoverIndex) {
         return;
       }
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-      const clientOffset = monitor.getClientOffset();
+      const clientOffset: any = monitor.getClientOffset();
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return;
@@ -57,7 +74,7 @@ const ConstructorItem = ({ img, id, index, moveElement, data, place }) => {
       isDragging: monitor.isDragging(),
     }),
   });
-  const ref = React.useRef(null);
+  const ref: any = React.useRef(null);
 
   drag(drop(ref));
 
@@ -128,11 +145,6 @@ const ConstructorItem = ({ img, id, index, moveElement, data, place }) => {
       </>
     );
   }
-};
-
-ConstructorItem.propTypes = {
-  data: PropTypes.object,
-  place: PropTypes.string,
 };
 
 export default ConstructorItem;

@@ -1,13 +1,11 @@
-import { React } from 'react';
 import styles from '../../styles/BurgerConstructor.module.css';
 import ConstructorItem from './ConstructorItem';
 import {
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postOrder } from '../../services/actions/Modals';
-import PropTypes from 'prop-types';
 import Loader from '../Loader';
 import { useDrop, useDrag } from 'react-dnd';
 import { addItem } from '../../services/actions';
@@ -18,15 +16,21 @@ import { MOVE_CONSTRUCTOR_ITEM } from '../../services/actions/constants';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link, useLocation } from 'react-router-dom';
+import { FC } from 'react';
+import { AppDispatch } from '../../services/reducers';
 
-const BurgerConstructor = (props) => {
-  const { data, constructorData, bunInOrder } = useSelector(
-    (state) => state.dataReducer
+interface IBurgerConstructor {
+  setActive: any;
+}
+
+const BurgerConstructor: FC<IBurgerConstructor> = ({ setActive }) => {
+  const { data, constructorData, bunInOrder } = useAppSelector(
+    (state: any) => state.dataReducer
   );
   const navigate = useNavigate();
   const location = useLocation();
 
-  const moveElement = useCallback((dragIndex, hoverIndex) => {
+  const moveElement = useCallback((dragIndex: number, hoverIndex: number) => {
     dispatch({
       type: MOVE_CONSTRUCTOR_ITEM,
       dragIndex,
@@ -34,11 +38,11 @@ const BurgerConstructor = (props) => {
     });
   }, []);
 
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useAppDispatch();
 
   const [, drop] = useDrop({
     accept: 'ingredient',
-    drop(itemId) {
+    drop(itemId: string) {
       const uniqueId = uuidv4();
       dispatch(addItem(itemId, uniqueId));
     },
@@ -48,7 +52,7 @@ const BurgerConstructor = (props) => {
     return <Loader />;
   } else {
     const ids = [data[0]._id, data[0]._id];
-    let priceArray = [];
+    let priceArray: [number?, number?] = [];
     if (bunInOrder.length > 0) {
       priceArray = [bunInOrder[0].price, bunInOrder[0].price];
     }
@@ -64,7 +68,7 @@ const BurgerConstructor = (props) => {
 
     const handleButtonClick = () => {
       if (localStorage.refreshToken) {
-        props.setActive(true);
+        setActive(true);
         dispatch(postOrder(ids));
       } else {
         navigate('/login', { replace: true });
@@ -77,7 +81,7 @@ const BurgerConstructor = (props) => {
           {announce}
           <ConstructorItem data={bunInOrder[0]} place="top" />
           <div className={styles.scroll}>
-            {constructorData.map((item, index) => {
+            {constructorData.map((item: any, index: number) => {
               if (item.type !== 'bun') {
                 ids.push(item._id);
                 priceArray.push(item.price);
@@ -89,7 +93,6 @@ const BurgerConstructor = (props) => {
                     moveElement={moveElement}
                     index={index}
                     id={item._id}
-                    element={item}
                   />
                 );
               }
@@ -101,13 +104,13 @@ const BurgerConstructor = (props) => {
           <p className="text text_type_digits-medium mr-2">
             <TotalPrice price={priceArray} />
           </p>
-          <CurrencyIcon />
+          <CurrencyIcon type="primary" />
           <div className={styles.buttonWrapper}>
             <Button
               htmlType="button"
               type="primary"
               size="large"
-              onClick={() => {
+              onClick={(): void => {
                 handleButtonClick();
               }}
             >
@@ -118,10 +121,6 @@ const BurgerConstructor = (props) => {
       </section>
     );
   }
-};
-
-BurgerConstructor.propTypes = {
-  setActive: PropTypes.func.isRequired,
 };
 
 export default BurgerConstructor;

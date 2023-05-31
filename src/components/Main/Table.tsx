@@ -1,19 +1,25 @@
 import React, { useEffect } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../../styles/BurgerIngredients.module.css';
-import PropTypes from 'prop-types';
+import { FC } from 'react';
 
-const Table = (props) => {
-  const [current, setCurrent] = React.useState('one');
+interface ITable {
+  bun: boolean;
+  sauce: boolean;
+  main: boolean;
+}
+
+const Table: FC<ITable> = ({ bun, sauce, main }) => {
+  const [current, setCurrent] = React.useState<string>('one');
   useEffect(() => {
-    if (props.bun) {
+    if (bun) {
       setCurrent('one');
-    } else if (props.sauce) {
+    } else if (sauce) {
       setCurrent('two');
-    } else if (props.main) {
+    } else if (main) {
       setCurrent('three');
     }
-  }, [props]);
+  }, [bun, sauce, main]);
 
   return (
     <div className={styles.tab}>
@@ -28,12 +34,6 @@ const Table = (props) => {
       </Tab>
     </div>
   );
-};
-
-Table.propTypes = {
-  bun: PropTypes.bool.isRequired,
-  sauce: PropTypes.bool.isRequired,
-  main: PropTypes.bool.isRequired,
 };
 
 export default Table;

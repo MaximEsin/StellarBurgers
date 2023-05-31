@@ -7,7 +7,7 @@ import {
 
 export const ingredientReducer = (
   state = { data: {}, dataRequest: false, dataFailed: false },
-  action
+  action: any
 ) => {
   switch (action.type) {
     case STORE_INGREDIENT: {
@@ -25,7 +25,7 @@ export const ingredientReducer = (
 
 export const orderReducer = (
   state = { number: 0, dataRequest: false, dataFailed: false },
-  action
+  action: any
 ) => {
   switch (action.type) {
     case POST_ORDER: {

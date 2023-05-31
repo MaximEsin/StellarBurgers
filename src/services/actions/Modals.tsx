@@ -5,9 +5,10 @@ import {
   POST_FAILED,
 } from './constants';
 import { request } from '../../utils';
+import { AppDispatch } from '../reducers';
 
-export function getIngredient(item) {
-  return function (dispatch) {
+export function getIngredient(item: any) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: STORE_INGREDIENT,
       info: item,
@@ -15,8 +16,8 @@ export function getIngredient(item) {
   };
 }
 
-export function postOrder(ids) {
-  return function (dispatch) {
+export function postOrder(ids: any) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: POST_ORDER,
     });
@@ -36,7 +37,7 @@ export function postOrder(ids) {
           number: res.order.number,
         });
       })
-      .catch((err) => {
+      .catch(() => {
         dispatch({
           type: POST_FAILED,
         });

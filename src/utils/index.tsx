@@ -1,14 +1,14 @@
+import { FormEvent } from 'react';
 import { baseUrl } from '../services/actions/constants';
-import { Navigate } from 'react-router-dom';
 
-export function checkResponse(res) {
+export function checkResponse(res: Response) {
   if (res.ok) {
     return res.json();
   }
   return Promise.reject(`Ошибка ${res.status}`);
 }
 
-export function request(endPoint, options) {
+export function request(endPoint: string, options?: any) {
   return fetch(`${baseUrl}${endPoint}`, options).then(checkResponse);
 }
 
@@ -29,10 +29,9 @@ export function refresh() {
     });
 }
 
-export const handleFormSubmit = (event) => {
+export const handleFormSubmit = (
+  event: FormEvent<HTMLFormElement>,
+  handler: any
+) => {
   event.preventDefault();
-};
-
-export const onClose = () => {
-  return <Navigate to="/" replace />;
 };

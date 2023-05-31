@@ -7,8 +7,23 @@ import styles from '../styles/App.module.css';
 import { refresh } from '../utils';
 import Modal from '../components/Modal';
 import OrderDetails from '../components/Main/OrderDetails';
+import { FC } from 'react';
 
-const Main = (props) => {
+interface IMain {
+  data: [];
+  modalIngredientActive: boolean;
+  modalOrderActive: boolean;
+  setModalIngredientActive: any;
+  setModalOrderActive: any;
+}
+
+const Main: FC<IMain> = ({
+  data,
+  modalIngredientActive,
+  modalOrderActive,
+  setModalIngredientActive,
+  setModalOrderActive,
+}) => {
   useEffect(() => {
     if (!localStorage.accessToken && localStorage.refeshToken) {
       refresh();
@@ -18,16 +33,16 @@ const Main = (props) => {
   return (
     <main className={styles.main}>
       <Modal
-        data={props.data}
-        active={props.modalIngredientActive}
-        setActive={props.setModalIngredientActive}
+        data={data}
+        active={modalIngredientActive}
+        setActive={setModalIngredientActive}
       >
         <OrderDetails />
       </Modal>
       <div className={styles.container}>
         <DndProvider backend={HTML5Backend}>
-          <BurgerIngredients setActive={props.setModalOrderActive} />
-          <BurgerConstructor setActive={props.setModalIngredientActive} />
+          <BurgerIngredients setActive={setModalOrderActive} />
+          <BurgerConstructor setActive={setModalIngredientActive} />
         </DndProvider>
       </div>
     </main>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/App.module.css';
 import Header from './Header';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { getData } from '../services/actions';
 import Loader from './Loader';
 import Main from '../pages/Main';
@@ -17,19 +17,21 @@ import Ingredient from '../pages/Ingredient';
 import { useLocation } from 'react-router-dom';
 import Modal from './Modal';
 import IngredientDetails from './Main/IngredientDetails';
+import { AppDispatch } from '../services/reducers';
 
 function App() {
-  const [modalIngredientActive, setModalIngredientActive] = useState(false);
-  const [modalOrderActive, setModalOrderActive] = useState(false);
+  const [modalIngredientActive, setModalIngredientActive] =
+    useState<boolean>(false);
+  const [modalOrderActive, setModalOrderActive] = useState<boolean>(false);
 
-  const { data, dataRequest, dataFailed } = useSelector(
-    (state) => state.dataReducer
+  const { data, dataRequest, dataFailed } = useAppSelector(
+    (state: any) => state.dataReducer
   );
 
   const location = useLocation();
   const background = location.state && location.state.background;
 
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getData());
@@ -42,7 +44,7 @@ function App() {
   } else {
     return (
       <div className={styles.App}>
-        <Header constructor={constructor} />
+        <Header />
         <Routes location={background || location}>
           <Route
             path="/"
@@ -56,18 +58,7 @@ function App() {
               />
             }
           />
-          <Route
-            path="/ingredients/:_id"
-            element={
-              <Modal
-                data={data}
-                active={modalOrderActive}
-                setActive={setModalOrderActive}
-              >
-                <IngredientDetails data={data} />
-              </Modal>
-            }
-          />
+
           <Route
             path="/register"
             element={<ProtectedSignedRouteElement element={<Registration />} />}
@@ -94,7 +85,7 @@ function App() {
             path="/profile"
             element={<ProtectedUnSignedRouteElement element={<Profile />} />}
           />
-          <Route path="/ingredient/:_id" element={<Ingredient />} />
+          <Route path="/ingredients/:_id" element={<Ingredient />} />
         </Routes>
         {background && (
           <Routes>
@@ -106,7 +97,10 @@ function App() {
                   active={modalOrderActive}
                   setActive={setModalOrderActive}
                 >
-                  <IngredientDetails data={data} />
+                  <IngredientDetails
+                    info={data}
+                    setActive={setModalOrderActive}
+                  />
                 </Modal>
               }
             />

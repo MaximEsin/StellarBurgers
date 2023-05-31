@@ -7,9 +7,10 @@ import {
   REMOVE_ITEM,
 } from './constants';
 import { request } from '../../utils';
+import { AppDispatch } from '../reducers';
 
 export function getData() {
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: GET_DATA,
     });
@@ -29,8 +30,8 @@ export function getData() {
   };
 }
 
-export function addItem(itemId, uniqueId) {
-  return function (dispatch) {
+export function addItem(itemId: string, uniqueId: string) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: ADD_ITEM,
       id: itemId,
@@ -39,8 +40,8 @@ export function addItem(itemId, uniqueId) {
   };
 }
 
-export function UpdatePrice(price) {
-  return function (dispatch) {
+export function UpdatePrice(price: string) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: UPDATE_PRICE,
       price: price,
@@ -48,8 +49,8 @@ export function UpdatePrice(price) {
   };
 }
 
-export function RemoveItem(uniqueId) {
-  return function (dispatch) {
+export function RemoveItem(uniqueId: string) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: REMOVE_ITEM,
       id: uniqueId,

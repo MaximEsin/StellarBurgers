@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from '../../styles/Modal.module.css';
-import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../hooks';
 import Loader from '../Loader';
+import { FC } from 'react';
 
-const IngredientDetails = (props) => {
-  const data = useSelector((state) => state.ingredientReducer);
+interface IIngredientDetails {
+  info: any;
+  setActive: any;
+}
 
-  if (props.data.length < 1) {
+const IngredientDetails: FC<IIngredientDetails> = ({ info, setActive }) => {
+  const data = useAppSelector((state: any) => state.ingredientReducer);
+
+  useEffect(() => {
+    setActive(true);
+  }, []);
+
+  if (data.length < 1) {
     return <Loader />;
   } else {
     return (
@@ -60,11 +69,6 @@ const IngredientDetails = (props) => {
       </>
     );
   }
-};
-
-IngredientDetails.propTypes = {
-  data: PropTypes.array.isRequired,
-  setActive: PropTypes.func,
 };
 
 export default IngredientDetails;
