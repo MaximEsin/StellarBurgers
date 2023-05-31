@@ -31,12 +31,24 @@ const Header = () => {
               </p>
             </div>
           </Link>
-          <div className={styles.navItem + ' pt-4 pb-4 ml-5 mr-5'}>
-            <ListIcon type="secondary" />
-            <p className="text text_type_main-default text_color_inactive pl-2">
-              Лента заказов
-            </p>
-          </div>
+          <Link style={{ textDecoration: 'none' }} to="/feed">
+            <div className={styles.navItem + ' pt-4 pb-4 ml-5 mr-5'}>
+              <ListIcon
+                type={`${pathname === '/feed' ? 'primary' : 'secondary'}`}
+              />
+              <p
+                className={
+                  `${
+                    pathname === '/feed'
+                      ? styles.activeText
+                      : 'text_color_inactive'
+                  }` + ' text text_type_main-default pl-2'
+                }
+              >
+                Лента заказов
+              </p>
+            </div>
+          </Link>
         </div>
         <div className={styles.logo}>
           <Logo />

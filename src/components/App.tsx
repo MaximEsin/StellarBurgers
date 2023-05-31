@@ -18,6 +18,7 @@ import { useLocation } from 'react-router-dom';
 import Modal from './Modal';
 import IngredientDetails from './Main/IngredientDetails';
 import { AppDispatch } from '../services/reducers';
+import Feed from '../pages/Feed';
 
 function App() {
   const [modalIngredientActive, setModalIngredientActive] =
@@ -58,7 +59,7 @@ function App() {
               />
             }
           />
-
+          <Route path="/feed" element={<Feed />}></Route>
           <Route
             path="/register"
             element={<ProtectedSignedRouteElement element={<Registration />} />}
