@@ -19,6 +19,7 @@ import Modal from './Modal';
 import IngredientDetails from './Main/IngredientDetails';
 import { AppDispatch } from '../services/reducers';
 import Feed from '../pages/Feed';
+import ProfileOrders from '../pages/ProfileOrders';
 
 function App() {
   const [modalIngredientActive, setModalIngredientActive] =
@@ -87,6 +88,12 @@ function App() {
             element={<ProtectedUnSignedRouteElement element={<Profile />} />}
           />
           <Route path="/ingredients/:_id" element={<Ingredient />} />
+          <Route
+            path="/profile/orders"
+            element={
+              <ProtectedUnSignedRouteElement element={<ProfileOrders />} />
+            }
+          />
         </Routes>
         {background && (
           <Routes>
