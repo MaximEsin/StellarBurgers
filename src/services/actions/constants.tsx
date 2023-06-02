@@ -10,5 +10,7 @@ export const POST_SUCCESS: string = 'POST_SUCCESS';
 export const POST_FAILED: string = 'POST_FAILED';
 export const MOVE_CONSTRUCTOR_ITEM: string = 'CONSTRUCTOR_ITEM';
 export const STORE_TOKEN: string = 'STORE_TOKEN';
+export const WS_CONNECTION_START: 'WS_CONNECTION_START' = 'WS_CONNECTION_START';
+export const WS_GET_MESSAGE: 'WS_GET_MESSAGE' = 'WS_GET_MESSAGE';
 
 export const baseUrl: string = 'https://norma.nomoreparties.space/api';

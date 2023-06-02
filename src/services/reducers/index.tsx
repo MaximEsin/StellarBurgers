@@ -11,6 +11,7 @@ import {
   MOVE_CONSTRUCTOR_ITEM,
 } from '../actions/constants';
 import update from 'immutability-helper';
+import { connectionReducer } from './Feed';
 
 const saveState = (state: any) => {
   try {
@@ -124,6 +125,7 @@ export const rootReducer = combineReducers({
   dataReducer,
   ingredientReducer,
   orderReducer,
+  connectionReducer,
 });
 
 const store = createStore(rootReducer, persistedStore, applyMiddleware(thunk));
