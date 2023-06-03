@@ -25,7 +25,7 @@ export function postOrder(ids: any) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        authorization: localStorage.refreshToken,
+        authorization: localStorage.accessToken,
       },
       body: JSON.stringify({
         ingredients: ids,

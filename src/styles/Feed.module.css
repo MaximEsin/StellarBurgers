@@ -92,6 +92,8 @@
 .imgContainer {
   position: relative;
   display: flex;
+  max-width: 410px;
+  overflow: hidden;
 }
 
 .img {
@@ -109,4 +111,8 @@
   flex-direction: column;
   flex-wrap: wrap;
   max-height: 170px;
+}
+
+.orderComplete {
+  color: #00cccc;
 }

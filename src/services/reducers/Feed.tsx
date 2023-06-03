@@ -1,8 +1,19 @@
-import { WS_CONNECTION_START, WS_GET_MESSAGE } from '../actions/constants';
-import store from '.';
+import {
+  WS_CONNECTION_START,
+  WS_GET_MESSAGE,
+  WS_CONNECTION_ORDERS_START,
+  WS_GET_ORDERS_MESSAGE,
+} from '../actions/constants';
 
 export const connectionReducer = (
-  state = { connection: '', orders: [], total: 0, totalToday: 0 },
+  state = {
+    connection: '',
+    orders: [],
+    total: 0,
+    totalToday: 0,
+    ordersConnection: '',
+    ordersProfile: [],
+  },
   action: any
 ) => {
   switch (action.type) {
@@ -18,6 +29,18 @@ export const connectionReducer = (
         orders: action.orders,
         total: action.total,
         totalToday: action.totalToday,
+      };
+    }
+    case WS_CONNECTION_ORDERS_START: {
+      return {
+        ...state,
+        ordersConnection: action.info,
+      };
+    }
+    case WS_GET_ORDERS_MESSAGE: {
+      return {
+        ...state,
+        ordersProfile: action.orders,
       };
     }
     default: {

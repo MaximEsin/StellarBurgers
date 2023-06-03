@@ -1,10 +1,24 @@
-import { WS_CONNECTION_START, WS_GET_MESSAGE } from './constants';
+import {
+  WS_CONNECTION_START,
+  WS_GET_MESSAGE,
+  WS_CONNECTION_ORDERS_START,
+  WS_GET_ORDERS_MESSAGE,
+} from './constants';
 import { AppDispatch } from '../reducers';
 
 export function startConnection(info: any) {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: WS_CONNECTION_START,
+      connection: info,
+    });
+  };
+}
+
+export function startOrdersConnection(info: any) {
+  return function (dispatch: AppDispatch) {
+    dispatch({
+      type: WS_CONNECTION_ORDERS_START,
       connection: info,
     });
   };
@@ -17,6 +31,15 @@ export function onMessage(orders: any, total: number, totalToday: number) {
       orders: orders,
       total: total,
       totalToday: totalToday,
+    });
+  };
+}
+
+export function onOrdersMessage(orders: any) {
+  return function (dispatch: AppDispatch) {
+    dispatch({
+      type: WS_GET_ORDERS_MESSAGE,
+      orders: orders,
     });
   };
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../styles/Feed.module.css';
 import ScrollList from '../components/Feed/ScrollList';
 import Stats from '../components/Feed/Stats';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../hooks';
 import {
   WS_CONNECTION_START,
   WS_GET_MESSAGE,
@@ -10,7 +10,7 @@ import {
 
 const Feed = () => {
   const ws = new WebSocket('wss://norma.nomoreparties.space/orders/all');
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   let data;
 
