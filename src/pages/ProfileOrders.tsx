@@ -7,8 +7,13 @@ import {
   WS_CONNECTION_ORDERS_START,
   WS_GET_ORDERS_MESSAGE,
 } from '../services/actions/constants';
+import { FC } from 'react';
 
-const ProfileOrders = () => {
+interface IProfileOrders {
+  setActive: any;
+}
+
+const ProfileOrders: FC<IProfileOrders> = ({ setActive }) => {
   const accessToken = localStorage.accessToken.slice(7);
   const ws = new WebSocket(
     `wss://norma.nomoreparties.space/orders?token=${accessToken}`
@@ -36,7 +41,7 @@ const ProfileOrders = () => {
       <div className={styles.sidebarContainer + ' mr-15'}>
         <ProfileSidebar />
       </div>
-      <ScrollList />
+      <ScrollList setActive={setActive} />
     </section>
   );
 };

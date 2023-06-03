@@ -4,8 +4,13 @@ import FeedCard from './FeedCard';
 import { useAppSelector } from '../../hooks';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { FC } from 'react';
 
-const ScrollList = () => {
+interface TScrollList {
+  setActive?: any;
+}
+
+const ScrollList: FC<TScrollList> = ({ setActive }) => {
   const { orders } = useAppSelector((state: any) => state.connectionReducer);
   const { data } = useAppSelector((state: any) => state.dataReducer);
   const { ordersProfile } = useAppSelector(
@@ -50,6 +55,9 @@ const ScrollList = () => {
     finalArr = profileArr;
   }
 
+  console.log(ordersProfile);
+  console.log(profileArr);
+
   return (
     <div className={styles.orders}>
       {finalData.map((order: TOrder, index: number) => {
@@ -68,6 +76,7 @@ const ScrollList = () => {
                   style={{ textDecoration: 'none', color: '#F2F2F3' }}
                 >
                   <FeedCard
+                    setActive={setActive}
                     createdAt={order.createdAt}
                     number={order.number}
                     name={order.name}

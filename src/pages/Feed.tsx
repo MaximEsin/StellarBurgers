@@ -7,8 +7,13 @@ import {
   WS_CONNECTION_START,
   WS_GET_MESSAGE,
 } from '../services/actions/constants';
+import { FC } from 'react';
 
-const Feed = () => {
+interface TFeed {
+  setActive: any;
+}
+
+const Feed: FC<TFeed> = ({ setActive }) => {
   const ws = new WebSocket('wss://norma.nomoreparties.space/orders/all');
   const dispatch = useAppDispatch();
 
@@ -35,7 +40,7 @@ const Feed = () => {
     <section className={styles.feedSection}>
       <h1 className="text text_type_main-large">Лента заказов</h1>
       <div className={styles.feedContainer}>
-        <ScrollList />
+        <ScrollList setActive={setActive} />
         <Stats />
       </div>
     </section>

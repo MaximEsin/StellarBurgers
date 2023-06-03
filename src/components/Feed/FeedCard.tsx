@@ -10,6 +10,7 @@ interface TFeedCard {
   name: string;
   ingredients: any;
   status?: string;
+  setActive: any;
 }
 
 const FeedCard: FC<TFeedCard> = ({
@@ -18,6 +19,7 @@ const FeedCard: FC<TFeedCard> = ({
   name,
   ingredients,
   status,
+  setActive,
 }) => {
   const images: any = [];
   const prices: any = [];
@@ -57,7 +59,7 @@ const FeedCard: FC<TFeedCard> = ({
   }
 
   return (
-    <div className={styles.orderCard}>
+    <div className={styles.orderCard} onClick={setActive(true)}>
       <div className={styles.dateContainer}>
         <p className="text text_type_main-medium">#{number}</p>
         <p className="text text_type_main-default text_color_inactive">

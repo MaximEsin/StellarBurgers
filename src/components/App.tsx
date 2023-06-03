@@ -26,6 +26,10 @@ function App() {
   const [modalIngredientActive, setModalIngredientActive] =
     useState<boolean>(false);
   const [modalOrderActive, setModalOrderActive] = useState<boolean>(false);
+  const [modalOrderItemActive, setModalOrderItemActive] =
+    useState<boolean>(false);
+  const [modalProfileOrderActive, setModalProfileOrderActive] =
+    useState<boolean>(false);
 
   const { data, dataRequest, dataFailed } = useAppSelector(
     (state: any) => state.dataReducer
@@ -61,7 +65,10 @@ function App() {
               />
             }
           />
-          <Route path="/feed" element={<Feed />}></Route>
+          <Route
+            path="/feed"
+            element={<Feed setActive={setModalOrderItemActive} />}
+          ></Route>
           <Route
             path="/register"
             element={<ProtectedSignedRouteElement element={<Registration />} />}
@@ -92,10 +99,18 @@ function App() {
           <Route
             path="/profile/orders"
             element={
-              <ProtectedUnSignedRouteElement element={<ProfileOrders />} />
+              <ProtectedUnSignedRouteElement
+                element={
+                  <ProfileOrders setActive={setModalProfileOrderActive} />
+                }
+              />
             }
           />
           <Route path="/feed/:_id" element={<Order />} />
+          <Route
+            path="/profile/orders/:_id"
+            element={<ProtectedUnSignedRouteElement element={<Order />} />}
+          />
         </Routes>
         {background && (
           <Routes>
@@ -111,6 +126,30 @@ function App() {
                     info={data}
                     setActive={setModalOrderActive}
                   />
+                </Modal>
+              }
+            />
+            <Route
+              path="/feed/:_id"
+              element={
+                <Modal
+                  data={data}
+                  active={modalOrderItemActive}
+                  setActive={setModalOrderItemActive}
+                >
+                  <Order />
+                </Modal>
+              }
+            />
+            <Route
+              path="/profile/orders/:_id"
+              element={
+                <Modal
+                  data={data}
+                  active={modalProfileOrderActive}
+                  setActive={setModalProfileOrderActive}
+                >
+                  <Order />
                 </Modal>
               }
             />

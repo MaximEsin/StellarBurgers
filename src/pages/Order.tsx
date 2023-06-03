@@ -8,15 +8,18 @@ import Loader from '../components/Loader';
 
 const Order = () => {
   const { _id } = useParams();
-  const { orders } = useAppSelector((state: any) => state.connectionReducer);
+  const { ordersProfile } = useAppSelector(
+    (state: any) => state.connectionReducer
+  );
   const { data } = useAppSelector((state: any) => state.dataReducer);
+  console.log(ordersProfile);
 
-  if (orders.length < 1) {
+  if (ordersProfile.length < 1) {
     return <Loader />;
   } else {
     return (
       <section className={styles.orderSection + ' mb-20'}>
-        {orders
+        {ordersProfile
           .filter((itm: any) => itm._id === _id)
           .map((item: any, index: number) => {
             const feedIds: any = item.ingredients;
