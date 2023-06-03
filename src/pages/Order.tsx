@@ -2,47 +2,95 @@ import React from 'react';
 import styles from '../styles/Order.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderItem from '../components/order/OrderItem';
+import { useParams } from 'react-router-dom';
+import { useAppSelector } from '../hooks';
+import Loader from '../components/Loader';
 
 const Order = () => {
-  return (
-    <section className={styles.orderSection + ' mb-20'}>
-      <div className={styles.orderContainer}>
-        <p className={styles.orderNumber + ' text text_type_digits-default'}>
-          #034533
-        </p>
-        <p className="text text_type_main-medium mb-3">
-          Black Hole Singularity острый бургер
-        </p>
-        <p
-          className={styles.orderStatus + ' text text_type_main-default mb-15'}
-        >
-          Выполнен
-        </p>
-        <p className="text text_type_main-medium mb-6">Состав:</p>
-        <div className={styles.ingredientsContainer + ' mt-6'}>
-          <div className={styles.scroll}>
-            <OrderItem />
-            <OrderItem />
-            <OrderItem />
-            <OrderItem />
-            <OrderItem />
-            <OrderItem />
-            <OrderItem />
-            <OrderItem />
-          </div>
-        </div>
-        <div className={styles.bottomContainer}>
-          <p className="text text_type_main-default text_color_inactive">
-            Вчера, 13:50
-          </p>
-          <div className={styles.priceContainer}>
-            <p className="text text_type_digits-default mr-2">510</p>
-            <CurrencyIcon type="primary" />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+  const { _id } = useParams();
+  const { orders } = useAppSelector((state: any) => state.connectionReducer);
+  const { data } = useAppSelector((state: any) => state.dataReducer);
+
+  if (orders.length < 1) {
+    return <Loader />;
+  } else {
+    return (
+      <section className={styles.orderSection + ' mb-20'}>
+        {orders
+          .filter((itm: any) => itm._id === _id)
+          .map((item: any, index: number) => {
+            const feedIds: any = item.ingredients;
+            const feedArr: any = [];
+            const priceArray: any = [];
+
+            feedIds.forEach((item: any) =>
+              feedArr.push(
+                data.filter((ingredient: any) => item.includes(ingredient._id))
+              )
+            );
+
+            feedArr.map((i: any) => {
+              priceArray.push(i[0].price);
+            });
+
+            const totalPrice = priceArray.reduce(
+              (a: number, b: number) => a + b
+            );
+
+            return (
+              <div key={index} className={styles.orderContainer}>
+                <p
+                  className={
+                    styles.orderNumber + ' text text_type_digits-default'
+                  }
+                >
+                  #{item.number}
+                </p>
+                <p className="text text_type_main-medium mb-3">{item.name}</p>
+                <p
+                  className={
+                    styles.orderStatus + ' text text_type_main-default mb-15'
+                  }
+                >
+                  {item.status}
+                </p>
+                <p className="text text_type_main-medium mb-6">Состав:</p>
+                <div className={styles.ingredientsContainer + ' mt-6'}>
+                  <div className={styles.scroll}>
+                    {feedArr.map((array: any, index: number) => {
+                      return (
+                        <OrderItem
+                          key={index}
+                          image={array[0].image}
+                          name={array[0].name}
+                          price={array[0].price}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+                <div className={styles.bottomContainer}>
+                  <p className="text text_type_main-default text_color_inactive">
+                    {new Date(item.createdAt).toLocaleString('ru', {
+                      day: '2-digit',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      month: 'long',
+                    })}
+                  </p>
+                  <div className={styles.priceContainer}>
+                    <p className="text text_type_digits-default mr-2">
+                      {totalPrice}
+                    </p>
+                    <CurrencyIcon type="primary" />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+      </section>
+    );
+  }
 };
 
 export default Order;

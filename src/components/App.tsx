@@ -95,7 +95,7 @@ function App() {
               <ProtectedUnSignedRouteElement element={<ProfileOrders />} />
             }
           />
-          <Route path="/order" element={<Order />} />
+          <Route path="/feed/:_id" element={<Order />} />
         </Routes>
         {background && (
           <Routes>

@@ -3,7 +3,7 @@ import styles from '../../styles/Feed.module.css';
 import FeedCard from './FeedCard';
 import { useAppSelector } from '../../hooks';
 import { useLocation } from 'react-router-dom';
-import Loader from '../Loader';
+import { Link } from 'react-router-dom';
 
 const ScrollList = () => {
   const { orders } = useAppSelector((state: any) => state.connectionReducer);
@@ -18,6 +18,7 @@ const ScrollList = () => {
     number: number;
     name: string;
     status?: string;
+    _id: string;
   }
   const feedIds: any = [];
   const feedArr: any = [];
@@ -56,14 +57,24 @@ const ScrollList = () => {
           <div key={index}>
             {finalArr.map((item: any, index: any) => {
               return (
-                <FeedCard
+                <Link
                   key={index}
-                  createdAt={order.createdAt}
-                  number={order.number}
-                  name={order.name}
-                  ingredients={item}
-                  status={order.status}
-                />
+                  to={
+                    location.pathname === '/feed'
+                      ? `/feed/${order._id}`
+                      : `/profile/orders/${order._id}`
+                  }
+                  state={{ background: location }}
+                  style={{ textDecoration: 'none', color: '#F2F2F3' }}
+                >
+                  <FeedCard
+                    createdAt={order.createdAt}
+                    number={order.number}
+                    name={order.name}
+                    ingredients={item}
+                    status={order.status}
+                  />
+                </Link>
               );
             })}
           </div>
