@@ -29,7 +29,7 @@ const ConstructorItem: FC<IConstructorItem> = ({
   data,
   place,
 }): any => {
-  const dispatch: AppDispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const [{ handlerId }, drop] = useDrop({
     accept: 'item',

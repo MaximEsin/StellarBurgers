@@ -32,13 +32,13 @@ function App() {
     useState<boolean>(false);
 
   const { data, dataRequest, dataFailed } = useAppSelector(
-    (state: any) => state.dataReducer
+    (state) => state.dataReducer
   );
 
   const location = useLocation();
   const background = location.state && location.state.background;
 
-  const dispatch: AppDispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getData());

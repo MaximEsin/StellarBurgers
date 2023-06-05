@@ -38,7 +38,7 @@ const BurgerConstructor: FC<IBurgerConstructor> = ({ setActive }) => {
     });
   }, []);
 
-  const dispatch: AppDispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const [, drop] = useDrop({
     accept: 'ingredient',

@@ -22,7 +22,7 @@ const BurgerIngredient: FC<IBurgerIngredient> = ({ data, setActive }) => {
     (state: any) => state.dataReducer
   );
 
-  const dispatch: AppDispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const location = useLocation();
 
   const id = data._id;

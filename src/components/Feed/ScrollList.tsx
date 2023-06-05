@@ -11,11 +11,9 @@ interface TScrollList {
 }
 
 const ScrollList: FC<TScrollList> = ({ setActive }) => {
-  const { orders } = useAppSelector((state: any) => state.connectionReducer);
+  const { orders } = useAppSelector((state) => state.connectionReducer);
   const { data } = useAppSelector((state: any) => state.dataReducer);
-  const { ordersProfile } = useAppSelector(
-    (state: any) => state.connectionReducer
-  );
+  const { ordersProfile } = useAppSelector((state) => state.connectionReducer);
   const location = useLocation();
 
   interface TOrder {

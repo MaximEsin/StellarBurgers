@@ -6,7 +6,7 @@ import Loader from '../Loader';
 
 const OrderDetails = () => {
   const { number, dataRequest, dataFailed } = useAppSelector(
-    (state: any) => state.orderReducer
+    (state) => state.orderReducer
   );
   if (dataFailed) {
     return <p>Произошла ошибка при получении данных</p>;

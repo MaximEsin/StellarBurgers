@@ -4,7 +4,7 @@ import { useAppSelector } from '../../hooks';
 
 const Stats = () => {
   const { orders, total, totalToday } = useAppSelector(
-    (state: any) => state.connectionReducer
+    (state) => state.connectionReducer
   );
   const done: any = [];
   const notDone: any = [];

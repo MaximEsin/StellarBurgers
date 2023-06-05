@@ -8,9 +8,7 @@ import Loader from '../components/Loader';
 
 const Order = () => {
   const { _id } = useParams();
-  const { ordersProfile } = useAppSelector(
-    (state: any) => state.connectionReducer
-  );
+  const { ordersProfile } = useAppSelector((state) => state.connectionReducer);
   const { data } = useAppSelector((state: any) => state.dataReducer);
   console.log(ordersProfile);
 
