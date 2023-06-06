@@ -17,7 +17,6 @@ import Ingredient from '../pages/Ingredient';
 import { useLocation } from 'react-router-dom';
 import Modal from './Modal';
 import IngredientDetails from './Main/IngredientDetails';
-import { AppDispatch } from '../services/reducers';
 import Feed from '../pages/Feed';
 import ProfileOrders from '../pages/ProfileOrders';
 import Order from '../pages/Order';

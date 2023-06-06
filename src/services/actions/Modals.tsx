@@ -7,16 +7,42 @@ import {
 import { request } from '../../utils';
 import { AppDispatch } from '../reducers';
 
-export function getIngredient(item: any) {
+export interface IStoreIngredientAction {
+  readonly type: typeof STORE_INGREDIENT;
+  readonly item: object;
+}
+
+export interface IPostOrderAction {
+  readonly type: typeof POST_ORDER;
+}
+
+export interface IPostSuccessAction {
+  readonly type: typeof POST_SUCCESS;
+  readonly number: number;
+}
+
+export interface IPostFailedAction {
+  readonly type: typeof POST_FAILED;
+}
+
+interface Array {}
+
+export type TModalsActions =
+  | IStoreIngredientAction
+  | IPostOrderAction
+  | IPostSuccessAction
+  | IPostFailedAction;
+
+export function getIngredient(item: object) {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: STORE_INGREDIENT,
-      info: item,
+      item: item,
     });
   };
 }
 
-export function postOrder(ids: any) {
+export function postOrder(ids: Array) {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: POST_ORDER,

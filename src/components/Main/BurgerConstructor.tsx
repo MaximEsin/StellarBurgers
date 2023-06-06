@@ -17,7 +17,6 @@ import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link, useLocation } from 'react-router-dom';
 import { FC } from 'react';
-import { AppDispatch } from '../../services/reducers';
 
 interface IBurgerConstructor {
   setActive: any;

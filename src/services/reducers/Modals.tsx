@@ -5,15 +5,41 @@ import {
   POST_FAILED,
 } from '../actions/constants';
 
+import { TModalsActions } from '../actions/Modals';
+
+type TIngredientState = {
+  data: object;
+  dataRequest: boolean;
+  dataFailed: boolean;
+};
+
+type IOrderState = {
+  number: number;
+  dataRequest: boolean;
+  dataFailed: boolean;
+};
+
+const orderInitialState: IOrderState = {
+  number: 0,
+  dataRequest: false,
+  dataFailed: false,
+};
+
+const ingredientInitialState: TIngredientState = {
+  data: {},
+  dataRequest: false,
+  dataFailed: false,
+};
+
 export const ingredientReducer = (
-  state = { data: {}, dataRequest: false, dataFailed: false },
-  action: any
+  state = ingredientInitialState,
+  action: TModalsActions
 ) => {
   switch (action.type) {
     case STORE_INGREDIENT: {
       return {
         ...state,
-        data: action.info,
+        data: action.item,
         dataRequest: false,
       };
     }
@@ -24,8 +50,8 @@ export const ingredientReducer = (
 };
 
 export const orderReducer = (
-  state = { number: 0, dataRequest: false, dataFailed: false },
-  action: any
+  state = orderInitialState,
+  action: TModalsActions
 ) => {
   switch (action.type) {
     case POST_ORDER: {

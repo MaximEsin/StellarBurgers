@@ -10,7 +10,6 @@ const Order = () => {
   const { _id } = useParams();
   const { ordersProfile } = useAppSelector((state) => state.connectionReducer);
   const { data } = useAppSelector((state: any) => state.dataReducer);
-  console.log(ordersProfile);
 
   if (ordersProfile.length < 1) {
     return <Loader />;

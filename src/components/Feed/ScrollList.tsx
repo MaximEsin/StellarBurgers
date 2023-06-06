@@ -53,9 +53,6 @@ const ScrollList: FC<TScrollList> = ({ setActive }) => {
     finalArr = profileArr;
   }
 
-  console.log(ordersProfile);
-  console.log(profileArr);
-
   return (
     <div className={styles.orders}>
       {finalData.map((order: TOrder, index: number) => {
