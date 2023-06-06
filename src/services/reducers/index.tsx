@@ -12,6 +12,7 @@ import {
 } from '../actions/constants';
 import update from 'immutability-helper';
 import { connectionReducer } from './Feed';
+import { TIndexActions } from '../actions';
 
 const saveState = (state: any) => {
   try {
@@ -34,7 +35,16 @@ const loadState = () => {
 
 const persistedStore = loadState();
 
-const initialState = {
+type IDataState = {
+  dataRequest: boolean;
+  dataFailed: boolean;
+  data: [];
+  constructorData: [];
+  buns: [];
+  bunInOrder: [];
+};
+
+const initialState: IDataState = {
   dataRequest: false,
   dataFailed: false,
   data: [],
@@ -43,7 +53,7 @@ const initialState = {
   bunInOrder: [],
 };
 
-export const dataReducer = (state = initialState, action: any) => {
+export const dataReducer = (state = initialState, action: TIndexActions) => {
   switch (action.type) {
     case GET_DATA: {
       return {
