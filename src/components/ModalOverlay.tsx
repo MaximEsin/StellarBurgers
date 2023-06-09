@@ -2,6 +2,8 @@ import React, { SyntheticEvent, useEffect } from 'react';
 import styles from '../styles/Modal.module.css';
 import { useNavigate } from 'react-router-dom';
 import { FC } from 'react';
+import { useLocation } from 'react-router-dom';
+import { onClose } from '../utils';
 
 interface IModalOverlay {
   active: boolean;
@@ -11,6 +13,7 @@ interface IModalOverlay {
 
 const ModalOverlay: FC<IModalOverlay> = ({ active, children, setActive }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const isOpen = active;
 
   useEffect(() => {
@@ -19,7 +22,7 @@ const ModalOverlay: FC<IModalOverlay> = ({ active, children, setActive }) => {
     }
     function closeByEscape(evt: KeyboardEvent) {
       if (evt.key === 'Escape') {
-        navigate('/', { replace: true });
+        onClose(location.pathname, navigate(-1));
         setActive(false);
       }
     }
@@ -35,7 +38,7 @@ const ModalOverlay: FC<IModalOverlay> = ({ active, children, setActive }) => {
       onClick={(event: SyntheticEvent) => {
         if (event.target === event.currentTarget) {
           setActive(false);
-          navigate('/', { replace: true });
+          onClose(location.pathname, navigate(-1));
         }
       }}
     >
