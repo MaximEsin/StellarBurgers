@@ -1,65 +1,33 @@
 import React, { ChangeEvent } from 'react';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../styles/Profile.module.css';
-import { request } from '../utils';
 import { useEffect, useState } from 'react';
-import { refresh } from '../utils';
+import { refresh } from '../services/actions/Auth';
 import ProfileSidebar from '../components/Profile/ProfileSidebar';
+import { useAppSelector } from '../hooks';
+import { getUserInfo } from '../services/actions/Auth';
+import { editUserInfo } from '../services/actions/Auth';
 
 const Profile = () => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const { isLoggedIn, token } = useAppSelector((state) => state.tokenReducer);
 
   useEffect(() => {
-    if (!sessionStorage.accessToken && sessionStorage.refreshToken) {
+    if (!isLoggedIn && sessionStorage.refeshToken) {
       refresh();
     }
   }, []);
 
-  const getUserInfo = () => {
-    request('/auth/user', {
-      method: 'GET',
-      headers: {
-        authorization: sessionStorage.accessToken,
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => {
-        setName(res.user.name);
-        setEmail(res.user.email);
-        setPassword(password);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const editUserInfo = (name: string, email: string, password: string) => {
-    request('/auth/user', {
-      method: 'PATCH',
-      headers: {
-        authorization: sessionStorage.accessToken,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password,
-      }),
-    }).catch((err) => {
-      console.log(err);
-    });
-  };
-
   useEffect(() => {
-    getUserInfo();
+    getUserInfo(setName, setEmail, setPassword, password, token);
   }, []);
 
   useEffect(() => {
     function onEnter(evt: KeyboardEvent) {
       if (evt.key === 'Enter') {
-        editUserInfo(name, email, password);
+        editUserInfo(name, email, password, token);
       }
     }
     document.addEventListener('keydown', onEnter);

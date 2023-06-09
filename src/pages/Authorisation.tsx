@@ -9,11 +9,13 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Auth } from '../services/actions/Auth';
 import { handleFormSubmit } from '../utils';
+import { useAppDispatch } from '../hooks';
 
 const Authorisation = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   return (
     <section className={styles.main}>
@@ -25,7 +27,7 @@ const Authorisation = () => {
           onSubmit={(event: FormEvent<HTMLFormElement>) =>
             handleFormSubmit(
               event,
-              Auth(email, password, navigate('/', { replace: true }))
+              dispatch(Auth(email, password, navigate('/', { replace: true })))
             )
           }
         >

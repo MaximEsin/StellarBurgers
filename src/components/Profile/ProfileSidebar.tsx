@@ -4,10 +4,13 @@ import { request } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks';
+import { REMOVE_TOKEN } from '../../services/actions/constants';
 
 const ProfileSidebar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const dispatch = useAppDispatch();
 
   const logOut = () => {
     request('/auth/logout', {
@@ -22,7 +25,7 @@ const ProfileSidebar = () => {
     })
       .then(() => {
         navigate('/', { replace: true });
-        sessionStorage.removeItem('accessToken');
+        dispatch({ type: REMOVE_TOKEN });
         sessionStorage.removeItem('refreshToken');
       })
       .catch((err) => {

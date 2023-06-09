@@ -8,13 +8,15 @@ import {
   WS_GET_ORDERS_MESSAGE,
 } from '../services/actions/constants';
 import { FC } from 'react';
+import { useAppSelector } from '../hooks';
 
 interface IProfileOrders {
   setActive: any;
 }
 
 const ProfileOrders: FC<IProfileOrders> = ({ setActive }) => {
-  const accessToken = sessionStorage.accessToken.slice(7);
+  const { token } = useAppSelector((state) => state.tokenReducer);
+  const accessToken = token.slice(7);
   const ws = new WebSocket(
     `wss://norma.nomoreparties.space/orders?token=${accessToken}`
   );

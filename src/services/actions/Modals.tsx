@@ -6,6 +6,7 @@ import {
 } from './constants';
 import { request } from '../../utils';
 import { AppDispatch } from '../reducers';
+import { useAppSelector } from '../../hooks';
 
 export interface IStoreIngredientAction {
   readonly type: typeof STORE_INGREDIENT;
@@ -42,7 +43,7 @@ export function getIngredient(item: object) {
   };
 }
 
-export function postOrder(ids: Array) {
+export function postOrder(ids: Array, token: string) {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: POST_ORDER,
@@ -51,7 +52,7 @@ export function postOrder(ids: Array) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        authorization: sessionStorage.accessToken,
+        authorization: token,
       },
       body: JSON.stringify({
         ingredients: ids,

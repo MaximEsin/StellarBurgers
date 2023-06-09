@@ -15,6 +15,7 @@ import update from 'immutability-helper';
 import { connectionReducer } from './Feed';
 import { TIndexActions } from '../actions';
 import { socketMiddleware } from '../middleware';
+import { tokenReducer } from './Auth';
 
 const saveState = (state: any) => {
   try {
@@ -138,6 +139,7 @@ export const rootReducer = combineReducers({
   ingredientReducer,
   orderReducer,
   connectionReducer,
+  tokenReducer,
 });
 
 const store = createStore(

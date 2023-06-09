@@ -26,6 +26,7 @@ const BurgerConstructor: FC<IBurgerConstructor> = ({ setActive }) => {
   const { data, constructorData, bunInOrder } = useAppSelector(
     (state: any) => state.dataReducer
   );
+  const { token } = useAppSelector((state) => state.tokenReducer);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -68,7 +69,7 @@ const BurgerConstructor: FC<IBurgerConstructor> = ({ setActive }) => {
     const handleButtonClick = () => {
       if (sessionStorage.refreshToken) {
         setActive(true);
-        dispatch(postOrder(ids));
+        dispatch(postOrder(ids, token));
       } else {
         navigate('/login', { replace: true });
       }
