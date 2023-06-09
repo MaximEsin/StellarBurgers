@@ -59,7 +59,7 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
           dispatch({ type: WS_CONNECTION_ERROR, payload: event });
         };
         socket.onmessage = (event) => {
-          const { data } = event;
+          const data = JSON.parse(event.data);
           dispatch({ type: WS_GET_MESSAGE, payload: data });
         };
         socket.onclose = (event) => {

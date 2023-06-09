@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { ingredientReducer, orderReducer } from './Modals';
 import {
@@ -13,11 +14,12 @@ import {
 import update from 'immutability-helper';
 import { connectionReducer } from './Feed';
 import { TIndexActions } from '../actions';
+import { socketMiddleware } from '../middleware';
 
 const saveState = (state: any) => {
   try {
     const serializedState = JSON.stringify(state);
-    localStorage.setItem('state', serializedState);
+    sessionStorage.setItem('state', serializedState);
   } catch (err) {
     console.log(err);
   }
@@ -25,7 +27,7 @@ const saveState = (state: any) => {
 
 const loadState = () => {
   try {
-    const serializedState = localStorage.getItem('state');
+    const serializedState = sessionStorage.getItem('state');
     if (!serializedState) return undefined;
     else return JSON.parse(serializedState);
   } catch (err) {
@@ -138,7 +140,14 @@ export const rootReducer = combineReducers({
   connectionReducer,
 });
 
-const store = createStore(rootReducer, persistedStore, applyMiddleware(thunk));
+const store = createStore(
+  rootReducer,
+  persistedStore,
+  composeWithDevTools(
+    applyMiddleware(socketMiddleware('wss://norma.nomoreparties.space/orders')),
+    applyMiddleware(thunk)
+  )
+);
 
 store.subscribe(() => {
   saveState(store.getState());

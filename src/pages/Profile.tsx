@@ -12,7 +12,7 @@ const Profile = () => {
   const [password, setPassword] = useState<string>('');
 
   useEffect(() => {
-    if (!localStorage.accessToken && localStorage.refreshToken) {
+    if (!sessionStorage.accessToken && sessionStorage.refreshToken) {
       refresh();
     }
   }, []);
@@ -21,7 +21,7 @@ const Profile = () => {
     request('/auth/user', {
       method: 'GET',
       headers: {
-        authorization: localStorage.accessToken,
+        authorization: sessionStorage.accessToken,
         'Content-Type': 'application/json',
       },
     })
@@ -39,7 +39,7 @@ const Profile = () => {
     request('/auth/user', {
       method: 'PATCH',
       headers: {
-        authorization: localStorage.accessToken,
+        authorization: sessionStorage.accessToken,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({

@@ -7,40 +7,13 @@ import {
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { request } from '../utils';
+import { Auth } from '../services/actions/Auth';
 import { handleFormSubmit } from '../utils';
 
 const Authorisation = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const navigate = useNavigate();
-
-  const auth = (email: string, password: string): void => {
-    request('/auth/login', {
-      method: 'POST',
-      headers: {
-        authorization: 'd5b34af3-ad0b-4c78-bdcc-85f9d783b0bc',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    })
-      .then((res) => {
-        if (res.success) {
-          navigate('/', { replace: true });
-          localStorage.setItem('accessToken', res.accessToken);
-          localStorage.setItem('refreshToken', res.refreshToken);
-          setTimeout(() => {
-            localStorage.removeItem('accessToken');
-          }, 1200000);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   return (
     <section className={styles.main}>
@@ -50,7 +23,10 @@ const Authorisation = () => {
         </h1>
         <form
           onSubmit={(event: FormEvent<HTMLFormElement>) =>
-            handleFormSubmit(event, auth(email, password))
+            handleFormSubmit(
+              event,
+              Auth(email, password, navigate('/', { replace: true }))
+            )
           }
         >
           <Input

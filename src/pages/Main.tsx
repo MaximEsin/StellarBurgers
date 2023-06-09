@@ -25,7 +25,7 @@ const Main: FC<IMain> = ({
   setModalOrderActive,
 }) => {
   useEffect(() => {
-    if (!localStorage.accessToken && localStorage.refeshToken) {
+    if (!sessionStorage.accessToken && sessionStorage.refeshToken) {
       refresh();
     }
   }, []);

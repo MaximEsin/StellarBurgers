@@ -17,13 +17,13 @@ const ProfileSidebar = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        token: localStorage.refreshToken,
+        token: sessionStorage.refreshToken,
       }),
     })
       .then(() => {
         navigate('/', { replace: true });
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
+        sessionStorage.removeItem('accessToken');
+        sessionStorage.removeItem('refreshToken');
       })
       .catch((err) => {
         console.log(err);

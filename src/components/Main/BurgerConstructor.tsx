@@ -66,7 +66,7 @@ const BurgerConstructor: FC<IBurgerConstructor> = ({ setActive }) => {
     }
 
     const handleButtonClick = () => {
-      if (localStorage.refreshToken) {
+      if (sessionStorage.refreshToken) {
         setActive(true);
         dispatch(postOrder(ids));
       } else {

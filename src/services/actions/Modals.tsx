@@ -51,7 +51,7 @@ export function postOrder(ids: Array) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        authorization: localStorage.accessToken,
+        authorization: sessionStorage.accessToken,
       },
       body: JSON.stringify({
         ingredients: ids,

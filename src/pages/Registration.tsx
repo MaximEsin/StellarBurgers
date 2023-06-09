@@ -5,7 +5,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../styles/Registration.module.css';
 import { Link } from 'react-router-dom';
-import { request } from '../utils';
+import { register } from '../services/actions/Auth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { handleFormSubmit } from '../utils';
@@ -16,29 +16,6 @@ const Registration = () => {
   const [name, setName] = useState<string>('');
   const navigate = useNavigate();
 
-  const register = (email: string, password: string, name: string) => {
-    request('/auth/register', {
-      method: 'POST',
-      headers: {
-        authorization: 'd5b34af3-ad0b-4c78-bdcc-85f9d783b0bc',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        name: name,
-      }),
-    })
-      .then((res) => {
-        if (res.success) {
-          navigate('/login', { replace: true });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   return (
     <section className={styles.main}>
       <div className={styles.container}>
@@ -47,7 +24,15 @@ const Registration = () => {
         </h1>
         <form
           onSubmit={(event: FormEvent<HTMLFormElement>) =>
-            handleFormSubmit(event, register(email, password, name))
+            handleFormSubmit(
+              event,
+              register(
+                email,
+                password,
+                name,
+                navigate('/login', { replace: true })
+              )
+            )
           }
         >
           <Input

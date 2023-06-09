@@ -14,7 +14,7 @@ interface IProfileOrders {
 }
 
 const ProfileOrders: FC<IProfileOrders> = ({ setActive }) => {
-  const accessToken = localStorage.accessToken.slice(7);
+  const accessToken = sessionStorage.accessToken.slice(7);
   const ws = new WebSocket(
     `wss://norma.nomoreparties.space/orders?token=${accessToken}`
   );

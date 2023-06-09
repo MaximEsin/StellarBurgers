@@ -20,10 +20,10 @@ export function refresh() {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      token: localStorage.refreshToken,
+      token: sessionStorage.refreshToken,
     }),
   })
-    .then((res) => localStorage.setItem('accessToken', res.accessToken))
+    .then((res) => sessionStorage.setItem('accessToken', res.accessToken))
     .catch((err) => {
       console.log(err);
     });

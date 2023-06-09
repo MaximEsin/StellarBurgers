@@ -37,7 +37,6 @@ export interface IUpdatePriceAction {
 export interface IRemoveItemAction {
   readonly type: typeof REMOVE_ITEM;
   readonly id?: any;
-  readonly uniqueId: string;
 }
 
 export interface IMoveConstructorItemAction {
