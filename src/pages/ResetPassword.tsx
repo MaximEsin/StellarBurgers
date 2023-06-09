@@ -5,7 +5,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../styles/Registration.module.css';
 import { Form, Link } from 'react-router-dom';
-import { request } from '../utils';
+import { resetPassword } from '../services/actions/Auth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { handleFormSubmit } from '../utils';
@@ -17,24 +17,6 @@ const ResetPassword = () => {
   const [code, setCode] = useState<string>('');
   const navigate = useNavigate();
   const prevRoute = useLocation();
-
-  const resetPassword = (password: string, code: string) => {
-    request('/password-reset/reset', {
-      method: 'POST',
-      headers: {
-        authorization: 'd5b34af3-ad0b-4c78-bdcc-85f9d783b0bc',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        password: password,
-        token: code,
-      }),
-    })
-      .then(() => navigate('/login', { replace: true }))
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   if (
     prevRoute.state &&
@@ -49,7 +31,14 @@ const ResetPassword = () => {
             </h1>
             <form
               onSubmit={(event: FormEvent<HTMLFormElement>) =>
-                handleFormSubmit(event, resetPassword(password, code))
+                handleFormSubmit(
+                  event,
+                  resetPassword(
+                    password,
+                    code,
+                    navigate('/login', { replace: true })
+                  )
+                )
               }
             >
               <Input

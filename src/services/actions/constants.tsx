@@ -26,3 +26,4 @@ export const WS_GET_ORDERS_MESSAGE: 'WS_GET_ORDERS_MESSAGE' =
   'WS_GET_ORDERS_MESSAGE';
 
 export const baseUrl: string = 'https://norma.nomoreparties.space/api';
+export const myToken: string = 'd5b34af3-ad0b-4c78-bdcc-85f9d783b0bc';
