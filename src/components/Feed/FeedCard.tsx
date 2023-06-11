@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from '../../styles/Feed.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { FC } from 'react';
@@ -59,7 +59,7 @@ const FeedCard: FC<TFeedCard> = ({
   }
 
   return (
-    <div className={styles.orderCard} onClick={setActive(true)}>
+    <div className={styles.orderCard} onClick={() => setActive(true)}>
       <div className={styles.dateContainer}>
         <p className="text text_type_main-medium">#{number}</p>
         <p className="text text_type_main-default text_color_inactive">

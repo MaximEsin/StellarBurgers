@@ -5,18 +5,32 @@ import OrderItem from '../components/order/OrderItem';
 import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../hooks';
 import Loader from '../components/Loader';
+import { useLocation } from 'react-router-dom';
 
 const Order = () => {
   const { _id } = useParams();
-  const { ordersProfile } = useAppSelector((state) => state.connectionReducer);
+  const { ordersProfile, orders } = useAppSelector(
+    (state) => state.connectionReducer
+  );
   const { data } = useAppSelector((state: any) => state.dataReducer);
+  const location = useLocation();
 
-  if (ordersProfile.length < 1) {
+  let finalOrderArray = [];
+
+  if (location.pathname === `/feed/${_id}`) {
+    finalOrderArray = orders;
+  }
+
+  if (location.pathname === `/profile/orders/${_id}`) {
+    finalOrderArray = ordersProfile;
+  }
+
+  if (finalOrderArray.length < 1) {
     return <Loader />;
   } else {
     return (
       <section className={styles.orderSection + ' mb-20'}>
-        {ordersProfile
+        {finalOrderArray
           .filter((itm: any) => itm._id === _id)
           .map((item: any, index: number) => {
             const feedIds: any = item.ingredients;
