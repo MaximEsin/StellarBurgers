@@ -72,7 +72,7 @@ const FeedCard: FC<TFeedCard> = ({
         </p>
       </div>
       <p className={styles.name + ' text text_type_main-medium mt-6'}>{name}</p>
-      <p>{showStatus}</p>
+      <span>{showStatus}</span>
       <div className={styles.ingredientContainer + ' mt-6'}>
         <div className={styles.imgContainer}>
           {images.map((img: string, index: number) => {
