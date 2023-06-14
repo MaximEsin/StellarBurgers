@@ -30,25 +30,26 @@ const ScrollList: FC<TScrollList> = ({ setActive }) => {
   let finalData: any = [];
   let finalArr: any = [];
 
-  orders.forEach((item: any) => feedIds.push(item.ingredients));
-  ordersProfile.forEach((item: any) => profileIds.push(item.ingredients));
-
-  feedIds.forEach((item: any) =>
-    feedArr.push(
-      data.filter((ingredient: any) => item.includes(ingredient._id))
-    )
-  );
-
-  profileIds.forEach((item: any) =>
-    profileArr.push(
-      data.filter((ingredient: any) => item.includes(ingredient._id))
-    )
-  );
-
   if (location.pathname === '/feed') {
+    orders.forEach((item: any) => feedIds.push(item.ingredients));
+
+    feedIds.forEach((item: any) =>
+      feedArr.push(
+        data.filter((ingredient: any) => item.includes(ingredient._id))
+      )
+    );
+
     finalData = orders;
     finalArr = feedArr;
   } else if (location.pathname === '/profile/orders') {
+    ordersProfile.forEach((item: any) => profileIds.push(item.ingredients));
+
+    profileIds.forEach((item: any) =>
+      profileArr.push(
+        data.filter((ingredient: any) => item.includes(ingredient._id))
+      )
+    );
+
     finalData = ordersProfile;
     finalArr = profileArr;
   }
@@ -57,31 +58,25 @@ const ScrollList: FC<TScrollList> = ({ setActive }) => {
     <div className={styles.orders}>
       {finalData.map((order: TOrder, index: number) => {
         return (
-          <div key={index}>
-            {finalArr.map((item: any, index: any) => {
-              return (
-                <Link
-                  key={index}
-                  to={
-                    location.pathname === '/feed'
-                      ? `/feed/${order._id}`
-                      : `/profile/orders/${order._id}`
-                  }
-                  state={{ background: location }}
-                  style={{ textDecoration: 'none', color: '#F2F2F3' }}
-                >
-                  <FeedCard
-                    setActive={setActive}
-                    createdAt={order.createdAt}
-                    number={order.number}
-                    name={order.name}
-                    ingredients={item}
-                    status={order.status}
-                  />
-                </Link>
-              );
-            })}
-          </div>
+          <Link
+            key={index}
+            to={
+              location.pathname === '/feed'
+                ? `/feed/${order._id}`
+                : `/profile/orders/${order._id}`
+            }
+            state={{ background: location }}
+            style={{ textDecoration: 'none', color: '#F2F2F3' }}
+          >
+            <FeedCard
+              setActive={setActive}
+              createdAt={order.createdAt}
+              number={order.number}
+              name={order.name}
+              ingredients={finalArr[index]}
+              status={order.status}
+            />
+          </Link>
         );
       })}
     </div>
