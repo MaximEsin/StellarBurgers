@@ -15,7 +15,7 @@ const Order = () => {
   const { data } = useAppSelector((state: any) => state.dataReducer);
   const location = useLocation();
 
-  let finalOrderArray = [];
+  let finalOrderArray: any = [];
 
   if (location.pathname === `/feed/${_id}`) {
     finalOrderArray = orders;

@@ -66,13 +66,12 @@ export const dataReducer = (state = initialState, action: TIndexActions) => {
       };
     }
     case GET_DATA_SUCCESS: {
-      const buns = action.data.filter((item: any) => item.type === 'bun');
       return {
         ...state,
         data: action.data,
         dataRequest: false,
-        constructorData: [...state.constructorData],
-        buns: buns,
+        constructorData: [],
+        buns: action.buns,
       };
     }
     case GET_DATA_FAILED: {

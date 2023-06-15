@@ -1,40 +1,31 @@
-import {
-  WS_CONNECTION_START,
-  WS_GET_MESSAGE,
-  WS_CONNECTION_ORDERS_START,
-  WS_GET_ORDERS_MESSAGE,
-} from '../actions/constants';
+import { WS_GET_MESSAGE, WS_GET_ORDERS_MESSAGE } from '../actions/constants';
+import { TFeedActions } from '../actions/Feed';
+
+type ConnectionState = {
+  orders: Array<object>;
+  total: number;
+  totalToday: number;
+  ordersProfile: Array<object>;
+};
+
+const initialConnectionState: ConnectionState = {
+  orders: [],
+  total: 0,
+  totalToday: 0,
+  ordersProfile: [],
+};
 
 export const connectionReducer = (
-  state = {
-    connection: '',
-    orders: [],
-    total: 0,
-    totalToday: 0,
-    ordersConnection: '',
-    ordersProfile: [],
-  },
-  action: any
+  state = initialConnectionState,
+  action: TFeedActions
 ) => {
   switch (action.type) {
-    case WS_CONNECTION_START: {
-      return {
-        ...state,
-        connection: action.info,
-      };
-    }
     case WS_GET_MESSAGE: {
       return {
         ...state,
         orders: action.orders,
         total: action.total,
         totalToday: action.totalToday,
-      };
-    }
-    case WS_CONNECTION_ORDERS_START: {
-      return {
-        ...state,
-        ordersConnection: action.info,
       };
     }
     case WS_GET_ORDERS_MESSAGE: {

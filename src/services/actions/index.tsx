@@ -17,6 +17,7 @@ export interface IGetDataAction {
 export interface IGetDataSuccessAction {
   readonly type: typeof GET_DATA_SUCCESS;
   readonly data: [];
+  readonly buns: [];
 }
 
 export interface IGetDataFailedAction {
@@ -62,9 +63,11 @@ export function getData() {
 
     request(`/ingredients`)
       .then((res) => {
+        const buns = res.data.filter((item: any) => item.type === 'bun');
         dispatch({
           type: GET_DATA_SUCCESS,
           data: res.data,
+          buns: buns,
         });
       })
       .catch(() => {
