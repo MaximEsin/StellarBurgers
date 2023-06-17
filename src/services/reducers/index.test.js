@@ -1,15 +1,20 @@
 import { dataReducer } from '.';
 import * as types from '../actions/constants';
+import { initialState } from '.';
+
+const getDataTestData = { dataRequest: true, dataFailed: false };
+const getDataSuccessTestData = {
+  data: 'Some data',
+  dataRequest: false,
+  constructorData: [],
+  buns: [],
+};
+const getDataFailedTestData = { dataFailed: true, dataRequest: false };
 
 describe('data reducer', () => {
   it('should return the initial state', () => {
     expect(dataReducer(undefined, {})).toEqual({
-      dataRequest: false,
-      dataFailed: false,
-      data: [],
-      constructorData: [],
-      buns: [],
-      bunInOrder: [],
+      ...initialState,
     });
   });
 });
@@ -18,12 +23,10 @@ it('should handle GET_DATA', () => {
   expect(
     dataReducer([], {
       type: types.GET_DATA,
-      dataRequest: true,
-      dataFailed: false,
+      ...getDataTestData,
     })
   ).toEqual({
-    dataRequest: true,
-    dataFailed: false,
+    ...getDataTestData,
   });
 });
 
@@ -31,16 +34,10 @@ it('should handle GET_DATA_SUCCESS', () => {
   expect(
     dataReducer([], {
       type: types.GET_DATA_SUCCESS,
-      data: 'Some data',
-      dataRequest: false,
-      constructorData: [],
-      buns: [],
+      ...getDataSuccessTestData,
     })
   ).toEqual({
-    data: 'Some data',
-    dataRequest: false,
-    constructorData: [],
-    buns: [],
+    ...getDataSuccessTestData,
   });
 });
 
@@ -48,11 +45,9 @@ it('should handle GET_DATA_FAILED', () => {
   expect(
     dataReducer([], {
       type: types.GET_DATA_FAILED,
-      dataFailed: true,
-      dataRequest: false,
+      ...getDataFailedTestData,
     })
   ).toEqual({
-    dataFailed: true,
-    dataRequest: false,
+    ...getDataFailedTestData,
   });
 });

@@ -1,12 +1,16 @@
 import { ingredientReducer, orderReducer } from './Modals';
 import * as types from '../actions/constants';
+import { orderInitialState, ingredientInitialState } from './Modals';
+
+const storeIngredientTestData = { data: undefined, dataRequest: false };
+const postOrderTestData = { dataRequest: true, dataFailed: false };
+const postSuccessTestData = { number: 123, dataRequest: false };
+const postFailedTestData = { dataFailed: true, dataRequest: false };
 
 describe('ingredient reducer', () => {
   it('should return the initial state', () => {
     expect(ingredientReducer(undefined, {})).toEqual({
-      data: {},
-      dataRequest: false,
-      dataFailed: false,
+      ...ingredientInitialState,
     });
   });
 });
@@ -14,9 +18,7 @@ describe('ingredient reducer', () => {
 describe('order reducer', () => {
   it('should return the initial state', () => {
     expect(orderReducer(undefined, {})).toEqual({
-      number: 0,
-      dataRequest: false,
-      dataFailed: false,
+      ...orderInitialState,
     });
   });
 });
@@ -25,12 +27,10 @@ it('should handle STORE_INGREDIENT', () => {
   expect(
     ingredientReducer([], {
       type: types.STORE_INGREDIENT,
-      data: undefined,
-      dataRequest: false,
+      ...storeIngredientTestData,
     })
   ).toEqual({
-    data: undefined,
-    dataRequest: false,
+    ...storeIngredientTestData,
   });
 });
 
@@ -38,12 +38,10 @@ it('should handle POST_ORDER', () => {
   expect(
     orderReducer([], {
       type: types.POST_ORDER,
-      dataRequest: true,
-      dataFailed: false,
+      ...postOrderTestData,
     })
   ).toEqual({
-    dataRequest: true,
-    dataFailed: false,
+    ...postOrderTestData,
   });
 });
 
@@ -51,12 +49,10 @@ it('should handle POST_SUCCESS', () => {
   expect(
     orderReducer([], {
       type: types.POST_SUCCESS,
-      number: 123,
-      dataRequest: false,
+      ...postSuccessTestData,
     })
   ).toEqual({
-    number: 123,
-    dataRequest: false,
+    ...postSuccessTestData,
   });
 });
 
@@ -64,11 +60,9 @@ it('should handle POST_FAILED', () => {
   expect(
     orderReducer([], {
       type: types.POST_FAILED,
-      dataFailed: true,
-      dataRequest: false,
+      ...postFailedTestData,
     })
   ).toEqual({
-    dataFailed: true,
-    dataRequest: false,
+    ...postFailedTestData,
   });
 });

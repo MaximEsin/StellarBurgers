@@ -47,7 +47,7 @@ type IDataState = {
   bunInOrder: [];
 };
 
-const initialState: IDataState = {
+export const initialState: IDataState = {
   dataRequest: false,
   dataFailed: false,
   data: [],

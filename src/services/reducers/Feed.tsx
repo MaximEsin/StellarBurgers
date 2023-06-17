@@ -8,7 +8,7 @@ type ConnectionState = {
   ordersProfile: Array<object>;
 };
 
-const initialConnectionState: ConnectionState = {
+export const initialConnectionState: ConnectionState = {
   orders: [],
   total: 0,
   totalToday: 0,

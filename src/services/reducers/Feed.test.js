@@ -1,13 +1,13 @@
 import { connectionReducer } from './Feed';
 import * as types from '../actions/constants';
+import { initialConnectionState } from './Feed';
+
+const testData = { orders: 'Run test', total: 123, totalToday: 123 };
 
 describe('connection reducer', () => {
   it('should return the initial state', () => {
     expect(connectionReducer(undefined, {})).toEqual({
-      orders: [],
-      total: 0,
-      totalToday: 0,
-      ordersProfile: [],
+      ...initialConnectionState,
     });
   });
 });
@@ -16,13 +16,9 @@ it('should handle WS_GET_MESSAGE', () => {
   expect(
     connectionReducer([], {
       type: types.WS_GET_MESSAGE,
-      orders: 'Run test',
-      total: 123,
-      totalToday: 123,
+      ...testData,
     })
   ).toEqual({
-    orders: 'Run test',
-    total: 123,
-    totalToday: 123,
+    ...testData,
   });
 });

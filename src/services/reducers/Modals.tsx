@@ -19,13 +19,13 @@ type IOrderState = {
   dataFailed: boolean;
 };
 
-const orderInitialState: IOrderState = {
+export const orderInitialState: IOrderState = {
   number: 0,
   dataRequest: false,
   dataFailed: false,
 };
 
-const ingredientInitialState: TIngredientState = {
+export const ingredientInitialState: TIngredientState = {
   data: {},
   dataRequest: false,
   dataFailed: false,
