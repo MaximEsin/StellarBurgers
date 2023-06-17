@@ -5,6 +5,7 @@ import { useAppSelector } from '../../hooks';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { FC } from 'react';
+import Loader from '../Loader';
 
 interface TScrollList {
   setActive?: any;
@@ -13,7 +14,6 @@ interface TScrollList {
 const ScrollList: FC<TScrollList> = ({ setActive }) => {
   const { orders } = useAppSelector((state) => state.connectionReducer);
   const { data } = useAppSelector((state: any) => state.dataReducer);
-  const { ordersProfile } = useAppSelector((state) => state.connectionReducer);
   const location = useLocation();
 
   interface TOrder {
@@ -23,14 +23,13 @@ const ScrollList: FC<TScrollList> = ({ setActive }) => {
     status?: string;
     _id: string;
   }
-  const feedIds: any = [];
-  const feedArr: any = [];
-  const profileIds: any = [];
-  const profileArr: any = [];
+  const feedIds: Array<string> = [];
+  const feedArr: Array<object> = [];
   let finalData: any = [];
-  let finalArr: any = [];
 
-  if (location.pathname === '/feed') {
+  if (orders.length < 1) {
+    return <Loader />;
+  } else {
     orders.forEach((item: any) => feedIds.push(item.ingredients));
 
     feedIds.forEach((item: any) =>
@@ -40,47 +39,35 @@ const ScrollList: FC<TScrollList> = ({ setActive }) => {
     );
 
     finalData = orders;
-    finalArr = feedArr;
-  } else if (location.pathname === '/profile/orders') {
-    ordersProfile.forEach((item: any) => profileIds.push(item.ingredients));
 
-    profileIds.forEach((item: any) =>
-      profileArr.push(
-        data.filter((ingredient: any) => item.includes(ingredient._id))
-      )
+    return (
+      <div className={styles.orders}>
+        {finalData.map((order: TOrder, index: number) => {
+          return (
+            <Link
+              key={index}
+              to={
+                location.pathname === '/feed'
+                  ? `/feed/${order._id}`
+                  : `/profile/orders/${order._id}`
+              }
+              state={{ background: location }}
+              style={{ textDecoration: 'none', color: '#F2F2F3' }}
+            >
+              <FeedCard
+                setActive={setActive}
+                createdAt={order.createdAt}
+                number={order.number}
+                name={order.name}
+                ingredients={feedArr[index]}
+                status={order.status}
+              />
+            </Link>
+          );
+        })}
+      </div>
     );
-
-    finalData = ordersProfile;
-    finalArr = profileArr;
   }
-
-  return (
-    <div className={styles.orders}>
-      {finalData.map((order: TOrder, index: number) => {
-        return (
-          <Link
-            key={index}
-            to={
-              location.pathname === '/feed'
-                ? `/feed/${order._id}`
-                : `/profile/orders/${order._id}`
-            }
-            state={{ background: location }}
-            style={{ textDecoration: 'none', color: '#F2F2F3' }}
-          >
-            <FeedCard
-              setActive={setActive}
-              createdAt={order.createdAt}
-              number={order.number}
-              name={order.name}
-              ingredients={finalArr[index]}
-              status={order.status}
-            />
-          </Link>
-        );
-      })}
-    </div>
-  );
 };
 
 export default ScrollList;

@@ -1,12 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from '../styles/Feed.module.css';
 import ScrollList from '../components/Feed/ScrollList';
 import Stats from '../components/Feed/Stats';
 import { useAppDispatch } from '../hooks';
-import {
-  WS_CONNECTION_START,
-  WS_GET_MESSAGE,
-} from '../services/actions/constants';
+import { WS_CONNECTION_START } from '../services/actions/constants';
 import { FC } from 'react';
 
 interface TFeed {
@@ -14,27 +11,14 @@ interface TFeed {
 }
 
 const Feed: FC<TFeed> = ({ setActive }) => {
-  const ws = new WebSocket('wss://norma.nomoreparties.space/orders/all');
   const dispatch = useAppDispatch();
 
-  let data;
-
-  ws.onopen = (event: Event) => {
+  useEffect(() => {
     dispatch({
       type: WS_CONNECTION_START,
-      info: event.type,
+      payload: '/all',
     });
-  };
-
-  ws.onmessage = (event: MessageEvent) => {
-    data = JSON.parse(event.data);
-    dispatch({
-      type: WS_GET_MESSAGE,
-      orders: data.orders,
-      total: data.total,
-      totalToday: data.totalToday,
-    });
-  };
+  }, []);
 
   return (
     <section className={styles.feedSection}>

@@ -1,8 +1,9 @@
 import {
   WS_CONNECTION_START,
   WS_GET_MESSAGE,
-  WS_CONNECTION_ORDERS_START,
-  WS_GET_ORDERS_MESSAGE,
+  WS_CONNECTION_CLOSED,
+  WS_CONNECTION_ERROR,
+  WS_CONNECTION_SUCCESS,
 } from './constants';
 import { AppDispatch } from '../reducers';
 
@@ -10,8 +11,9 @@ export interface IStartConnection {
   readonly type: typeof WS_CONNECTION_START;
 }
 
-export interface IStartOrdersConnection {
-  readonly type: typeof WS_CONNECTION_ORDERS_START;
+export interface IWsConnectionSuccess {
+  readonly type: typeof WS_CONNECTION_SUCCESS;
+  readonly payolad: string;
 }
 
 export interface IGetMessage {
@@ -21,18 +23,29 @@ export interface IGetMessage {
   readonly totalToday: number;
 }
 
-export interface IGetOrderMessage {
-  readonly type: typeof WS_GET_ORDERS_MESSAGE;
-  readonly orders: Array<object>;
+export interface IWsConnectionClosed {
+  readonly type: typeof WS_CONNECTION_CLOSED;
+  readonly payload: string;
+}
+
+export interface IWsConnectionError {
+  readonly type: typeof WS_CONNECTION_ERROR;
+  readonly payload: string;
+}
+
+export interface IWsConnectionClosed {
+  readonly type: typeof WS_CONNECTION_CLOSED;
+  readonly payload: string;
 }
 
 export type TFeedActions =
   | IGetMessage
-  | IGetOrderMessage
+  | IWsConnectionClosed
   | IStartConnection
-  | IStartOrdersConnection;
+  | IWsConnectionError
+  | IWsConnectionSuccess;
 
-export function startConnection(info: any) {
+export function startConnection() {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: WS_CONNECTION_START,
@@ -40,10 +53,29 @@ export function startConnection(info: any) {
   };
 }
 
-export function startOrdersConnection(info: any) {
+export function connectionSuccess(payload: string) {
   return function (dispatch: AppDispatch) {
     dispatch({
-      type: WS_CONNECTION_ORDERS_START,
+      type: WS_CONNECTION_SUCCESS,
+      payload: payload,
+    });
+  };
+}
+
+export function connectionError(payload: string) {
+  return function (dispatch: AppDispatch) {
+    dispatch({
+      type: WS_CONNECTION_ERROR,
+      payload: payload,
+    });
+  };
+}
+
+export function connectionClosed(payload: string) {
+  return function (dispatch: AppDispatch) {
+    dispatch({
+      type: WS_CONNECTION_CLOSED,
+      payload: payload,
     });
   };
 }
@@ -55,15 +87,6 @@ export function onMessage(orders: any, total: number, totalToday: number) {
       orders: orders,
       total: total,
       totalToday: totalToday,
-    });
-  };
-}
-
-export function onOrdersMessage(orders: any) {
-  return function (dispatch: AppDispatch) {
-    dispatch({
-      type: WS_GET_ORDERS_MESSAGE,
-      orders: orders,
     });
   };
 }

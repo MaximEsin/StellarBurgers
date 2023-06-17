@@ -1,12 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from '../styles/Feed.module.css';
 import ProfileSidebar from '../components/Profile/ProfileSidebar';
 import ScrollList from '../components/Feed/ScrollList';
 import { useAppDispatch } from '../hooks';
-import {
-  WS_CONNECTION_ORDERS_START,
-  WS_GET_ORDERS_MESSAGE,
-} from '../services/actions/constants';
+import { WS_CONNECTION_START } from '../services/actions/constants';
 import { FC } from 'react';
 import { useAppSelector } from '../hooks';
 
@@ -17,27 +14,15 @@ interface IProfileOrders {
 const ProfileOrders: FC<IProfileOrders> = ({ setActive }) => {
   const { token } = useAppSelector((state) => state.tokenReducer);
   const accessToken = token.slice(7);
-  const ws = new WebSocket(
-    `wss://norma.nomoreparties.space/orders?token=${accessToken}`
-  );
   const dispatch = useAppDispatch();
 
-  let data;
-
-  ws.onopen = (event: Event) => {
+  useEffect(() => {
     dispatch({
-      type: WS_CONNECTION_ORDERS_START,
-      info: event.type,
+      type: WS_CONNECTION_START,
+      payload: `?token=${accessToken}`,
     });
-  };
+  }, []);
 
-  ws.onmessage = (event: MessageEvent) => {
-    data = JSON.parse(event.data);
-    dispatch({
-      type: WS_GET_ORDERS_MESSAGE,
-      orders: data.orders,
-    });
-  };
   return (
     <section className={styles.profileOrdersSection}>
       <div className={styles.sidebarContainer + ' mr-15'}>

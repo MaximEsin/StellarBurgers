@@ -60,7 +60,12 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
         };
         socket.onmessage = (event) => {
           const data = JSON.parse(event.data);
-          dispatch({ type: WS_GET_MESSAGE, payload: data });
+          dispatch({
+            type: WS_GET_MESSAGE,
+            orders: data.orders,
+            total: data.total,
+            totalToday: data.totalToday,
+          });
         };
         socket.onclose = (event) => {
           dispatch({ type: WS_CONNECTION_CLOSED, payload: event });
