@@ -136,7 +136,7 @@ function App() {
                   active={modalOrderItemActive}
                   setActive={setModalOrderItemActive}
                 >
-                  <Order />
+                  <Order setActive={setModalOrderItemActive} />
                 </Modal>
               }
             />
@@ -148,7 +148,7 @@ function App() {
                   active={modalProfileOrderActive}
                   setActive={setModalProfileOrderActive}
                 >
-                  <Order />
+                  <Order setActive={setModalProfileOrderActive} />
                 </Modal>
               }
             />

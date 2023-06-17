@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from '../styles/Order.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderItem from '../components/order/OrderItem';
 import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../hooks';
 import Loader from '../components/Loader';
+import { FC } from 'react';
 
-const Order = () => {
+interface IOrder {
+  setActive?: any;
+}
+
+const Order: FC<IOrder> = ({ setActive }) => {
   const { _id } = useParams();
   const { orders } = useAppSelector((state) => state.connectionReducer);
   const { data } = useAppSelector((state: any) => state.dataReducer);
+
+  useEffect(() => {
+    setActive(true);
+  }, []);
 
   if (orders.length < 1) {
     return <Loader />;
