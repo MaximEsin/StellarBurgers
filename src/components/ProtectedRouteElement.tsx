@@ -1,6 +1,5 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAppSelector } from '../hooks';
-import { JsxElement } from 'typescript';
 
 export const ProtectedUnSignedRouteElement = ({
   element,

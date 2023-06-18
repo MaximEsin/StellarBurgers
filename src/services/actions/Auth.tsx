@@ -7,7 +7,7 @@ export function register(
   email: string,
   password: string,
   name: string,
-  nav: any
+  nav: () => void
 ) {
   request('/auth/register', {
     method: 'POST',
@@ -23,7 +23,7 @@ export function register(
   })
     .then((res) => {
       if (res.success) {
-        return nav;
+        nav();
       }
     })
     .catch((err) => {
@@ -31,7 +31,7 @@ export function register(
     });
 }
 
-export function Auth(email: string, password: string, nav: any) {
+export function Auth(email: string, password: string, nav: () => void) {
   return function (dispatch: AppDispatch) {
     request('/auth/login', {
       method: 'POST',
@@ -51,7 +51,7 @@ export function Auth(email: string, password: string, nav: any) {
             token: res.accessToken,
           });
           sessionStorage.setItem('refreshToken', res.refreshToken);
-          return nav;
+          nav();
         }
       })
       .catch((err) => {
@@ -60,7 +60,7 @@ export function Auth(email: string, password: string, nav: any) {
   };
 }
 
-export function getEmailCode(email: string, nav: any) {
+export function getEmailCode(email: string, nav: () => void) {
   request('/password-reset', {
     method: 'POST',
     headers: {
@@ -73,7 +73,7 @@ export function getEmailCode(email: string, nav: any) {
   })
     .then((res) => {
       if (res.success) {
-        return nav;
+        nav();
       }
     })
     .catch((err) => {
@@ -81,7 +81,7 @@ export function getEmailCode(email: string, nav: any) {
     });
 }
 
-export function resetPassword(password: string, code: string, nav: any) {
+export function resetPassword(password: string, code: string, nav: () => void) {
   request('/password-reset/reset', {
     method: 'POST',
     headers: {
@@ -93,7 +93,7 @@ export function resetPassword(password: string, code: string, nav: any) {
       token: code,
     }),
   })
-    .then(() => nav)
+    .then(() => nav())
     .catch((err) => {
       console.log(err);
     });

@@ -26,10 +26,7 @@ const Registration = () => {
           onSubmit={(event: FormEvent<HTMLFormElement>) =>
             handleFormSubmit(
               event,
-              register(
-                email,
-                password,
-                name,
+              register(email, password, name, () =>
                 navigate('/login', { replace: true })
               )
             )

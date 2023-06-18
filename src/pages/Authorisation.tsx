@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Auth } from '../services/actions/Auth';
 import { handleFormSubmit } from '../utils';
-import { useAppDispatch } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { useLocation } from 'react-router-dom';
 
 const Authorisation = () => {
@@ -18,8 +18,12 @@ const Authorisation = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const location = useLocation();
+  const { isLoggedIn } = useAppSelector((state) => state.tokenReducer);
 
   const from = location.state?.from || '/';
+  if (isLoggedIn) {
+    navigate(from, { replace: true });
+  }
 
   return (
     <section className={styles.main}>
@@ -31,7 +35,9 @@ const Authorisation = () => {
           onSubmit={(event: FormEvent<HTMLFormElement>) =>
             handleFormSubmit(
               event,
-              dispatch(Auth(email, password, navigate(from, { replace: true })))
+              dispatch(
+                Auth(email, password, () => navigate(from, { replace: true }))
+              )
             )
           }
         >

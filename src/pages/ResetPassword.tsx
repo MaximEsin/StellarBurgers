@@ -33,9 +33,7 @@ const ResetPassword = () => {
               onSubmit={(event: FormEvent<HTMLFormElement>) =>
                 handleFormSubmit(
                   event,
-                  resetPassword(
-                    password,
-                    code,
+                  resetPassword(password, code, () =>
                     navigate('/login', { replace: true })
                   )
                 )

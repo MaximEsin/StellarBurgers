@@ -27,8 +27,7 @@ const ForgotPassword = () => {
             onSubmit={(event: FormEvent<HTMLFormElement>) =>
               handleFormSubmit(
                 event,
-                getEmailCode(
-                  email,
+                getEmailCode(email, () =>
                   navigate('/reset-password', {
                     state: { prevRoute },
                     replace: true,
