@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../hooks';
 import Loader from '../components/Loader';
 import { FC } from 'react';
+import { uniq } from 'cypress/types/lodash';
 
 interface IOrder {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -46,6 +47,28 @@ const Order: FC<IOrder> = ({ setActive }) => {
               (a: number, b: number) => a + b
             );
 
+            const ingArr: Array<object> = [];
+            feedArr.forEach((item: any) => {
+              ingArr.push(item[0]);
+            });
+
+            function onlyUnique(
+              value: any,
+              index: number,
+              array: Array<object>
+            ) {
+              return array.indexOf(value) === index;
+            }
+            const uniqueArr = ingArr.filter(onlyUnique);
+
+            function filterArr(array: Array<object>, value: object) {
+              return array.filter((v) => v === value).length;
+            }
+
+            uniqueArr.forEach((item: any) => {
+              item.amount = filterArr(ingArr, item);
+            });
+
             return (
               <div key={index} className={styles.orderContainer}>
                 <p
@@ -66,13 +89,14 @@ const Order: FC<IOrder> = ({ setActive }) => {
                 <p className="text text_type_main-medium mb-6">Состав:</p>
                 <div className={styles.ingredientsContainer + ' mt-6'}>
                   <div className={styles.scroll}>
-                    {feedArr.map((array: any, index: number) => {
+                    {uniqueArr.map((item: any, index: number) => {
                       return (
                         <OrderItem
                           key={index}
-                          image={array[0].image}
-                          name={array[0].name}
-                          price={array[0].price}
+                          image={item.image}
+                          name={item.name}
+                          price={item.price}
+                          amount={item.amount}
                         />
                       );
                     })}

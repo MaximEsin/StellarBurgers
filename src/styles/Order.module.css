@@ -53,3 +53,7 @@
   width: 100px;
   height: 56px;
 }
+
+.name {
+  max-width: 340px;
+}
