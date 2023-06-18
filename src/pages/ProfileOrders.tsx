@@ -3,7 +3,10 @@ import styles from '../styles/Feed.module.css';
 import ProfileSidebar from '../components/Profile/ProfileSidebar';
 import ScrollList from '../components/Feed/ScrollList';
 import { useAppDispatch } from '../hooks';
-import { WS_CONNECTION_START } from '../services/actions/constants';
+import {
+  WS_CONNECTION_START,
+  WS_CONNECTION_CLOSED,
+} from '../services/actions/constants';
 import { FC } from 'react';
 import { useAppSelector } from '../hooks';
 
@@ -21,6 +24,11 @@ const ProfileOrders: FC<IProfileOrders> = ({ setActive }) => {
       type: WS_CONNECTION_START,
       payload: `?token=${accessToken}`,
     });
+    return () => {
+      dispatch({
+        type: WS_CONNECTION_CLOSED,
+      });
+    };
   }, []);
 
   return (

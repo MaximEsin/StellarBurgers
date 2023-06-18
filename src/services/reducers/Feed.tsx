@@ -49,7 +49,7 @@ export const connectionReducer = (
         ...state,
         error: undefined,
         orders: action.orders,
-        today: action.total,
+        total: action.total,
         totalToday: action.totalToday,
       };
     default: {

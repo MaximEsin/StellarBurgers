@@ -3,7 +3,10 @@ import styles from '../styles/Feed.module.css';
 import ScrollList from '../components/Feed/ScrollList';
 import Stats from '../components/Feed/Stats';
 import { useAppDispatch } from '../hooks';
-import { WS_CONNECTION_START } from '../services/actions/constants';
+import {
+  WS_CONNECTION_CLOSED,
+  WS_CONNECTION_START,
+} from '../services/actions/constants';
 import { FC } from 'react';
 
 interface TFeed {
@@ -18,6 +21,11 @@ const Feed: FC<TFeed> = ({ setActive }) => {
       type: WS_CONNECTION_START,
       payload: '/all',
     });
+    return () => {
+      dispatch({
+        type: WS_CONNECTION_CLOSED,
+      });
+    };
   }, []);
 
   return (
