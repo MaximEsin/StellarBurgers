@@ -21,6 +21,7 @@ import Feed from '../pages/Feed';
 import ProfileOrders from '../pages/ProfileOrders';
 import Order from '../pages/Order';
 import { useNavigate } from 'react-router-dom';
+import OrderModal from '../pages/OrderModal';
 
 function App() {
   const [modalOrderActive, setModalOrderActive] = useState<boolean>(false);
@@ -111,17 +112,10 @@ function App() {
               />
             }
           />
-          <Route
-            path="/feed/:_id"
-            element={<Order setActive={setModalProfileOrderActive} />}
-          />
+          <Route path="/feed/:_id" element={<Order />} />
           <Route
             path="/profile/orders/:_id"
-            element={
-              <ProtectedUnSignedRouteElement
-                element={<Order setActive={setModalProfileOrderActive} />}
-              />
-            }
+            element={<ProtectedUnSignedRouteElement element={<Order />} />}
           />
         </Routes>
         {background && (
@@ -149,7 +143,7 @@ function App() {
                   data={data}
                   closeModal={closeModal}
                 >
-                  <Order setActive={setModalOrderItemActive} />
+                  <OrderModal setActive={setModalOrderItemActive} />
                 </Modal>
               }
             />
@@ -161,7 +155,7 @@ function App() {
                   data={data}
                   closeModal={closeModal}
                 >
-                  <Order setActive={setModalProfileOrderActive} />
+                  <OrderModal setActive={setModalProfileOrderActive} />
                 </Modal>
               }
             />
