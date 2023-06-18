@@ -20,10 +20,9 @@ import IngredientDetails from './Main/IngredientDetails';
 import Feed from '../pages/Feed';
 import ProfileOrders from '../pages/ProfileOrders';
 import Order from '../pages/Order';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
-  const [modalIngredientActive, setModalIngredientActive] =
-    useState<boolean>(false);
   const [modalOrderActive, setModalOrderActive] = useState<boolean>(false);
   const [modalOrderItemActive, setModalOrderItemActive] =
     useState<boolean>(false);
@@ -35,6 +34,7 @@ function App() {
   );
 
   const location = useLocation();
+  const navigate = useNavigate();
   const background = location.state && location.state.background;
 
   const dispatch = useAppDispatch();
@@ -42,6 +42,13 @@ function App() {
   useEffect(() => {
     dispatch(getData());
   }, []);
+
+  const closeModal = () => {
+    setModalOrderActive(false);
+    setModalOrderItemActive(false);
+    setModalProfileOrderActive(false);
+    navigate(-1);
+  };
 
   if (dataFailed) {
     return <p>Произошла ошибка при получении данных</p>;
@@ -56,10 +63,9 @@ function App() {
             path="/"
             element={
               <Main
-                modalIngredientActive={modalIngredientActive}
-                setModalIngredientActive={setModalIngredientActive}
-                modalOrderActive={modalOrderActive}
+                closeModal={closeModal}
                 setModalOrderActive={setModalOrderActive}
+                modalOrderActive={modalOrderActive}
                 data={data}
               />
             }
@@ -124,9 +130,9 @@ function App() {
               path="/ingredients/:_id"
               element={
                 <Modal
-                  data={data}
                   active={modalOrderActive}
-                  setActive={setModalOrderActive}
+                  data={data}
+                  closeModal={closeModal}
                 >
                   <IngredientDetails
                     info={data}
@@ -139,9 +145,9 @@ function App() {
               path="/feed/:_id"
               element={
                 <Modal
-                  data={data}
                   active={modalOrderItemActive}
-                  setActive={setModalOrderItemActive}
+                  data={data}
+                  closeModal={closeModal}
                 >
                   <Order setActive={setModalOrderItemActive} />
                 </Modal>
@@ -151,9 +157,9 @@ function App() {
               path="/profile/orders/:_id"
               element={
                 <Modal
-                  data={data}
                   active={modalProfileOrderActive}
-                  setActive={setModalProfileOrderActive}
+                  data={data}
+                  closeModal={closeModal}
                 >
                   <Order setActive={setModalProfileOrderActive} />
                 </Modal>

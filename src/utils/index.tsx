@@ -19,11 +19,3 @@ export const handleFormSubmit = (
 ) => {
   event.preventDefault();
 };
-
-export const onClose = (location: string, nav: any) => {
-  if (location !== '/') {
-    return nav;
-  } else {
-    return <Navigate to="/" replace />;
-  }
-};

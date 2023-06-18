@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import BurgerIngredients from '../components/Main/BurgerIngredients';
 import BurgerConstructor from '../components/Main/BurgerConstructor';
 import { DndProvider } from 'react-dnd';
@@ -12,24 +12,24 @@ import { useAppSelector } from '../hooks';
 
 interface IMain {
   data: Array<object>;
-  modalIngredientActive: boolean;
   modalOrderActive: boolean;
-  setModalIngredientActive: React.Dispatch<React.SetStateAction<boolean>>;
   setModalOrderActive: React.Dispatch<React.SetStateAction<boolean>>;
+  closeModal: () => void;
 }
 
-const Main: FC<IMain> = ({
-  data,
-  modalIngredientActive,
-  setModalIngredientActive,
-  setModalOrderActive,
-}) => {
+const Main: FC<IMain> = ({ data, closeModal, setModalOrderActive }) => {
+  const [modalIngredientActive, setModalIngredientActive] =
+    useState<boolean>(false);
   const { isLoggedIn } = useAppSelector((state) => state.tokenReducer);
   useEffect(() => {
     if (!isLoggedIn && sessionStorage.refeshToken) {
       refresh();
     }
   }, []);
+
+  const closeOrderModal = () => {
+    setModalIngredientActive(false);
+  };
 
   return (
     <main className={styles.main}>
@@ -38,7 +38,7 @@ const Main: FC<IMain> = ({
           <Modal
             data={data}
             active={modalIngredientActive}
-            setActive={setModalIngredientActive}
+            closeModal={closeOrderModal}
           >
             <OrderDetails />
           </Modal>
