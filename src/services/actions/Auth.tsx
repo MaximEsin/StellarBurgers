@@ -100,9 +100,9 @@ export function resetPassword(password: string, code: string, nav: any) {
 }
 
 export function getUserInfo(
-  setName: any,
-  setEmail: any,
-  setPassword: any,
+  setName: React.Dispatch<React.SetStateAction<string>>,
+  setEmail: React.Dispatch<React.SetStateAction<string>>,
+  setPassword: React.Dispatch<React.SetStateAction<string>>,
   password: string,
   token: string
 ) {

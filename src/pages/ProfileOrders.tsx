@@ -8,7 +8,7 @@ import { FC } from 'react';
 import { useAppSelector } from '../hooks';
 
 interface IProfileOrders {
-  setActive: any;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ProfileOrders: FC<IProfileOrders> = ({ setActive }) => {

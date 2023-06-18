@@ -7,8 +7,8 @@ const Stats = () => {
   const { orders, total, totalToday } = useAppSelector(
     (state) => state.connectionReducer
   );
-  const done: any = [];
-  const notDone: any = [];
+  const done: Array<object> = [];
+  const notDone: Array<object> = [];
 
   if (orders.length < 1) {
     return <Loader />;
@@ -21,8 +21,8 @@ const Stats = () => {
       }
     });
 
-    const last10ready: any = done.slice(0, 10);
-    const last10notReady: any = notDone.slice(0, 10);
+    const last10ready: Array<object> = done.slice(0, 10);
+    const last10notReady: Array<object> = notDone.slice(0, 10);
 
     return (
       <section className={styles.statsSection + ' ml-15'}>

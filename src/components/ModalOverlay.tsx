@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useEffect } from 'react';
+import React, { ReactNode, SyntheticEvent, useEffect } from 'react';
 import styles from '../styles/Modal.module.css';
 import { useNavigate } from 'react-router-dom';
 import { FC } from 'react';
@@ -7,8 +7,8 @@ import { onClose } from '../utils';
 
 interface IModalOverlay {
   active: boolean;
-  children?: any;
-  setActive: any;
+  children?: ReactNode;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ModalOverlay: FC<IModalOverlay> = ({ active, children, setActive }) => {

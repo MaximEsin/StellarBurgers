@@ -13,8 +13,8 @@ import { FC } from 'react';
 import { AppDispatch } from '../../services/reducers';
 
 interface IConstructorItem {
-  img?: any;
-  id?: any;
+  img?: string;
+  id?: string;
   index?: number;
   moveElement?: any;
   data?: any;

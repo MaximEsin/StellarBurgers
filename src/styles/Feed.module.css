@@ -13,7 +13,7 @@
 
 .orders {
   max-height: 100vh;
-  overflow: scroll;
+  overflow: auto;
 
   width: 100%;
 }

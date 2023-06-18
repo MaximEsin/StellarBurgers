@@ -80,7 +80,11 @@ export function connectionClosed(payload: string) {
   };
 }
 
-export function onMessage(orders: any, total: number, totalToday: number) {
+export function onMessage(
+  orders: Array<object>,
+  total: number,
+  totalToday: number
+) {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: WS_GET_MESSAGE,

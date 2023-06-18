@@ -14,12 +14,12 @@ import { AppDispatch } from '../../services/reducers';
 
 interface IBurgerIngredient {
   data: any;
-  setActive: any;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const BurgerIngredient: FC<IBurgerIngredient> = ({ data, setActive }) => {
   const { constructorData, bunInOrder } = useAppSelector(
-    (state: any) => state.dataReducer
+    (state) => state.dataReducer
   );
 
   const dispatch = useAppDispatch();

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import ModalOverlay from './ModalOverlay';
 import styles from '../styles/Modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -9,9 +9,9 @@ import { onClose } from '../utils';
 
 interface IModal {
   active: boolean;
-  children?: any;
-  data: [];
-  setActive: any;
+  children?: ReactNode;
+  data: Array<object>;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Modal: FC<IModal> = ({ active, children, data, setActive }) => {

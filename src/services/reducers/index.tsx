@@ -41,10 +41,10 @@ const persistedStore = loadState();
 type IDataState = {
   dataRequest: boolean;
   dataFailed: boolean;
-  data: [];
-  constructorData: [];
-  buns: [];
-  bunInOrder: [];
+  data: Array<object>;
+  constructorData: Array<object>;
+  buns: Array<object>;
+  bunInOrder: Array<object>;
 };
 
 export const initialState: IDataState = {

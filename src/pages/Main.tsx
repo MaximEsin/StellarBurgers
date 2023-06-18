@@ -11,11 +11,11 @@ import { FC } from 'react';
 import { useAppSelector } from '../hooks';
 
 interface IMain {
-  data: [];
+  data: Array<object>;
   modalIngredientActive: boolean;
   modalOrderActive: boolean;
-  setModalIngredientActive: any;
-  setModalOrderActive: any;
+  setModalIngredientActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalOrderActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Main: FC<IMain> = ({

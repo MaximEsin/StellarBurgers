@@ -19,7 +19,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { FC } from 'react';
 
 interface IBurgerConstructor {
-  setActive: any;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const BurgerConstructor: FC<IBurgerConstructor> = ({ setActive }) => {

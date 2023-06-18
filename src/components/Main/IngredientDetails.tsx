@@ -5,8 +5,8 @@ import Loader from '../Loader';
 import { FC } from 'react';
 
 interface IIngredientDetails {
-  info: any;
-  setActive: any;
+  info: Array<object>;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const IngredientDetails: FC<IIngredientDetails> = ({ info, setActive }) => {

@@ -8,21 +8,22 @@ import { FC } from 'react';
 import Loader from '../Loader';
 
 interface TScrollList {
-  setActive?: any;
+  setActive?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ScrollList: FC<TScrollList> = ({ setActive }) => {
   const { orders } = useAppSelector((state) => state.connectionReducer);
-  const { data } = useAppSelector((state: any) => state.dataReducer);
+  const { data } = useAppSelector((state) => state.dataReducer);
   const location = useLocation();
 
   interface TOrder {
-    createdAt: any;
+    createdAt: string;
     number: number;
     name: string;
     status?: string;
     _id: string;
   }
+
   const feedIds: Array<string> = [];
   const feedArr: Array<object> = [];
   let finalData: any = [];
@@ -32,7 +33,7 @@ const ScrollList: FC<TScrollList> = ({ setActive }) => {
   } else {
     orders.forEach((item: any) => feedIds.push(item.ingredients));
 
-    feedIds.forEach((item: any) =>
+    feedIds.forEach((item: string) =>
       feedArr.push(
         data.filter((ingredient: any) => item.includes(ingredient._id))
       )

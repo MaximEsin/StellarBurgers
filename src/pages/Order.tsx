@@ -8,13 +8,13 @@ import Loader from '../components/Loader';
 import { FC } from 'react';
 
 interface IOrder {
-  setActive?: any;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Order: FC<IOrder> = ({ setActive }) => {
   const { _id } = useParams();
   const { orders } = useAppSelector((state) => state.connectionReducer);
-  const { data } = useAppSelector((state: any) => state.dataReducer);
+  const { data } = useAppSelector((state) => state.dataReducer);
 
   useEffect(() => {
     setActive(true);
@@ -28,9 +28,9 @@ const Order: FC<IOrder> = ({ setActive }) => {
         {orders
           .filter((itm: any) => itm._id === _id)
           .map((item: any, index: number) => {
-            const feedIds: any = item.ingredients;
-            const feedArr: any = [];
-            const priceArray: any = [];
+            const feedIds: Array<object> = item.ingredients;
+            const feedArr: Array<object> = [];
+            const priceArray: Array<number> = [];
 
             feedIds.forEach((item: any) =>
               feedArr.push(

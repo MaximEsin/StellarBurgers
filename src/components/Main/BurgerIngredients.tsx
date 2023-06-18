@@ -7,11 +7,11 @@ import { useAppSelector } from '../../hooks';
 import { FC } from 'react';
 
 interface IBurgerIngredients {
-  setActive: any;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const BurgerIngredients: FC<IBurgerIngredients> = ({ setActive }) => {
-  const { data } = useAppSelector((state: any) => state.dataReducer);
+  const { data } = useAppSelector((state) => state.dataReducer);
 
   const [bunRef, inBunView] = useInView({
     threshold: 0,

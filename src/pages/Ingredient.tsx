@@ -6,7 +6,7 @@ import { useAppSelector } from '../hooks';
 
 const Ingredient = () => {
   const { _id } = useParams();
-  const { data } = useAppSelector((state: any) => state.dataReducer);
+  const { data } = useAppSelector((state) => state.dataReducer);
 
   if (data.length < 1) {
     return <Loader />;

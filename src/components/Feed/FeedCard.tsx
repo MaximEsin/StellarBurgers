@@ -21,15 +21,15 @@ const FeedCard: FC<TFeedCard> = ({
   status,
   setActive,
 }) => {
-  const images: any = [];
-  const prices: any = [];
+  const images: Array<string> = [];
+  const prices: Array<number> = [];
   const location = useLocation();
   let statusProfile;
   let showStatus;
 
   ingredients.forEach((item: any) => images.push(item.image));
   ingredients.forEach((item: any) => prices.push(item.price));
-  const totalPrice = prices.reduce((a: any, b: any) => a + b);
+  const totalPrice = prices.reduce((a: number, b: number) => a + b);
 
   if (status === 'done') {
     statusProfile = (

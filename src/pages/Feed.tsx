@@ -7,7 +7,7 @@ import { WS_CONNECTION_START } from '../services/actions/constants';
 import { FC } from 'react';
 
 interface TFeed {
-  setActive: any;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Feed: FC<TFeed> = ({ setActive }) => {

@@ -105,10 +105,17 @@ function App() {
               />
             }
           />
-          <Route path="/feed/:_id" element={<Order />} />
+          <Route
+            path="/feed/:_id"
+            element={<Order setActive={setModalProfileOrderActive} />}
+          />
           <Route
             path="/profile/orders/:_id"
-            element={<ProtectedUnSignedRouteElement element={<Order />} />}
+            element={
+              <ProtectedUnSignedRouteElement
+                element={<Order setActive={setModalProfileOrderActive} />}
+              />
+            }
           />
         </Routes>
         {background && (
