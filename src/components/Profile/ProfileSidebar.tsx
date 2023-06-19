@@ -27,6 +27,7 @@ const ProfileSidebar = () => {
         navigate('/', { replace: true });
         dispatch({ type: REMOVE_TOKEN });
         sessionStorage.removeItem('refreshToken');
+        localStorage.removeItem('isLoggedIn');
       })
       .catch((err) => {
         console.log(err);

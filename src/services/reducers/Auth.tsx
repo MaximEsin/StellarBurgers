@@ -9,6 +9,8 @@ export const tokenReducer = (
       setTimeout(() => {
         state.isLoggedIn = false;
       }, 1200000);
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('accessToken', action.token);
       return {
         ...state,
         token: action.token,

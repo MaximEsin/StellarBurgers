@@ -9,7 +9,7 @@ export const ProtectedUnSignedRouteElement = ({
   const location = useLocation();
   const { isLoggedIn } = useAppSelector((state) => state.tokenReducer);
 
-  return isLoggedIn ? (
+  return isLoggedIn || localStorage.isLoggedIn === 'true' ? (
     element
   ) : (
     <Navigate to="/login" state={{ from: location }} />

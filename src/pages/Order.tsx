@@ -14,7 +14,13 @@ const Order = () => {
   const location = useLocation();
   const { _id } = useParams();
   const { token } = useAppSelector((state) => state.tokenReducer);
-  const accessToken = token.slice(7);
+  let accessToken: string;
+
+  if (token !== '') {
+    accessToken = token.slice(7);
+  } else {
+    accessToken = localStorage.accessToken.slice(7);
+  }
 
   useEffect(() => {
     if (location.pathname === `/feed/${_id}`) {
@@ -23,6 +29,7 @@ const Order = () => {
         payload: '/all',
       });
     } else {
+      console.log(accessToken);
       dispatch({
         type: WS_CONNECTION_START,
         payload: `?token=${accessToken}`,

@@ -8,10 +8,13 @@ import OrderItem from './OrderItem';
 
 const OrderContent = () => {
   const { _id } = useParams();
-  const { orders } = useAppSelector((state) => state.connectionReducer);
+  const { orders, wsConnected } = useAppSelector(
+    (state) => state.connectionReducer
+  );
   const { data } = useAppSelector((state) => state.dataReducer);
+  console.log(wsConnected);
 
-  if (orders.length < 1) {
+  if (orders === undefined) {
     return <Loader />;
   } else {
     return (

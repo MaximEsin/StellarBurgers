@@ -18,6 +18,10 @@
   flex-direction: column;
 }
 
+.sidebarItem {
+  cursor: pointer;
+}
+
 .description {
   max-width: 300px;
 }

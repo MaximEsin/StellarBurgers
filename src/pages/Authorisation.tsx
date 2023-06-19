@@ -21,7 +21,7 @@ const Authorisation = () => {
   const { isLoggedIn } = useAppSelector((state) => state.tokenReducer);
 
   const from = location.state?.from || '/';
-  if (isLoggedIn) {
+  if (isLoggedIn || localStorage.isLoggedIn === 'true') {
     navigate(from, { replace: true });
   }
 
