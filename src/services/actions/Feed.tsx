@@ -6,6 +6,7 @@ import {
   WS_CONNECTION_SUCCESS,
 } from './constants';
 import { AppDispatch } from '../reducers';
+import { TOrder } from '../reducers/Feed';
 
 export interface IStartConnection {
   readonly type: typeof WS_CONNECTION_START;
@@ -18,7 +19,7 @@ export interface IWsConnectionSuccess {
 
 export interface IGetMessage {
   readonly type: typeof WS_GET_MESSAGE;
-  readonly orders: Array<object>;
+  readonly orders: TOrder[];
   readonly total: number;
   readonly totalToday: number;
 }
@@ -80,11 +81,7 @@ export function connectionClosed(payload: string) {
   };
 }
 
-export function onMessage(
-  orders: Array<object>,
-  total: number,
-  totalToday: number
-) {
+export function onMessage(orders: TOrder[], total: number, totalToday: number) {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: WS_GET_MESSAGE,

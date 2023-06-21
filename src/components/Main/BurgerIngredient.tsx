@@ -10,10 +10,10 @@ import { getIngredient } from '../../services/actions/Modals';
 import { useDrag } from 'react-dnd';
 import { Link, useLocation } from 'react-router-dom';
 import { FC } from 'react';
-import { AppDispatch } from '../../services/reducers';
+import { TIngredient } from '../../services/reducers';
 
 interface IBurgerIngredient {
-  data: any;
+  data: TIngredient;
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -21,7 +21,6 @@ const BurgerIngredient: FC<IBurgerIngredient> = ({ data, setActive }) => {
   const { constructorData, bunInOrder } = useAppSelector(
     (state) => state.dataReducer
   );
-
   const dispatch = useAppDispatch();
   const location = useLocation();
 
@@ -33,8 +32,12 @@ const BurgerIngredient: FC<IBurgerIngredient> = ({ data, setActive }) => {
   });
 
   let counter;
-  const amount = constructorData.filter((item: any) => item._id === id).length;
-  const bunsAmount = bunInOrder.filter((item: any) => item._id === id).length;
+  const amount = constructorData.filter(
+    (item: TIngredient) => item._id === id
+  ).length;
+  const bunsAmount = bunInOrder.filter(
+    (item: TIngredient) => item._id === id
+  ).length;
   if (amount > 0) {
     counter = (
       <Counter
@@ -55,7 +58,7 @@ const BurgerIngredient: FC<IBurgerIngredient> = ({ data, setActive }) => {
     counter = '';
   }
 
-  if (data.length > 1) {
+  if (!data) {
     return <Loader />;
   } else {
     return (

@@ -3,14 +3,15 @@ import styles from '../../styles/Feed.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { FC } from 'react';
 import { useLocation } from 'react-router-dom';
+import { TIngredient } from '../../services/reducers';
 
 interface TFeedCard {
   createdAt: string;
   number: number;
   name: string;
-  ingredients: any;
+  ingredients: TIngredient[];
   status?: string;
-  setActive: any;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const FeedCard: FC<TFeedCard> = ({
@@ -27,8 +28,8 @@ const FeedCard: FC<TFeedCard> = ({
   let statusProfile;
   let showStatus;
 
-  ingredients.forEach((item: any) => images.push(item.image));
-  ingredients.forEach((item: any) => prices.push(item.price));
+  ingredients.forEach((item: TIngredient) => images.push(item.image));
+  ingredients.forEach((item: TIngredient) => prices.push(item.price));
   const totalPrice = prices.reduce((a: number, b: number) => a + b);
 
   if (status === 'done') {

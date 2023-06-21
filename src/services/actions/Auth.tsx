@@ -3,6 +3,17 @@ import { myToken } from './constants';
 import { AppDispatch } from '../reducers';
 import { STORE_TOKEN, REMOVE_TOKEN } from './constants';
 
+export interface IStoreTokenAction {
+  readonly type: typeof STORE_TOKEN;
+  readonly token: string;
+}
+
+export interface IRemoveTokenAction {
+  readonly type: typeof REMOVE_TOKEN;
+}
+
+export type TAuthActions = IStoreTokenAction | IRemoveTokenAction;
+
 export function register(
   email: string,
   password: string,

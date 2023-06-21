@@ -6,9 +6,11 @@ import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { FC } from 'react';
 import Loader from '../Loader';
+import { TIngredient } from '../../services/reducers';
+import { TOrder } from '../../services/reducers/Feed';
 
 interface TScrollList {
-  setActive?: React.Dispatch<React.SetStateAction<boolean>>;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ScrollList: FC<TScrollList> = ({ setActive }) => {
@@ -16,31 +18,22 @@ const ScrollList: FC<TScrollList> = ({ setActive }) => {
   const { data } = useAppSelector((state) => state.dataReducer);
   const location = useLocation();
 
-  interface TOrder {
-    createdAt: string;
-    number: number;
-    name: string;
-    status?: string;
-    _id: string;
-  }
+  const feedIds: Array<Array<string>> = [];
+  const feedArr: Array<Array<TIngredient>> = [];
+  let finalData: Array<TOrder> = [];
 
-  const feedIds: Array<string> = [];
-  const feedArr: Array<object> = [];
-  let finalData: any = [];
-
-  if (orders.length < 1) {
+  if (orders === undefined) {
     return <Loader />;
   } else {
-    orders.forEach((item: any) => feedIds.push(item.ingredients));
+    orders.forEach((item: TOrder) => feedIds.push(item.ingredients));
 
-    feedIds.forEach((item: string) =>
+    feedIds.forEach((item: Array<string>) =>
       feedArr.push(
-        data.filter((ingredient: any) => item.includes(ingredient._id))
+        data.filter((ingredient: TIngredient) => item.includes(ingredient._id))
       )
     );
 
     finalData = orders;
-
     return (
       <div className={styles.orders}>
         {finalData.map((order: TOrder, index: number) => {

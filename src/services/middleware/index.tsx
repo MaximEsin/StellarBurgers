@@ -10,7 +10,7 @@ import type { AppDispatch, RootState } from '../reducers';
 
 interface IWsConnectionStartAction {
   readonly type: typeof WS_CONNECTION_START;
-  readonly payload: any;
+  readonly payload: string;
 }
 
 interface IWsGetMessageAction {
@@ -20,17 +20,17 @@ interface IWsGetMessageAction {
 
 interface IWsConnectionClosedAction {
   readonly type: typeof WS_CONNECTION_CLOSED;
-  readonly payload: any;
+  readonly payload: string;
 }
 
 interface IWsConnectionErrorAction {
   readonly type: typeof WS_CONNECTION_ERROR;
-  readonly payload: any;
+  readonly payload: string;
 }
 
 interface IWsConnectionSuccessAction {
   readonly type: typeof WS_CONNECTION_SUCCESS;
-  readonly payload: any;
+  readonly payload: string;
 }
 
 type AppActions =

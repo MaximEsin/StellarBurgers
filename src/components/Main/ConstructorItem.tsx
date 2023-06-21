@@ -10,14 +10,14 @@ import ConstructorItemWrapper from './ConstructorItemWrapper';
 import { REMOVE_ITEM } from '../../services/actions/constants';
 import { useDrag, useDrop } from 'react-dnd';
 import { FC } from 'react';
-import { AppDispatch } from '../../services/reducers';
+import { AppDispatch, TIngredient } from '../../services/reducers';
 
 interface IConstructorItem {
   img?: string;
   id?: string;
   index?: number;
   moveElement?: any;
-  data?: any;
+  data?: TIngredient;
   place?: string;
 }
 
@@ -39,6 +39,7 @@ const ConstructorItem: FC<IConstructorItem> = ({
       };
     },
     hover(item: any, monitor) {
+      console.log(item);
       if (!ref.current) {
         return;
       }

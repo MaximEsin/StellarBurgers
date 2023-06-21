@@ -8,7 +8,7 @@ import {
   MOVE_CONSTRUCTOR_ITEM,
 } from './constants';
 import { request } from '../../utils';
-import { AppDispatch } from '../reducers';
+import { AppDispatch, TIngredient } from '../reducers';
 
 export interface IGetDataAction {
   readonly type: typeof GET_DATA;
@@ -63,7 +63,9 @@ export function getData() {
 
     request(`/ingredients`)
       .then((res) => {
-        const buns = res.data.filter((item: any) => item.type === 'bun');
+        const buns = res.data.filter(
+          (item: TIngredient) => item.type === 'bun'
+        );
         dispatch({
           type: GET_DATA_SUCCESS,
           data: res.data,
@@ -80,6 +82,7 @@ export function getData() {
 
 export function addItem(itemId: string, uniqueId: string) {
   return function (dispatch: AppDispatch) {
+    console.log(itemId);
     dispatch({
       type: ADD_ITEM,
       id: itemId,

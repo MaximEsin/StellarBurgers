@@ -5,14 +5,13 @@ import Loader from '../Loader';
 import { useParams } from 'react-router-dom';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderItem from './OrderItem';
+import { TOrder } from '../../services/reducers/Feed';
+import { TIngredient } from '../../services/reducers';
 
 const OrderContent = () => {
   const { _id } = useParams();
-  const { orders, wsConnected } = useAppSelector(
-    (state) => state.connectionReducer
-  );
+  const { orders } = useAppSelector((state) => state.connectionReducer);
   const { data } = useAppSelector((state) => state.dataReducer);
-  console.log(wsConnected);
 
   if (orders === undefined) {
     return <Loader />;
@@ -20,19 +19,21 @@ const OrderContent = () => {
     return (
       <section className={styles.orderSection + ' mb-20'}>
         {orders
-          .filter((itm: any) => itm._id === _id)
-          .map((item: any, index: number) => {
-            const feedIds: Array<object> = item.ingredients;
-            const feedArr: Array<object> = [];
+          .filter((itm: TOrder) => itm._id === _id)
+          .map((item: TOrder, index: number) => {
+            const feedIds: Array<string> = item.ingredients;
+            const feedArr: Array<Array<TIngredient>> = [];
             const priceArray: Array<number> = [];
 
-            feedIds.forEach((item: any) =>
+            feedIds.forEach((item: string) =>
               feedArr.push(
-                data.filter((ingredient: any) => item.includes(ingredient._id))
+                data.filter((ingredient: TIngredient) =>
+                  item.includes(ingredient._id)
+                )
               )
             );
 
-            feedArr.map((i: any) => {
+            feedArr.map((i: Array<TIngredient>) => {
               priceArray.push(i[0].price);
             });
 
@@ -41,12 +42,12 @@ const OrderContent = () => {
             );
 
             const ingArr: Array<object> = [];
-            feedArr.forEach((item: any) => {
+            feedArr.forEach((item: Array<TIngredient>) => {
               ingArr.push(item[0]);
             });
 
             function onlyUnique(
-              value: any,
+              value: object,
               index: number,
               array: Array<object>
             ) {

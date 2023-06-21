@@ -1,4 +1,5 @@
 import { STORE_TOKEN, REMOVE_TOKEN } from '../actions/constants';
+import { TAuthActions } from '../actions/Auth';
 
 export const tokenReducer = (
   state = { token: '', isLoggedIn: false },

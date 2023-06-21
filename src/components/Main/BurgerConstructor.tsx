@@ -17,6 +17,7 @@ import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link, useLocation } from 'react-router-dom';
 import { FC } from 'react';
+import { TIngredient } from '../../services/reducers';
 
 interface IBurgerConstructor {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,7 +25,7 @@ interface IBurgerConstructor {
 
 const BurgerConstructor: FC<IBurgerConstructor> = ({ setActive }) => {
   const { data, constructorData, bunInOrder } = useAppSelector(
-    (state: any) => state.dataReducer
+    (state) => state.dataReducer
   );
   const { token } = useAppSelector((state) => state.tokenReducer);
   const navigate = useNavigate();
@@ -81,7 +82,7 @@ const BurgerConstructor: FC<IBurgerConstructor> = ({ setActive }) => {
           {announce}
           <ConstructorItem data={bunInOrder[0]} place="top" />
           <div className={styles.scroll}>
-            {constructorData.map((item: any, index: number) => {
+            {constructorData.map((item: TIngredient, index: number) => {
               if (item.type !== 'bun') {
                 ids.push(item._id);
                 priceArray.push(item.price);

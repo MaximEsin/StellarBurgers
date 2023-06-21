@@ -3,6 +3,7 @@ import Loader from '../components/Loader';
 import styles from '../styles/Modal.module.css';
 import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../hooks';
+import { TIngredient } from '../services/reducers';
 
 const Ingredient = () => {
   const { _id } = useParams();
@@ -14,8 +15,8 @@ const Ingredient = () => {
     return (
       <>
         {data
-          .filter((item: any) => item._id === _id)
-          .map((item: any, index: number) => {
+          .filter((item: TIngredient) => item._id === _id)
+          .map((item: TIngredient, index: number) => {
             return (
               <section key={index}>
                 <div className={styles.ingredientDetails + ' pt-10 pl-10'}>

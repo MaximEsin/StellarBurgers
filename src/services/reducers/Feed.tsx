@@ -6,8 +6,18 @@ import {
 } from '../actions/constants';
 import { TFeedActions } from '../actions/Feed';
 
+export type TOrder = {
+  createdAt: string;
+  ingredients: Array<string>;
+  name: string;
+  number: number;
+  status: string;
+  updatedAt: string;
+  _id: string;
+};
+
 type ConnectionState = {
-  orders: Array<object>;
+  orders: TOrder[];
   total: number;
   totalToday: number;
   wsConnected: boolean;

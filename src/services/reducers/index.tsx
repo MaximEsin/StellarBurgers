@@ -38,13 +38,30 @@ const loadState = () => {
 
 const persistedStore = loadState();
 
+export type TIngredient = {
+  _id: string;
+  calories: number;
+  carbohydrates: number;
+  fat: number;
+  image: string;
+  image_large: string;
+  image_mobile: string;
+  name: string;
+  price: number;
+  proteins: number;
+  type: string;
+  _v: number;
+  uniqueId?: string;
+  amount?: number;
+};
+
 type IDataState = {
   dataRequest: boolean;
   dataFailed: boolean;
-  data: Array<object>;
-  constructorData: Array<object>;
-  buns: Array<object>;
-  bunInOrder: Array<object>;
+  data: TIngredient[];
+  constructorData: TIngredient[];
+  buns: TIngredient[];
+  bunInOrder: TIngredient[];
 };
 
 export const initialState: IDataState = {
@@ -83,7 +100,7 @@ export const dataReducer = (state = initialState, action: TIndexActions) => {
     }
     case ADD_ITEM: {
       const bun = state.buns.filter(
-        (item: any) => item._id === action.id.id
+        (item: TIngredient) => item._id === action.id.id
       )[0];
 
       if (bun) {
@@ -92,8 +109,8 @@ export const dataReducer = (state = initialState, action: TIndexActions) => {
           bunInOrder: [bun],
         };
       }
-      const newItem: any = state.data.filter(
-        (item: any) => item._id === action.id.id
+      const newItem: TIngredient = state.data.filter(
+        (item: TIngredient) => item._id === action.id.id
       )[0];
       const modifyedItem = {
         ...newItem,
@@ -110,7 +127,7 @@ export const dataReducer = (state = initialState, action: TIndexActions) => {
         ...state,
         constructorData: [
           ...state.constructorData.filter(
-            (item: any) => item.uniqueId !== action.id
+            (item: TIngredient) => item.uniqueId !== action.id
           ),
         ],
       };
