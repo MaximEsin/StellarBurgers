@@ -1,0 +1,59 @@
+.orderSection {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.orderContainer {
+  max-width: 640px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 122px;
+}
+
+.orderNumber {
+  margin: 0 auto 40px;
+}
+
+.orderStatus {
+  color: #00cccc;
+}
+
+.bottomContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.priceContainer {
+  display: flex;
+  margin-left: auto;
+}
+
+.ingredientsContainer {
+  height: 312px;
+}
+
+.scroll {
+  max-height: 310px;
+  height: 100%;
+  overflow: auto;
+  padding-right: 24px;
+}
+
+.orderItemContainer {
+  max-width: 610px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.img {
+  width: 100px;
+  height: 56px;
+}
+
+.name {
+  max-width: 340px;
+}

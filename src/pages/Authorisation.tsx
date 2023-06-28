@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, FormEvent } from 'react';
 import styles from '../styles/Registration.module.css';
 import {
   Input,
@@ -7,40 +7,23 @@ import {
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { request } from '../utils';
+import { Auth } from '../services/actions/Auth';
 import { handleFormSubmit } from '../utils';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { useLocation } from 'react-router-dom';
 
 const Authorisation = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+  const { isLoggedIn } = useAppSelector((state) => state.tokenReducer);
 
-  const auth = (email: string, password: string): void => {
-    request('/auth/login', {
-      method: 'POST',
-      headers: {
-        authorization: 'd5b34af3-ad0b-4c78-bdcc-85f9d783b0bc',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    })
-      .then((res) => {
-        if (res.success) {
-          navigate('/', { replace: true });
-          localStorage.setItem('accessToken', res.accessToken);
-          localStorage.setItem('refreshToken', res.refreshToken);
-          setTimeout(() => {
-            localStorage.removeItem('accessToken');
-          }, 1200000);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const from = location.state?.from || '/';
+  if (isLoggedIn || localStorage.isLoggedIn === 'true') {
+    navigate(from, { replace: true });
+  }
 
   return (
     <section className={styles.main}>
@@ -49,15 +32,22 @@ const Authorisation = () => {
           Вход
         </h1>
         <form
-          onSubmit={(event: any) =>
-            handleFormSubmit(event, auth(email, password))
+          onSubmit={(event: FormEvent<HTMLFormElement>) =>
+            handleFormSubmit(
+              event,
+              dispatch(
+                Auth(email, password, () => navigate(from, { replace: true }))
+              )
+            )
           }
         >
           <Input
             type={'email'}
             placeholder={'E-mail'}
             extraClass="mb-6"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setEmail(e.target.value)
+            }
             value={email || ''}
           />
           <Input
@@ -65,7 +55,9 @@ const Authorisation = () => {
             placeholder={'Пароль'}
             icon={'ShowIcon'}
             extraClass="mb-6"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setPassword(e.target.value)
+            }
             value={password || ''}
           />
           <Button htmlType="submit" type="primary" size="medium">

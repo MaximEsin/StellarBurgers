@@ -1,26 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { ReactNode, SyntheticEvent, useEffect } from 'react';
 import styles from '../styles/Modal.module.css';
-import { useNavigate } from 'react-router-dom';
 import { FC } from 'react';
 
 interface IModalOverlay {
   active: boolean;
-  children?: any;
-  setActive: any;
+  children?: ReactNode;
+  closeModal: () => void;
 }
 
-const ModalOverlay: FC<IModalOverlay> = ({ active, children, setActive }) => {
-  const navigate = useNavigate();
+const ModalOverlay: FC<IModalOverlay> = ({ active, children, closeModal }) => {
   const isOpen = active;
 
   useEffect(() => {
     if (!isOpen) {
       return;
     }
-    function closeByEscape(evt: any) {
+    function closeByEscape(evt: KeyboardEvent) {
       if (evt.key === 'Escape') {
-        navigate('/', { replace: true });
-        setActive(false);
+        closeModal();
       }
     }
     document.addEventListener('keydown', closeByEscape);
@@ -32,10 +29,9 @@ const ModalOverlay: FC<IModalOverlay> = ({ active, children, setActive }) => {
   return (
     <div
       className={active ? styles.modalOverlay_active : styles.modalOverlay}
-      onClick={(event) => {
+      onClick={(event: SyntheticEvent) => {
         if (event.target === event.currentTarget) {
-          setActive(false);
-          navigate('/', { replace: true });
+          closeModal();
         }
       }}
     >

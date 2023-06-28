@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect } from 'react';
 import {
   Input,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../styles/Registration.module.css';
 import { Form, Link } from 'react-router-dom';
-import { request } from '../utils';
+import { resetPassword } from '../services/actions/Auth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { handleFormSubmit } from '../utils';
@@ -17,24 +17,6 @@ const ResetPassword = () => {
   const [code, setCode] = useState<string>('');
   const navigate = useNavigate();
   const prevRoute = useLocation();
-
-  const resetPassword = (password: string, code: string) => {
-    request('/password-reset/reset', {
-      method: 'POST',
-      headers: {
-        authorization: 'd5b34af3-ad0b-4c78-bdcc-85f9d783b0bc',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        password: password,
-        token: code,
-      }),
-    })
-      .then((res) => navigate('/login', { replace: true }))
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   if (
     prevRoute.state &&
@@ -48,22 +30,31 @@ const ResetPassword = () => {
               Восстановление пароля
             </h1>
             <form
-              onSubmit={(event) =>
-                handleFormSubmit(event, resetPassword(password, code))
+              onSubmit={(event: FormEvent<HTMLFormElement>) =>
+                handleFormSubmit(
+                  event,
+                  resetPassword(password, code, () =>
+                    navigate('/login', { replace: true })
+                  )
+                )
               }
             >
               <Input
                 type={'password'}
                 placeholder={'Введите новый пароль'}
                 extraClass="mb-6"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setPassword(e.target.value)
+                }
                 value={password || ''}
               />
               <Input
                 type={'text'}
                 placeholder={'Введите код из письма'}
                 extraClass="mb-6"
-                onChange={(e) => setCode(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setCode(e.target.value)
+                }
                 value={code || ''}
               />
               <Button htmlType="submit" type="primary" size="medium">

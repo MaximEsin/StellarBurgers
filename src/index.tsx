@@ -9,6 +9,12 @@ import { BrowserRouter as Router } from 'react-router-dom';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+window.onclose = () => {
+  if (localStorage.getItem('isLoggedIn') === 'true') {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('accessToken');
+  }
+};
 root.render(
   <Provider store={store}>
     <Router>

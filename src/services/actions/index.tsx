@@ -5,23 +5,74 @@ import {
   ADD_ITEM,
   UPDATE_PRICE,
   REMOVE_ITEM,
+  MOVE_CONSTRUCTOR_ITEM,
 } from './constants';
 import { request } from '../../utils';
+import { AppDispatch, TIngredient } from '../reducers';
+
+export interface IGetDataAction {
+  readonly type: typeof GET_DATA;
+}
+
+export interface IGetDataSuccessAction {
+  readonly type: typeof GET_DATA_SUCCESS;
+  readonly data: [];
+  readonly buns: [];
+}
+
+export interface IGetDataFailedAction {
+  readonly type: typeof GET_DATA_FAILED;
+}
+
+export interface IAddItemAction {
+  readonly type: typeof ADD_ITEM;
+  readonly id: any;
+  readonly uniqueId: string;
+}
+
+export interface IUpdatePriceAction {
+  readonly type: typeof UPDATE_PRICE;
+  readonly price: string;
+}
+
+export interface IRemoveItemAction {
+  readonly type: typeof REMOVE_ITEM;
+  readonly id?: string;
+}
+
+export interface IMoveConstructorItemAction {
+  readonly type: typeof MOVE_CONSTRUCTOR_ITEM;
+  readonly dragIndex: number;
+  readonly hoverIndex: number;
+}
+
+export type TIndexActions =
+  | IGetDataAction
+  | IGetDataSuccessAction
+  | IGetDataFailedAction
+  | IAddItemAction
+  | IUpdatePriceAction
+  | IRemoveItemAction
+  | IMoveConstructorItemAction;
 
 export function getData() {
-  return function (dispatch: any) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: GET_DATA,
     });
 
     request(`/ingredients`)
       .then((res) => {
+        const buns = res.data.filter(
+          (item: TIngredient) => item.type === 'bun'
+        );
         dispatch({
           type: GET_DATA_SUCCESS,
           data: res.data,
+          buns: buns,
         });
       })
-      .catch((err) => {
+      .catch(() => {
         dispatch({
           type: GET_DATA_FAILED,
         });
@@ -30,7 +81,8 @@ export function getData() {
 }
 
 export function addItem(itemId: string, uniqueId: string) {
-  return function (dispatch: any) {
+  return function (dispatch: AppDispatch) {
+    console.log(itemId);
     dispatch({
       type: ADD_ITEM,
       id: itemId,
@@ -40,7 +92,7 @@ export function addItem(itemId: string, uniqueId: string) {
 }
 
 export function UpdatePrice(price: string) {
-  return function (dispatch: any) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: UPDATE_PRICE,
       price: price,
@@ -49,7 +101,7 @@ export function UpdatePrice(price: string) {
 }
 
 export function RemoveItem(uniqueId: string) {
-  return function (dispatch: any) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: REMOVE_ITEM,
       id: uniqueId,

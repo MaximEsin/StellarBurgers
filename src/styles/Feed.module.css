@@ -1,0 +1,118 @@
+.feedSection {
+  width: 100%;
+  margin: 40px auto 20px;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.feedContainer {
+  display: flex;
+  margin-top: 20px;
+}
+
+.orders {
+  max-height: 100vh;
+  overflow: auto;
+
+  width: 100%;
+}
+
+.orderCard {
+  margin-bottom: 16px;
+  padding: 24px;
+  background: #1c1c21;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 2px rgba(0, 0, 0, 0.06),
+    0px 0px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 40px;
+  width: 91%;
+}
+
+.dateContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ingredientContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.priceContainer {
+  display: flex;
+  align-items: center;
+}
+
+.statsSection {
+  display: flex;
+  flex-direction: column;
+  max-width: 550px;
+  width: 100%;
+}
+
+.statsContainer {
+  display: flex;
+}
+
+.statContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.preparedOrder {
+  color: #00cccc;
+}
+
+.statNumbers {
+  text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25),
+    0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
+}
+
+.profileOrdersSection {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  width: 100%;
+  margin: 40px auto 0;
+}
+
+.sidebarContainer {
+  margin-top: 55px;
+  margin-left: 8px;
+}
+
+.name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 500px;
+}
+
+.imgContainer {
+  position: relative;
+  display: flex;
+  max-width: 410px;
+  overflow: hidden;
+}
+
+.img {
+  width: 100px;
+  height: 56px;
+  margin-left: -60px;
+}
+
+.img:first-of-type {
+  margin-left: -20px;
+}
+
+.readyContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 170px;
+}
+
+.orderComplete {
+  color: #00cccc;
+}

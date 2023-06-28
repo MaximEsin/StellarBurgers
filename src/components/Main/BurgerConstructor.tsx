@@ -4,9 +4,8 @@ import {
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postOrder } from '../../services/actions/Modals';
-import PropTypes from 'prop-types';
 import Loader from '../Loader';
 import { useDrop, useDrag } from 'react-dnd';
 import { addItem } from '../../services/actions';
@@ -18,15 +17,17 @@ import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link, useLocation } from 'react-router-dom';
 import { FC } from 'react';
+import { TIngredient } from '../../services/reducers';
 
 interface IBurgerConstructor {
-  setActive: any;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const BurgerConstructor: FC<IBurgerConstructor> = ({ setActive }) => {
-  const { data, constructorData, bunInOrder } = useSelector(
-    (state: any) => state.dataReducer
+  const { data, constructorData, bunInOrder } = useAppSelector(
+    (state) => state.dataReducer
   );
+  const { token } = useAppSelector((state) => state.tokenReducer);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -38,7 +39,7 @@ const BurgerConstructor: FC<IBurgerConstructor> = ({ setActive }) => {
     });
   }, []);
 
-  const dispatch: any = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [, drop] = useDrop({
     accept: 'ingredient',
@@ -67,9 +68,9 @@ const BurgerConstructor: FC<IBurgerConstructor> = ({ setActive }) => {
     }
 
     const handleButtonClick = () => {
-      if (localStorage.refreshToken) {
+      if (sessionStorage.refreshToken) {
         setActive(true);
-        dispatch(postOrder(ids));
+        dispatch(postOrder(ids, token));
       } else {
         navigate('/login', { replace: true });
       }
@@ -81,7 +82,7 @@ const BurgerConstructor: FC<IBurgerConstructor> = ({ setActive }) => {
           {announce}
           <ConstructorItem data={bunInOrder[0]} place="top" />
           <div className={styles.scroll}>
-            {constructorData.map((item: any, index: number) => {
+            {constructorData.map((item: TIngredient, index: number) => {
               if (item.type !== 'bun') {
                 ids.push(item._id);
                 priceArray.push(item.price);
@@ -110,7 +111,7 @@ const BurgerConstructor: FC<IBurgerConstructor> = ({ setActive }) => {
               htmlType="button"
               type="primary"
               size="large"
-              onClick={() => {
+              onClick={(): void => {
                 handleButtonClick();
               }}
             >

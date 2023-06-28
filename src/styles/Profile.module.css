@@ -18,12 +18,12 @@
   flex-direction: column;
 }
 
-.description {
-  max-width: 300px;
-}
-
 .sidebarItem {
   cursor: pointer;
+}
+
+.description {
+  max-width: 300px;
 }
 
 .navItem {
@@ -33,4 +33,5 @@
 
 .activeText {
   color: #f2f2f3;
+  cursor: pointer;
 }

@@ -5,18 +5,19 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../../styles/BurgerConstructor.module.css';
 import substract from '../../images/Subtract.svg';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../hooks';
 import ConstructorItemWrapper from './ConstructorItemWrapper';
 import { REMOVE_ITEM } from '../../services/actions/constants';
 import { useDrag, useDrop } from 'react-dnd';
 import { FC } from 'react';
+import { AppDispatch, TIngredient } from '../../services/reducers';
 
 interface IConstructorItem {
-  img?: any;
-  id?: any;
+  img?: string;
+  id?: string;
   index?: number;
   moveElement?: any;
-  data?: any;
+  data?: TIngredient;
   place?: string;
 }
 
@@ -28,7 +29,7 @@ const ConstructorItem: FC<IConstructorItem> = ({
   data,
   place,
 }): any => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [{ handlerId }, drop] = useDrop({
     accept: 'item',
@@ -38,6 +39,7 @@ const ConstructorItem: FC<IConstructorItem> = ({
       };
     },
     hover(item: any, monitor) {
+      console.log(item);
       if (!ref.current) {
         return;
       }

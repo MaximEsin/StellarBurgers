@@ -1,41 +1,20 @@
-import React from 'react';
+import React, { ChangeEvent, FormEvent } from 'react';
 import {
   Input,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../styles/Registration.module.css';
 import { Link } from 'react-router-dom';
-import { request } from '../utils';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { handleFormSubmit } from '../utils';
 import { useLocation } from 'react-router-dom';
+import { getEmailCode } from '../services/actions/Auth';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState<string>('');
   const navigate = useNavigate();
   const prevRoute = useLocation();
-
-  const getEmailCode = (email: string) => {
-    request('/password-reset', {
-      method: 'POST',
-      headers: {
-        authorization: 'd5b34af3-ad0b-4c78-bdcc-85f9d783b0bc',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: email,
-      }),
-    })
-      .then((res) => {
-        if (res.success) {
-          navigate('/reset-password', { state: { prevRoute }, replace: true });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   return (
     <>
@@ -45,13 +24,25 @@ const ForgotPassword = () => {
             Восстановление пароля
           </h1>
           <form
-            onSubmit={(event) => handleFormSubmit(event, getEmailCode(email))}
+            onSubmit={(event: FormEvent<HTMLFormElement>) =>
+              handleFormSubmit(
+                event,
+                getEmailCode(email, () =>
+                  navigate('/reset-password', {
+                    state: { prevRoute },
+                    replace: true,
+                  })
+                )
+              )
+            }
           >
             <Input
               type={'email'}
               placeholder={'Укажите e-mail'}
               extraClass="mb-6"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setEmail(e.target.value)
+              }
               value={email || ''}
             />
             <Button htmlType="submit" type="primary" size="medium">
